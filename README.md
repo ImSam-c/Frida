@@ -1,3 +1,3 @@
-# Repositorio oficial de Valsega.com
+# Repositorio oficial de Frida
 
-Nunca te rindas.
+Proyecto en construcción.
