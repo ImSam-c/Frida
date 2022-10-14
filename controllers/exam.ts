@@ -54,4 +54,21 @@ const deleteExam = async (req: Request, res: Response) => {
   res.json({ msg: "Exam deleted" });
 };
 
-export { getExams, createExam, getExamById, deleteExam };
+const verifyExam = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { answers } = req.body;
+  const result: boolean[] = [];
+
+  const exam = await Exam.findById(id);
+  if (!exam) return res.status(400).json({ msg: "This exam doesn't exist" });
+
+  exam.questions.forEach((question, i) => {
+    question.correctAnswer === answers[i]
+      ? result.push(true)
+      : result.push(false);
+  });
+
+  res.json({ result });
+};
+
+export { getExams, createExam, getExamById, deleteExam, verifyExam };

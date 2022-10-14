@@ -4,6 +4,7 @@ import {
   deleteExam,
   getExamById,
   getExams,
+  verifyExam,
 } from "../controllers/exam";
 import { validateJWT } from "../middlewares/validateJWT";
 
@@ -22,6 +23,6 @@ router.post("/createExam", validateJWT, createExam);
 router.delete("/deleteExam/:id", validateJWT, deleteExam);
 
 //* Verifying an exam
-router.post("/verifyExam", validateJWT);
+router.post("/verifyExam/:id", validateJWT, verifyExam);
 
 export default router;
