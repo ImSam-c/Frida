@@ -1,8 +1,8 @@
 import User from "../models/user";
 import { ObjectId } from "mongoose";
 
-export const emailExists = async (email: string) => {
-  const emailE = await User.findOne({ email });
+export const emailExists = async (email: string = "") => {
+  const emailE = await User.findOne({ email: email.toLowerCase() });
 
   if (emailE) throw new Error(`The email ${email} is already registered`);
 };
