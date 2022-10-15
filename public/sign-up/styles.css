@@ -1,0 +1,56 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--body-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: var(--form-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--form-border-radius);
+  margin-top: 15px;
+  padding: 17px;
+  width: 24rem;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.fullname-container {
+  display: grid;
+  grid-template-rows: min-content min-content;
+  grid-template-columns: repeat(auto-fit, calc(50% - 7px));
+  grid-auto-flow: column;
+  grid-gap: 10px 14px;
+}
+
+label[for="email"],
+label[for="password"]{
+  margin: 15px 0 10px;
+}
+
+.password-requirement-text{
+  margin: 5px 0 20px;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.sign-in-container{
+  width: 18rem;
+  margin: 1.5rem auto;
+  padding: 12px 20px;
+  background-color: white;
+}
+
+.already-registered-text a{
+  display: inline-block;
+  margin-left: 1rem;
+  text-decoration: none;
+}

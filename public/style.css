@@ -48,3 +48,13 @@
   border: 1px solid black;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+  height: 1.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--btn-and-input-radius);
+  padding: 0 6px;
+}
+
