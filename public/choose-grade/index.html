@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>Choose your grade</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-  <main>
-    <img src="../logo.png" alt="logo" class="logo" draggable="false">
-    <h3 class="title">Choose your grade</h3>
-    <div class="container">
-      <p>I am a:</p>
-      <div class="grades">
-        <div class="student-radio">
-          <input type="radio" id="student" name="category" />
-          <label for="student">Student</label>
+  <head>
+    <title>Choose your grade</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main>
+      <img src="../logo.png" alt="logo" class="logo" draggable="false">
+      <h3 class="title">Choose your grade</h3>
+      <div class="container">
+        <p>I am a:</p>
+        <div class="grades">
+          <div class="student-radio">
+            <input type="radio" id="student" name="category" />
+            <label for="student">Student</label>
+          </div>
+          <div class="teacher-radio">
+            <input type="radio" id="teacher" name="category" checked />
+            <label for="teacher">Teacher</label>
+          </div>
         </div>
-        <div class="teacher-radio">
-          <input type="radio" id="teacher" name="category" checked />
-          <label for="teacher">Teacher</label>
+        <div class="image"></div>
+        <div class="subject-container">
+          <p>Subject</p>
+          <select name="area" id="subject-select">
+            <option value="Geography" selected>Geography</option>
+            <option value="History">History</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="English">English</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Foreign Languages">Foreign Languages</option>
+            <option value="Computer Science">Computer Science</option>
+          </select>
         </div>
+        <button type="button" class="button">Register</button>
       </div>
-      <div class="image"></div>
-      <div class="subject-container">
-        <p>Subject</p>
-        <select name="area" id="subject-select">
-          <option value="Geography">Geography</option>
-          <option value="History">History</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Biology">Biology</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="English">English</option>
-          <option value="Social Studies">Social Studies</option>
-          <option value="Foreign Languages">Foreign Languages</option>
-          <option value="Computer Science">Computer Science</option>
-        </select>
-      </div>
-      <button type="button" class="button">Register</button>
-    </div>
-  </main>
-  <script src="index.js"></script>
-</body>
-
+    </main>
+    <script src="index.js"></script>
+  </body>
 </html>
