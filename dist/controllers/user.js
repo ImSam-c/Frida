@@ -12,17 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.existsUserById = exports.emailExists = void 0;
+exports.getStudents = exports.getTeachers = exports.getUsers = void 0;
 const user_1 = __importDefault(require("../models/user"));
-const emailExists = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const emailE = yield user_1.default.findOne({ email: email.toLowerCase() });
-    if (emailE)
-        throw new Error(`The email ${email} is already registered`);
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield user_1.default.find({ state: true });
+    users ? res.json({ users }) : res.json({ msg: "There isn't users" });
 });
-exports.emailExists = emailExists;
-const existsUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const userE = yield user_1.default.findById(id);
-    if (!userE)
-        throw new Error(`Id ${id} isn't registered`);
+exports.getUsers = getUsers;
+const getTeachers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const teachers = yield user_1.default.find({ state: true }).where("area").exists(true);
+    teachers ? res.json({ teachers }) : res.json({ msg: "There isn't teachers" });
 });
-exports.existsUserById = existsUserById;
+exports.getTeachers = getTeachers;
+const getStudents = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const students = yield user_1.default.find({ state: true, area: null });
+    students ? res.json({ students }) : res.json({ msg: "There isn't students" });
+});
+exports.getStudents = getStudents;

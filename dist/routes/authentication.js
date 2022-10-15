@@ -16,5 +16,10 @@ router.post("/register", [
     (0, express_validator_1.check)("password", "The password must be longer than 5 characters").isLength({ min: 6 }),
     validationResult_1.validate,
 ], authentication_1.register);
-// * router.post("/login", login)
+router.post("/login", [
+    (0, express_validator_1.check)("email", "The email is empty").notEmpty(),
+    (0, express_validator_1.check)("email", "Wrong email").isEmail(),
+    (0, express_validator_1.check)("password", "The password is empty").notEmpty(),
+    validationResult_1.validate,
+], authentication_1.login);
 exports.default = router;

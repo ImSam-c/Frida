@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { register } from "../controllers/authentication";
+import { login, register } from "../controllers/authentication";
 import { emailExists } from "../helpers/dbValidations";
 import { validate } from "../middlewares/validationResult";
 
-const router: Router = Router();
+const router = Router();
 
+//* Std register
 router.post(
   "/register",
   [
@@ -23,6 +24,18 @@ router.post(
   register
 );
 
-// * router.post("/login", login)
+//* Std login
+router.post(
+  "/login",
+  [
+    check("email", "The email is empty").notEmpty(),
+    check("email", "Wrong email").isEmail(),
+    check("password", "The password is empty").notEmpty(),
+    validate,
+  ],
+  login
+);
+
+//TODO: Anyday, register and login with Google Sign-In
 
 export default router;

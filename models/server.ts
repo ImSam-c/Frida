@@ -1,6 +1,7 @@
 import express, { Application } from "express";
-import teacherRouter from "../routes/teacherRoute";
 import authRouter from "../routes/authentication";
+import examRouter from "../routes/exam";
+import userRouter from "../routes/user";
 import { dbConnection } from "../db/connection";
 
 export class Server {
@@ -8,8 +9,8 @@ export class Server {
   private port: string;
   private apiPaths = {
     auth: "/api/auth",
-    teachers: "/api/teachers",
-    students: "/api/students",
+    exams: "/api/exams",
+    users: "/api/users",
   };
 
   constructor() {
@@ -31,6 +32,8 @@ export class Server {
 
   routes() {
     this.app.use(this.apiPaths.auth, authRouter);
+    this.app.use(this.apiPaths.exams, examRouter);
+    this.app.use(this.apiPaths.users, userRouter);
   }
 
   connectDB() {
