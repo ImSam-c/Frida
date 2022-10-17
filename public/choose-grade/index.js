@@ -48,7 +48,7 @@ async function sendData(name, lastname, email, password, area) {
     .then(() => {
       alert("Registered successfully");
       sessionStorage.removeItem("tmpReg");
-      // redirect to main page
+      location.replace("../home/index.html");
     })
     .catch((error) => {
       alert("Something went wrong, try again.");
