@@ -1,8 +1,7 @@
-const teacherImage =
+const TEACHER_IMAGE =
   "https://apicms.thestar.com.my/uploads/images/2022/05/15/1585587.jpg";
-const studentImage =
+const STUDENT_IMAGE =
   "https://assets-homepages-learning.3plearning.net/wp-content/uploads/2020/06/blog-20-student-engagement-strategies-captivating-classroom.png";
-
 
 const studentRadio = document.getElementById("student");
 const teacherRadio = document.getElementById("teacher");
@@ -12,51 +11,52 @@ const comboBox = document.getElementById("subject-select");
 const button = document.querySelector(".button");
 let chkboxSelection;
 
-
 if (!sessionStorage.getItem("tmpReg")) {
   location.replace("../sign-up/index.html");
 }
 
-studentRadio.addEventListener("change", (e) => {
-  image.style.backgroundImage = `url(${studentImage})`;
+studentRadio.addEventListener("change", () => {
+  image.style.backgroundImage = `url(${STUDENT_IMAGE})`;
   subjectContainer.style.display = "none";
   comboBox.value = null;
 });
 
-
-teacherRadio.addEventListener("change", (e) => {
-  image.style.backgroundImage = `url(${teacherImage})`;
+teacherRadio.addEventListener("change", () => {
+  image.style.backgroundImage = `url(${TEACHER_IMAGE})`;
   subjectContainer.style.display = "block";
   comboBox.value = "Geography";
 });
 
 async function sendData(name, lastname, email, password, area) {
   const response = await fetch("http://localhost:5000/api/auth/register", {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: `{
-      "name": ${name},
-      "lastname": ${lastname},
-      "email": ${email},
-      "password": ${password},
-      "area": ${area}
-      }`,
+    body: JSON.stringify({
+      name,
+      lastname,
+      email,
+      password,
+      area,
+    }),
   });
 
-  response.json()
-    .then(data => {
+  response
+    .json()
+    .then(() => {
       alert("Registered successfully");
       sessionStorage.removeItem("tmpReg");
       // redirect to main page
-    }).catch(error => {
+    })
+    .catch((error) => {
       alert("Something went wrong, try again.");
+      console.log(error);
     });
 }
 
-button.addEventListener("click", e => {
+button.addEventListener("click", () => {
   const area = comboBox.value;
   const tmpReg = JSON.parse(sessionStorage.getItem("tmpReg"));
   sendData(...tmpReg, area);

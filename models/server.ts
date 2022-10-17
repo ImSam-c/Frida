@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 import authRouter from "../routes/authentication";
 import examRouter from "../routes/exam";
 import userRouter from "../routes/user";
@@ -25,6 +26,9 @@ export class Server {
   middlewares() {
     //Static content
     this.app.use(express.static("public"));
+
+    //CORS
+    this.app.use(cors());
 
     //Parse body
     this.app.use(express.json());

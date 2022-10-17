@@ -1,22 +1,28 @@
+import nodemailer from "nodemailer";
 import { Request, Response } from "express";
 import { reqID } from "../interfaces/interfaces";
 import User from "../models/user";
+import { newJWT } from "../helpers/generateJWT";
 
-const getUsers = async (req: Request, res: Response) => {
+const getUsers = async (_req: Request, res: Response) => {
   const users = await User.find({ state: true });
-  users ? res.json({ users }) : res.json({ msg: "There isn't users" });
+  users ? res.json({ users }) : res.json({ msg: "There aren't users" });
   res.end();
 };
 
-const getTeachers = async (req: Request, res: Response) => {
+const getTeachers = async (_req: Request, res: Response) => {
   const teachers = await User.find({ state: true }).where("area").exists(true);
-  teachers ? res.json({ teachers }) : res.json({ msg: "There isn't teachers" });
+  teachers
+    ? res.json({ teachers })
+    : res.json({ msg: "There aren't teachers" });
   res.end();
 };
 
-const getStudents = async (req: Request, res: Response) => {
+const getStudents = async (_req: Request, res: Response) => {
   const students = await User.find({ state: true, area: null });
-  students ? res.json({ students }) : res.json({ msg: "There isn't students" });
+  students
+    ? res.json({ students })
+    : res.json({ msg: "There aren't students" });
   res.end();
 };
 
@@ -29,7 +35,7 @@ const getUserById = async (req: Request, res: Response) => {
 };
 
 const updateUser = async (req: Request, res: Response) => {
-  let { fullname, email } = req.body;
+  let { state, ...rest } = req.body;
   const { id: idToUpdate } = req.params;
   const { id } = (req as reqID).decoded;
 
@@ -39,12 +45,9 @@ const updateUser = async (req: Request, res: Response) => {
   const user = await User.findById(idToUpdate);
   if (!user) return res.status(401).json({ msg: "This user doesn't exist" });
 
-  if (email) email = email.toLowerCase();
+  if (rest.email) rest.email = rest.email.toLowerCase();
 
-  await User.findByIdAndUpdate(id, {
-    fullname,
-    email,
-  });
+  await User.findByIdAndUpdate(id, rest);
   user
     ? res.json({ msg: "Everything is ok" })
     : res.json({ msg: "This user doesn't exist" });
@@ -67,6 +70,43 @@ const deleteUser = async (req: Request, res: Response) => {
   res.end();
 };
 
+const recoverPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email, state: true });
+  if (!user)
+    return res
+      .status(400)
+      .json({ msg: "A user with this email doesn't exist" });
+
+  //* Creating new JWT and sending email
+  try {
+    const tkn = await newJWT(user._id, "10m");
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 25,
+      secure: false,
+      auth: {
+        user: "noreply.frida@gmail.com",
+        pass: "xckjuynqvwjmjjrs",
+      },
+    });
+
+    await transporter.sendMail({
+      from: "noreply.frida@gmail.com",
+      to: email,
+      subject: "Recovering password",
+      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/recoverPassword?temptKNrecvg=${tkn}`,
+    });
+
+    res.json({ msg: "Email sent" });
+    res.end();
+  } catch (error) {
+    console.log(error);
+    res.end();
+  }
+};
+
 export {
   getUsers,
   getTeachers,
@@ -74,4 +114,5 @@ export {
   getUserById,
   updateUser,
   deleteUser,
+  recoverPassword,
 };

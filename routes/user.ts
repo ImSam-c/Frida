@@ -5,6 +5,7 @@ import {
   getTeachers,
   getUserById,
   getUsers,
+  recoverPassword,
   updateUser,
 } from "../controllers/user";
 import { validate } from "../middlewares/validationResult";
@@ -28,12 +29,15 @@ router.get("/:id", getUserById);
 
 //* Updating user by id
 router.put(
-  "/:id",
+  "/updateUser/:id",
   [validateJWT, check("email").custom(emailExists), validate],
   updateUser
 );
 
 //* Deleting user by id
 router.delete("/:id", validateJWT, deleteUser);
+
+//* Recovering password
+router.put("/recoverPassword", recoverPassword);
 
 export default router;

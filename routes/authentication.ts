@@ -36,6 +36,4 @@ router.post(
   login
 );
 
-//TODO: Anyday, register and login with Google Sign-In
-
 export default router;

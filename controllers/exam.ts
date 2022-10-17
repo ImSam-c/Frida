@@ -5,7 +5,8 @@ import User from "../models/user";
 
 const getExams = async (req: Request, res: Response) => {
   const exams = await Exam.find().populate("byTeacher", "fullname");
-  exams ? res.json({ exams }) : res.json({ msg: "There isn't exams" });
+  exams ? res.json({ exams }) : res.json({ msg: "There aren't exams" });
+  res.end();
 };
 
 const createExam = async (req: Request, res: Response) => {
@@ -28,7 +29,7 @@ const createExam = async (req: Request, res: Response) => {
     res.status(201).json({ exam });
   } else {
     return res
-      .status(401)
+      .status(400)
       .json({ msg: "This user isn't a teacher or doesn't exist" });
   }
 
@@ -38,7 +39,10 @@ const createExam = async (req: Request, res: Response) => {
 const getExamById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const exams = await Exam.findById(id).populate("byTeacher", "fullname");
-  exams ? res.json({ exams }) : res.json({ msg: "This exam doesn't exist" });
+  exams
+    ? res.json({ exams })
+    : res.status(400).json({ msg: "This exam doesn't exist" });
+  res.end();
 };
 
 const deleteExam = async (req: Request, res: Response) => {
@@ -52,6 +56,7 @@ const deleteExam = async (req: Request, res: Response) => {
 
   await exam?.deleteOne();
   res.json({ msg: "Exam deleted" });
+  res.end();
 };
 
 const verifyExam = async (req: Request, res: Response) => {
@@ -69,6 +74,7 @@ const verifyExam = async (req: Request, res: Response) => {
   });
 
   res.json({ result });
+  res.end();
 };
 
 export { getExams, createExam, getExamById, deleteExam, verifyExam };

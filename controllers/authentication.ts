@@ -44,7 +44,7 @@ const login = async (req: Request, res: Response) => {
   if (!user) return res.status(400).json({ msg: "This user doesn't exist" });
 
   //Verifying password
-  const passwordMatch = bcryptjs.compareSync(password, user.password);
+  const passwordMatch: boolean = bcryptjs.compareSync(password, user.password);
 
   if (!passwordMatch)
     return res.status(401).json({ msg: "Incorrect credentials" });
