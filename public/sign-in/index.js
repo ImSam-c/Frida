@@ -1,6 +1,4 @@
 const button = document.querySelector(".button");
-const firstName = document.querySelector("input[name='first-name']");
-const lastName = document.querySelector("input[name='last-name']");
 const email = document.querySelector("input[name='email']");
 const password = document.querySelector("input[name='password']");
 const inputs = document.querySelectorAll("input");
@@ -8,14 +6,6 @@ const inputs = document.querySelectorAll("input");
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
     switch (e.target.name) {
-      case "first-name":
-        color = validateName(e.target.value) ? "green" : "red";
-        e.target.style.border = "2px solid " + color;
-        break;
-      case "last-name":
-        color = validateName(e.target.value) ? "green" : "red";
-        e.target.style.border = "2px solid " + color;
-        break;
       case "email":
         color = validateEmail(e.target.value) ? "green" : "red";
         e.target.style.border = "2px solid " + color;
@@ -39,15 +29,6 @@ function validateEmail(emailInput) {
   }
 }
 
-function validateName(nameInput) {
-  const nameRegex = /^[a-zA-Z]{1,50}(?: ?[a-zA-Z]){1,50}$/;
-  if (nameInput.match(nameRegex)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 function validatePassword(passwordInput) {
   const passwordRegex =
     /[0-9a-zA-Z~`!@#$%^&*()\-+={}[\]|\:;"'<>\\,.?\/ _]{6,50}/;
@@ -58,22 +39,36 @@ function validatePassword(passwordInput) {
   }
 }
 
+async function sendData(email, password) {
+  const response = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  response
+    .json()
+    .then(() => {
+      location.replace("../home/index.html");
+    })
+    .catch((error) => {
+      alert("Something went wrong, try again.");
+      console.log(error);
+    });
+}
+
 button.addEventListener("click", () => {
   if (
-    validateName(firstName.value) &&
-    validateName(lastName.value) &&
     validateEmail(email.value) &&
     validatePassword(password.value)
   ) {
-    //persist data temporarily between page change
-    const tmpData = JSON.stringify([
-      firstName.value,
-      lastName.value,
-      email.value,
-      password.value,
-    ]);
-    sessionStorage.setItem("tmpReg", tmpData);
-    location.replace("../choose-grade/index.html");
+    sendData(email.value, password.value);
   } else {
     //some alert like sweetAlert2
   }

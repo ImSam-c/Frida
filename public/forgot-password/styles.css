@@ -1,0 +1,32 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--body-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: var(--form-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--form-border-radius);
+  margin-top: 15px;
+  padding: 17px;
+  width: 20rem;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+}
+
+label[for="email"]{
+  margin-bottom: 10px;
+}
+
+input[name="email"]{
+  margin-bottom: 25px;
+}
