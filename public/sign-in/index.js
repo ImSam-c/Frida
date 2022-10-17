@@ -54,7 +54,8 @@ async function sendData(email, password) {
 
   response
     .json()
-    .then(() => {
+    .then((data) => {
+      document.cookie = "tmPtknf.....=" + data.jwt;
       location.replace("../home/index.html");
     })
     .catch((error) => {
@@ -64,10 +65,7 @@ async function sendData(email, password) {
 }
 
 button.addEventListener("click", () => {
-  if (
-    validateEmail(email.value) &&
-    validatePassword(password.value)
-  ) {
+  if (validateEmail(email.value) && validatePassword(password.value)) {
     sendData(email.value, password.value);
   } else {
     //some alert like sweetAlert2

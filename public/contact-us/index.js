@@ -20,7 +20,7 @@ function validateEmail(emailInput) {
 
 button.addEventListener("click", () => {
   if (validateEmail(email.value)) {
-    const email = 'support.frida@gmail.com';
+    const email = "noreply.frida@gmail.com";
     location.href = "mailto:" + email + "?body=" + message.value;
   } else {
     //some alert like sweetAlert2

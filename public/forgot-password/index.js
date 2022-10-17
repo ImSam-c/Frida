@@ -17,21 +17,24 @@ function validateEmail(emailInput) {
 
 async function sendData(email) {
   // fetch url may change.
-  const response = await fetch("http://localhost:5000/api/recoverPassword", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email
-    }),
-  });
+  const response = await fetch(
+    "http://localhost:5000/api/users/recoverPassword",
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    }
+  );
 
   response
     .json()
     .then(() => {
-      alert("Recovery email link sent. Check your inbox.")
+      alert("Recovery email link sent. Check your inbox.");
     })
     .catch((error) => {
       alert("Something went wrong, try again.");
@@ -41,7 +44,7 @@ async function sendData(email) {
 
 button.addEventListener("click", () => {
   if (validateEmail(email.value)) {
-    // sendData(email.value);
+    sendData(email.value);
     console.log("Send password reset email");
   } else {
     //some alert like sweetAlert2

@@ -1,8 +1,9 @@
 import nodemailer from "nodemailer";
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import { reqID } from "../interfaces/interfaces";
 import User from "../models/user";
 import { newJWT } from "../helpers/generateJWT";
+import bcryptjs from "bcryptjs";
 
 const getUsers = async (_req: Request, res: Response) => {
   const users = await User.find({ state: true });
@@ -46,10 +47,14 @@ const updateUser = async (req: Request, res: Response) => {
   if (!user) return res.status(401).json({ msg: "This user doesn't exist" });
 
   if (rest.email) rest.email = rest.email.toLowerCase();
+  if (rest.password) {
+    const salt = bcryptjs.genSaltSync();
+    rest.password = bcryptjs.hashSync(rest.password, salt);
+  }
 
   await User.findByIdAndUpdate(id, rest);
   user
-    ? res.json({ msg: "Everything is ok" })
+    ? res.json({ msg: "User updated" })
     : res.json({ msg: "This user doesn't exist" });
   res.end();
 };
@@ -96,7 +101,7 @@ const recoverPassword = async (req: Request, res: Response) => {
       from: "noreply.frida@gmail.com",
       to: email,
       subject: "Recovering password",
-      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/recoverPassword?temptKNrecvg=${tkn}`,
+      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/../reset-password/index.html?temptKNrecvg=${tkn}`,
     });
 
     res.json({ msg: "Email sent" });
