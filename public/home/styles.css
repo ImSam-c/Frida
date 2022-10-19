@@ -1,5 +1,167 @@
 body {
-    width: 100vw;
-    height: 100vh;
     background-color: var(--body-color);
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100vh;
+}
+
+header{
+  background-color: var(--header-color);
+}
+
+.container-padding{
+  padding: 3% 7%;
+}
+
+.navbar{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3rem;
+}
+
+.navbar-nav{
+    list-style: none;
+}
+
+.nav-item{
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.nav-link{
+    color: white;
+    font-weight: 300;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.nav-link:hover{
+    opacity: 1;
+}
+
+.nav-signin-button{
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--nav-signin-color);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 6px 25px;
+    border-radius: var(--btn-and-input-radius);
+    font-size: 1rem;
+}
+
+.nav-signin-button:hover{
+    cursor: pointer;
+    background-color: black;
+}
+
+.container{
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.big-header-container{
+    width: 50%;
+    text-align: left;
+}
+
+.big-header-container .big-header{
+    margin-top: 6%;
+}
+
+.chalkboard-container{
+    width: 50%;
+    text-align: right;
+    position: relative;
+}
+
+.chalkboard {
+    border: 5px solid #D2D2D2;
+    width: 80%;
+    max-width: 450px;
+    pointer-events: none;
+}
+
+.cards{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4%;
+}
+
+.card{
+    width: 30%;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.card img{
+    width: 165px;
+}
+
+.card-text{
+    font-family: 'Fredericka the Great', sans-serif;
+    font-size: 2rem;
+}
+
+.cta-container{
+    background-color: var(--home-section-color);
+}
+
+.CTA{
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 4rem;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: var(--footer-color);
+    font-size: 0.8rem;
+    flex-grow: 1;
+}
+
+
+@media (min-width: 1200px){
+
+    .container-padding{
+        padding: 3% 15%;
+    }
+
+}
+
+@media (max-width: 1024px){
+
+    .container-padding{
+        padding: 5% 10%;
+    }
+
+    .chalkboard{
+        width: 85%;
+    }
+}
+
+
+@media (max-width: 850px){
+
+    .big-header{
+        font-size: 2rem;
+    }
+
+    .card-text{
+        font-size: 1.5rem;
+    }
+
 }
