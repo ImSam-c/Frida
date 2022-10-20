@@ -6,6 +6,10 @@
 }
 
 :root {
+  --header-color: #12581D;
+  --footer-color: #425F57;
+  --home-section-color: #749F82;
+  --nav-signin-color: #343A40;
   --body-color: #f2f6f3;
   --btn-color: #157070;
   --form-color: #f6f8fa;
@@ -22,10 +26,25 @@
   pointer-events: none;
 }
 
+.brand{
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  color: white;
+  font-size: 2.5rem;
+  text-decoration: none;
+}
+
 .title {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   text-align: center;
+}
+
+.big-header{
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
 }
 
 .button {
