@@ -1,4 +1,5 @@
 const createButtons = document.querySelectorAll(".create-button");
+const saveButtons = document.querySelectorAll(".save-button");
 const questionsBox = document.querySelector(".questions-box");
 let questionNumber = 1;
 
@@ -13,28 +14,60 @@ function createQuestion(n){
   questionsBox.appendChild(questionContainer);
 }
 
-function getAnswers(){
-  const answersContainer = document.querySelector(".answers-container");
-  const answers = answersContainer.querySelectorAll("input[type='text']");
-  const correctAnswer = answersContainer.querySelectorAll("input[type='radio']");
+function getData(){
+  const questions = [];
+  const questionsContainer = document.querySelectorAll(".question-container");
+  questionsContainer.forEach(questionContainer => {
+    // Get questions from the textarea.
+    const question = questionContainer.querySelector("textarea").value;
+    // Skip blank questions.
+    if (!question.trim()) return;
+  
+    // Get answer options and correct answer from the input text and radio buttons.
+    const answersContainer = questionContainer.querySelector(".answers-container");
+    const answers = answersContainer.querySelectorAll("input[type='text']");
+    const correctAnswers = answersContainer.querySelectorAll("input[type='radio']");
 
-  const answersText = Array.from(answers, (answer) => {
-    return answer.value;
+    const answerOptions = Array.from(answers, (answer) => {
+      return answer.value;
+    });
+
+    const correctAnswer = Array.from(correctAnswers, (radioBtn) => {
+      return radioBtn.checked;
+    });
+
+    const questionData = {
+      question,
+      answerOptions,
+      correctAnswer  
+    };
+    
+    questions.push(questionData);
   });
-
-  const correctAnswerArray = Array.from(correctAnswer, (radioBtn) => {
-    return radioBtn.checked;
-  });
-
-  const questions = [
-    {
-      question: "first one",
-      answersText: answersText,
-      correctAnswer: correctAnswerArray   
-    },
-  ];
 
   return questions;
+}
+
+async function sendData(questions) {
+  const response = await fetch("http://localhost:5000/api/exams/createExam", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({questions}),
+  });
+
+  response
+    .json()
+    .then(() => {
+      alert("Exam created successfully");
+      location.replace("../home/index.html");
+    })
+    .catch((error) => {
+      alert("Something went wrong, try again.");
+      console.log(error);
+    });
 }
 
 createButtons.forEach(createButton => {
@@ -42,6 +75,16 @@ createButtons.forEach(createButton => {
     questionNumber++;
     createQuestion(questionNumber);
     window.scrollTo(0, document.body.scrollHeight);
+  });
+});
+
+saveButtons.forEach(saveButton => {
+  saveButton.addEventListener("click", () => {
+     const questions = getData();
+     if(questions.length > 0){
+      // sweetAlert2 or some other modal...
+      window.confirm("Create the exam?") ? sendData(questions) : null;
+     }    
   });
 });
 
@@ -71,6 +114,7 @@ function createNqbContainer(n){
 
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
+  deleteButton.classList.add("button");
   deleteButton.setAttribute("type", "button");
   deleteButton.setAttribute("onclick", `deleteContent(${n})`);
   deleteButton.textContent = "Delete";

@@ -16,6 +16,8 @@
   --border-color: #797979;
   --form-border-radius: 10px;
   --btn-and-input-radius: 5px;
+  --danger-color: #e54545;
+  --exam-body-color: #285e50e3;
 }
 
 .logo {

@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="styles.css">
     <title>Create Exam</title>
 </head>
 <body>
     <main>
         <div class="exam-container">
-          <h1 class="title">Exam:</h1>
+          <h1 class="exam-title">Create New Exam:</h1>
           <div class="buttons-container">
-            <button type="button" class="create-button">Create Question</button>
-            <button type="button" class="save-button">Save Exam</button>
+            <button type="button" class="create-button button">Create Question</button>
+            <button type="button" class="save-button button">Save Exam</button>
           </div>
           <div class="questions-box">
             <div class="question-container" id="qc1">
               <div class="nqb-container">
                 <p class="question-number">1.-</p>
                 <textarea rows="3" name="question1"></textarea>
-                <button type="button" class="delete-button" onclick="deleteContent(1)">Delete</button>
+                <button type="button" class="delete-button button" onclick="deleteContent(1)">Delete</button>
               </div>
               <div class="answers-container">
                 <div><input type="radio" name="answers1"><input type="text"></div>
@@ -31,8 +32,8 @@
             </div>
           </div>
           <div class="buttons-container">
-            <button type="button" class="create-button">Create Question</button>
-            <button type="button" class="save-button">Save Exam</button>
+            <button type="button" class="create-button button">Create Question</button>
+            <button type="button" class="save-button button">Save Exam</button>
           </div>
         </div>
       </main>
