@@ -16,9 +16,9 @@ function createQuestion(n){
 
 function getData(){
   const questions = [];
+  const comments = document.querySelector(".comments").value;
   const questionsContainer = document.querySelectorAll(".question-container");
   questionsContainer.forEach(questionContainer => {
-    // Get questions from the textarea.
     const statement = questionContainer.querySelector("textarea").value;
     // Skip blank questions.
     if (!statement.trim()) return;
@@ -44,23 +44,23 @@ function getData(){
     const questionData = {
       statement,
       options,
-      correctAnswer  
+      correctAnswer
     };
     
     questions.push(questionData);
   });
 
-  return questions;
+  return {questions, comments};
 }
 
-async function sendData(questions) {
+async function sendData(questions, comments) {
   const response = await fetch("http://localhost:5000/api/exams/createExam", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({questions}),
+    body: JSON.stringify({questions, comments}),
   });
 
   response
@@ -85,10 +85,10 @@ createButtons.forEach(createButton => {
 
 saveButtons.forEach(saveButton => {
   saveButton.addEventListener("click", () => {
-     const questions = getData();
+     const {questions, comments} = getData();
      if(questions.length > 0){
       // sweetAlert2 or some other modal...
-      window.confirm("Create the exam?") ? sendData(questions) : null;
+      window.confirm("Create the exam?") ? sendData(questions, comments) : null;
      }    
   });
 });

@@ -36,6 +36,10 @@
     resize: vertical;
     padding: 6px;
   }
+
+  .comment{
+    margin-bottom: 1.5rem;
+  }
   
   .answers-container{
     display: flex;
