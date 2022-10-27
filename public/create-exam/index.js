@@ -19,26 +19,31 @@ function getData(){
   const questionsContainer = document.querySelectorAll(".question-container");
   questionsContainer.forEach(questionContainer => {
     // Get questions from the textarea.
-    const question = questionContainer.querySelector("textarea").value;
+    const statement = questionContainer.querySelector("textarea").value;
     // Skip blank questions.
-    if (!question.trim()) return;
+    if (!statement.trim()) return;
   
     // Get answer options and correct answer from the input text and radio buttons.
     const answersContainer = questionContainer.querySelector(".answers-container");
     const answers = answersContainer.querySelectorAll("input[type='text']");
-    const correctAnswers = answersContainer.querySelectorAll("input[type='radio']");
+    const radioButtons = answersContainer.querySelectorAll("input[type='radio']");
 
-    const answerOptions = Array.from(answers, (answer) => {
+    const options = Array.from(answers, (answer) => {
       return answer.value;
     });
 
-    const correctAnswer = Array.from(correctAnswers, (radioBtn) => {
-      return radioBtn.checked;
-    });
+    let correctAnswer = -1;
+    for(const radioBtn of radioButtons.entries()){
+      if(radioBtn[1].checked){
+        correctAnswer = radioBtn[0];
+        correctAnswer++;
+        break;
+      }
+    }
 
     const questionData = {
-      question,
-      answerOptions,
+      statement,
+      options,
       correctAnswer  
     };
     
