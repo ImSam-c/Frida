@@ -20,7 +20,7 @@ header{
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 3rem;
+    padding-bottom: 4rem;
 }
 
 .navbar-nav{
@@ -29,7 +29,7 @@ header{
 
 .nav-item{
     display: inline-block;
-    margin-left: 12px;
+    margin-left: 1rem;
 }
 
 .nav-link{
@@ -59,6 +59,24 @@ header{
     background-color: black;
 }
 
+.nav-signup-button{
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--body-color);
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 6px 25px;
+    border-radius: var(--btn-and-input-radius);
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.nav-signup-button:hover{
+    cursor: pointer;
+    background-color: white;
+    opacity: 1;
+}
+
 .container{
     display: flex;
     flex-flow: row nowrap;
@@ -86,28 +104,35 @@ header{
     pointer-events: none;
 }
 
-.cards{
+.exam-sample{
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
-    padding: 4%;
 }
 
-.card{
-    width: 30%;
-    display: block;
-    position: relative;
-    text-align: center;
+.description-container{
+    display: flex;
+    flex-flow: column nowrap;
 }
 
-.card img{
-    width: 165px;
-}
-
-.card-text{
-    font-family: 'Fredericka the Great', sans-serif;
+.description-container > p {
     font-size: 2rem;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+}
+
+.quote-container{
+    text-align: right;
+}
+
+.strikethrough{
+    text-decoration: line-through;
+}
+
+.mobile-image{
+    width: 30%;
+    pointer-events: none;
 }
 
 .cta-container{
@@ -151,17 +176,45 @@ footer{
     .chalkboard{
         width: 85%;
     }
+
+    .quote-container{
+        margin-right: 1rem;
+    }
 }
 
 
-@media (max-width: 850px){
+@media (max-width: 870px){
 
     .big-header{
         font-size: 2rem;
     }
 
-    .card-text{
-        font-size: 1.5rem;
+    .mobile-image{
+        width: 45%;
+    }
+}
+
+
+@media (max-width: 614px){
+
+    .exam-sample {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+        align-items: center;
     }
 
+    .mobile-image{
+        width: 85%;
+        margin-top: 2rem;
+    }
+
+    /* .nav-item{
+        display: block;
+        margin: 1rem 0;
+    }
+
+    .navbar-nav{
+        text-align: center;
+    } */
 }
