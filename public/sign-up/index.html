@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Choose your grade</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <main>
-      <img src="../logo.png" alt="logo" class="logo" draggable="false">
-      <h3 class="title">Sign up to Frida</h3>
-      <div class="container">
-        <div class="fullname-container">
-          <label for="first-name">First name</label>
-          <input type="text" name="first-name" required>
-          <label for="last-name">Last name</label>
-          <input type="text" name="last-name" required>
-        </div>
-        <label for="email">Email address</label>
-        <input type="email" name="email" required>
-        <label for="password">Password</label>
-        <input type="password"  name="password" required>
-        <p class="password-requirement-text">Minimum length is 6 characters.</p>
-        <button type="button" class="button">Next</button>
+
+<head>
+  <title>Choose your grade</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <img src="../logo.png" alt="logo" class="logo" draggable="false">
+    <h3 class="title">Sign up to Frida</h3>
+    <div class="container">
+      <div class="fullname-container">
+        <label for="first-name">First name</label>
+        <input type="text" name="first-name" required>
+        <label for="last-name">Last name</label>
+        <input type="text" name="last-name" required>
       </div>
-      <div class="container sign-in-container">
-        <p class="already-registered-text">Already have an account?<a href="../sign-in/index.html">Sign in</a></p>
-      </div>
-    </main>
-    <script src="index.js"></script>
-  </body>
+      <label for="email">Email address</label>
+      <input type="email" name="email" required>
+      <label for="password">Password</label>
+      <input type="password" name="password" required>
+      <p class="password-requirement-text">Minimum length is 6 characters.</p>
+      <button type="button" class="button">Next</button>
+    </div>
+    <div class="container sign-in-container">
+      <p class="already-registered-text">Already have an account?<a href="../sign-in/index.html">Sign in</a></p>
+    </div>
+  </main>
+  <script src="index.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
 </html>

@@ -2,6 +2,7 @@ const button = document.querySelector(".button");
 const email = document.querySelector("input[name='email']");
 const password = document.querySelector("input[name='password']");
 const inputs = document.querySelectorAll("input");
+const ic_paragraph = document.getElementById("ic-paragraph");
 
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
@@ -38,6 +39,11 @@ function validatePassword(passwordInput) {
     return false;
   }
 }
+/*
+  Tipos de errores:
+    ic: Incorrect Credentials - Credenciales incorrectas.
+    userdx: User doesn't exist - No existe un usuario con estas credenciales.
+*/
 
 async function sendData(email, password) {
   const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -59,7 +65,33 @@ async function sendData(email, password) {
       location.replace("../home/index.html");
     })
     .catch((error) => {
-      alert("Something went wrong, try again.");
+      switch (error) {
+        case "ic":
+          ic_paragraph.classList.add("inc-credentials");
+          break;
+
+        case "userdx":
+          Swal.fire({
+            title: "This user doesn't exist",
+            html: "<p class='modal-font'>Please verify your credentials, especially your email address.</p>",
+            icon: "error",
+            customClass: {
+              title: "modal-font",
+            },
+            confirmButtonColor: "var(--incorrect-color)",
+          });
+          break;
+
+        default:
+          Swal.fire({
+            title: "Something went wrong, try again.",
+            icon: "error",
+            customClass: {
+              title: "modal-font",
+            },
+          });
+          break;
+      }
       console.log(error);
     });
 }
@@ -68,6 +100,14 @@ button.addEventListener("click", () => {
   if (validateEmail(email.value) && validatePassword(password.value)) {
     sendData(email.value, password.value);
   } else {
-    //some alert like sweetAlert2
+    Swal.fire({
+      title: "Hey!",
+      html: '<p class="modal-font">Please correct the fields.</p>',
+      icon: "error",
+      customClass: {
+        title: "modal-font",
+      },
+      confirmButtonColor: "var(--incorrect-color)",
+    });
   }
 });

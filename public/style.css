@@ -12,6 +12,7 @@
   --border-color: #797979;
   --form-border-radius: 10px;
   --btn-and-input-radius: 5px;
+  --incorrect-color: #fc4545;
 }
 
 .logo {
@@ -51,10 +52,18 @@
 
 input[type="text"],
 input[type="email"],
-input[type="password"]{
+input[type="password"] {
   height: 1.8rem;
   border: 1px solid var(--border-color);
   border-radius: var(--btn-and-input-radius);
   padding: 0 6px;
 }
 
+.modal-font {
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-sign-up {
+  text-decoration: none;
+  color: white;
+}

@@ -32,24 +32,24 @@ body {
 }
 
 label[for="email"],
-label[for="password"]{
+label[for="password"] {
   margin: 15px 0 10px;
 }
 
-.password-requirement-text{
+.password-requirement-text {
   margin: 5px 0 20px;
   font-size: 10px;
   font-weight: 300;
 }
 
-.sign-in-container{
+.sign-in-container {
   width: 18rem;
   margin: 1.5rem auto;
   padding: 12px 20px;
   background-color: white;
 }
 
-.already-registered-text a{
+.already-registered-text a {
   display: inline-block;
   margin-left: 1rem;
   text-decoration: none;

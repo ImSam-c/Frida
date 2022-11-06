@@ -23,35 +23,44 @@ body {
   font-style: normal;
 }
 
-label[for="email"]{
+label[for="email"] {
   margin-bottom: 10px;
 }
 
-.forgot-password-container{
+.forgot-password-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.forgot-password-container a{
+.forgot-password-container a {
   text-decoration: none;
 }
 
 input[name="email"],
-input[name="password"]{
+input[name="password"] {
   margin-bottom: 25px;
 }
 
-.register-now-container{
+.register-now-container {
   margin: 1.5rem auto;
   padding: 12px 20px;
   background-color: white;
   text-align: center;
 }
 
-.not-registered-text a{
+.not-registered-text a {
   display: inline-block;
   margin-left: 1rem;
   text-decoration: none;
+}
+
+.inc-credentials {
+  display: block !important;
+  position: relative;
+  bottom: 0.9rem;
+  color: var(--incorrect-color);
+  text-align: center;
+  font-size: 0.8rem;
 }

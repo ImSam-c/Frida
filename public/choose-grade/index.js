@@ -24,7 +24,6 @@ studentRadio.addEventListener("change", () => {
 teacherRadio.addEventListener("change", () => {
   image.style.backgroundImage = `url(${TEACHER_IMAGE})`;
   subjectContainer.style.display = "block";
-  comboBox.value = "Geography";
 });
 
 async function sendData(name, lastname, email, password, area) {
@@ -46,12 +45,27 @@ async function sendData(name, lastname, email, password, area) {
   response
     .json()
     .then(() => {
-      alert("Registered successfully");
+      Swal.fire({
+        title: "Nice!",
+        icon: "success",
+        html: `<p class="modal-font">Successfully registered.</p>`,
+        confirmButtonText:
+          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonColor: "var(--btn-color)",
+        customClass: {
+          title: "modal-font",
+        },
+      });
       sessionStorage.removeItem("tmpReg");
-      location.replace("../home/index.html");
     })
     .catch((error) => {
-      alert("Something went wrong, try again.");
+      Swal.fire({
+        title: "Something went wrong, try again.",
+        icon: "error",
+        customClass: {
+          title: "model-font",
+        },
+      });
       console.log(error);
     });
 }

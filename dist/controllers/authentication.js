@@ -47,7 +47,7 @@ exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     //Verifying email
-    const user = yield user_1.default.findOne({ email });
+    const user = yield user_1.default.findOne({ email, state: true });
     if (!user)
         return res.status(400).json({ msg: "This user doesn't exist" });
     //Verifying password
@@ -57,6 +57,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const jwt = yield (0, generateJWT_1.newJWT)(user._id).catch((err) => {
         throw new Error(err);
     });
-    return res.json({ jwt });
+    return res.json({ user, jwt });
 });
 exports.login = login;

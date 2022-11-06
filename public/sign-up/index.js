@@ -73,8 +73,25 @@ button.addEventListener("click", () => {
       password.value,
     ]);
     sessionStorage.setItem("tmpReg", tmpData);
-    location.replace("../choose-grade/index.html");
+    Swal.fire({
+      title: "Perfect!",
+      html: `<p class="modal-font">Now, let's see if you are a student or not.</p>`,
+      confirmButtonText:
+        '<a class="modal-sign-up" href="../choose-grade/index.html">Next →</a> ',
+      confirmButtonColor: "var(--btn-color)",
+      customClass: {
+        title: "modal-font",
+      },
+    });
   } else {
-    //some alert like sweetAlert2
+    Swal.fire({
+      title: "Hey!",
+      html: '<p class="modal-font">Please correct the fields.</p>',
+      icon: "error",
+      customClass: {
+        title: "modal-font",
+      },
+      confirmButtonColor: "var(--incorrect-color)",
+    });
   }
 });

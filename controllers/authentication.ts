@@ -41,13 +41,16 @@ const login = async (req: Request, res: Response) => {
   //Verifying email
   const user = await User.findOne({ email, state: true });
 
-  if (!user) return res.status(400).json({ msg: "This user doesn't exist" });
+  if (!user)
+    return res
+      .status(400)
+      .json({ msg: "This user doesn't exist", id: "userdx" });
 
   //Verifying password
   const passwordMatch: boolean = bcryptjs.compareSync(password, user.password);
 
   if (!passwordMatch)
-    return res.status(401).json({ msg: "Incorrect credentials" });
+    return res.status(401).json({ msg: "Incorrect credentials", id: "ic" });
 
   const jwt = await newJWT(user._id).catch((err) => {
     throw new Error(err);

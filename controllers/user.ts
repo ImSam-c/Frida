@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { reqID } from "../interfaces/interfaces";
 import User from "../models/user";
 import { newJWT } from "../helpers/generateJWT";

@@ -18,7 +18,7 @@ const variables_1 = require("../helpers/variables");
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(process.env.MONGODB_CNN || variables_1.mongodbcnn);
-        console.log("db connected");
+        console.log("DB Connected");
     }
     catch (error) {
         throw new Error("database connect failed");

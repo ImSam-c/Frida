@@ -12,15 +12,27 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const userSchema = new mongoose_1.Schema({
-    fullname: { type: String, required: true },
-    password: { type: String, required: true },
-    email: { type: String, required: true },
-    area: { type: String },
-    state: { type: Boolean, default: true },
+const examSchema = new mongoose_1.Schema({
+    area: {
+        type: String,
+        required: true,
+    },
+    byTeacher: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    questions: {
+        type: [],
+        required: true,
+    },
+    comments: {
+        type: String,
+        default: "",
+    },
 });
-userSchema.methods.toJSON = function () {
-    const _a = this.toObject(), { password, state, __v } = _a, rest = __rest(_a, ["password", "state", "__v"]);
+examSchema.methods.toJSON = function () {
+    const _a = this.toObject(), { __v } = _a, rest = __rest(_a, ["__v"]);
     return rest;
 };
-exports.default = (0, mongoose_1.model)("User", userSchema);
+exports.default = (0, mongoose_1.model)("Exam", examSchema);
