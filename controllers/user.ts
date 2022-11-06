@@ -44,7 +44,10 @@ const updateUser = async (req: Request, res: Response) => {
     return res.status(401).json({ msg: "You cannot update this user" });
 
   const user = await User.findById(idToUpdate);
-  if (!user) return res.status(401).json({ msg: "This user doesn't exist" });
+  if (!user)
+    return res
+      .status(401)
+      .json({ msg: "This user doesn't exist", id: "userdx" });
 
   if (rest.email) rest.email = rest.email.toLowerCase();
   if (rest.password) {
@@ -54,8 +57,8 @@ const updateUser = async (req: Request, res: Response) => {
 
   await User.findByIdAndUpdate(id, rest);
   user
-    ? res.json({ msg: "User updated" })
-    : res.json({ msg: "This user doesn't exist" });
+    ? res.json({})
+    : res.json({ msg: "This user doesn't exist", id: "userdx" });
   res.end();
 };
 
@@ -82,9 +85,9 @@ const recoverPassword = async (req: Request, res: Response) => {
   if (!user)
     return res
       .status(400)
-      .json({ msg: "A user with this email doesn't exist" });
+      .json({ msg: "A user with this email doesn't exist", id: "userdx" });
 
-  //* Creating new JWT and sending email
+  //* Creating new JWT and sending mail
   try {
     const tkn = await newJWT(user._id, "10m");
     let transporter = nodemailer.createTransport({
@@ -101,11 +104,11 @@ const recoverPassword = async (req: Request, res: Response) => {
       from: "noreply.frida@gmail.com",
       to: email,
       subject: "Recovering password",
-      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/../reset-password/index.html?temptKNrecvg=${tkn}`,
+      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/../reset-password/index.html?temptKNrecvg=${tkn}
+      
+      Important: This link contains a secret key, expires in 10 minutes.`,
     });
-
-    res.json({ msg: "Email sent" });
-    res.end();
+    return res.json({ msg: "sent" });
   } catch (error) {
     console.log(error);
     res.end();

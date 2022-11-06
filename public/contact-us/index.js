@@ -23,6 +23,14 @@ button.addEventListener("click", () => {
     const email = "noreply.frida@gmail.com";
     location.href = "mailto:" + email + "?body=" + message.value;
   } else {
-    //some alert like sweetAlert2
+    Swal.fire({
+      title: "Hey!",
+      html: '<p class="modal-font">Please correct the fields.</p>',
+      icon: "error",
+      customClass: {
+        title: "modal-font",
+      },
+      confirmButtonColor: "var(--incorrect-color)",
+    });
   }
 });

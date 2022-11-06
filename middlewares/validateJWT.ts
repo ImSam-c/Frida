@@ -37,7 +37,8 @@ export const validateJWT = async (
   } catch (error) {
     console.log(error);
     res.status(401).json({
-      msg: "Invalid token",
+      msg: "Invalid token, use a valid token",
+      id: "it",
     });
   }
 };

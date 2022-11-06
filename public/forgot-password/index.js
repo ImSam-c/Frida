@@ -34,19 +34,55 @@ async function sendData(email) {
   response
     .json()
     .then(() => {
-      alert("Recovery email link sent. Check your inbox.");
+      Swal.close();
+      Swal.fire({
+        title: "Nice!",
+        icon: "success",
+        html: `<p class="modal-font">Recovery email link sent. Check your inbox and spam.</p>`,
+        confirmButtonText:
+          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonColor: "var(--btn-color)",
+        customClass: {
+          title: "modal-font",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
     })
     .catch((error) => {
-      alert("Something went wrong, try again.");
+      Swal.fire({
+        title: "Something went wrong, try again.",
+        icon: "error",
+        customClass: {
+          title: "model-font",
+        },
+      });
       console.log(error);
     });
 }
 
 button.addEventListener("click", () => {
   if (validateEmail(email.value)) {
+    Swal.fire({
+      icon: "info",
+      title: "Sending mail",
+      customClass: {
+        title: "modal-font",
+      },
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     sendData(email.value);
-    console.log("Send password reset email");
   } else {
-    //some alert like sweetAlert2
+    Swal.fire({
+      title: "Hey!",
+      html: '<p class="modal-font">Please correct the fields.</p>',
+      icon: "error",
+      customClass: {
+        title: "modal-font",
+      },
+      confirmButtonColor: "var(--incorrect-color)",
+    });
   }
 });

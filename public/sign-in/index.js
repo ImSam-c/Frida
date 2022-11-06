@@ -4,6 +4,13 @@ const password = document.querySelector("input[name='password']");
 const inputs = document.querySelectorAll("input");
 const ic_paragraph = document.getElementById("ic-paragraph");
 
+function redirectHomeIfToken() {
+  if (localStorage.getItem("XSRF-TOKEN"))
+    location.replace("../home/index.html");
+}
+
+document.addEventListener("DOMContentLoaded", redirectHomeIfToken);
+
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
     switch (e.target.name) {
@@ -61,11 +68,12 @@ async function sendData(email, password) {
   response
     .json()
     .then((data) => {
-      document.cookie = "tmPtknf.....=" + data.jwt;
+      if (data.msg) throw data;
+      localStorage.setItem("XSRF-TOKEN", data.jwt);
       location.replace("../home/index.html");
     })
     .catch((error) => {
-      switch (error) {
+      switch (error.id) {
         case "ic":
           ic_paragraph.classList.add("inc-credentials");
           break;
@@ -92,7 +100,7 @@ async function sendData(email, password) {
           });
           break;
       }
-      console.log(error);
+      console.log(error.msg);
     });
 }
 

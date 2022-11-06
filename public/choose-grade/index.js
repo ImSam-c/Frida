@@ -55,6 +55,8 @@ async function sendData(name, lastname, email, password, area) {
         customClass: {
           title: "modal-font",
         },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
       });
       sessionStorage.removeItem("tmpReg");
     })

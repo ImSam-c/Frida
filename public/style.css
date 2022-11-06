@@ -6,12 +6,18 @@
 }
 
 :root {
+  --header-color: #12581d;
+  --footer-color: #425f57;
+  --home-section-color: #749f82;
+  --nav-signin-color: #343a40;
   --body-color: #f2f6f3;
   --btn-color: #157070;
   --form-color: #f6f8fa;
   --border-color: #797979;
   --form-border-radius: 10px;
   --btn-and-input-radius: 5px;
+  --danger-color: #e54545;
+  --exam-body-color: #285e50e3;
   --incorrect-color: #fc4545;
 }
 
@@ -23,10 +29,25 @@
   pointer-events: none;
 }
 
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  color: white;
+  font-size: 2.5rem;
+  text-decoration: none;
+}
+
 .title {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   text-align: center;
+}
+
+.big-header {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
 }
 
 .button {

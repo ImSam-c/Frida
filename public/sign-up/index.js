@@ -82,6 +82,8 @@ button.addEventListener("click", () => {
       customClass: {
         title: "modal-font",
       },
+      allowOutsideClick: false,
+      allowEscapeKey: false,
     });
   } else {
     Swal.fire({

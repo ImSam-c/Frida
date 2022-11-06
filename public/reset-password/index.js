@@ -4,6 +4,8 @@ const verifyPassword = document.querySelector("input[name='verify-password']");
 const inputs = document.querySelectorAll("input");
 const [, jwtToken] = new URLSearchParams(location.search).toString().split("=");
 
+if (!jwtToken) location.replace("../home/index.html");
+
 const base64Url = jwtToken.split(".")[1];
 const base64 = base64Url.replace("-", "+").replace("_", "/");
 const token = JSON.parse(window.atob(base64));
@@ -25,8 +27,7 @@ function validatePassword(passwordInput) {
   }
 }
 
-async function sendData(password, jwt) {
-  // todo: receive jwt and confirm auth header name.
+async function sendData(password) {
   const response = await fetch(
     `http://localhost:5000/api/users/updateUser/${token.id}`,
     {
@@ -42,15 +43,65 @@ async function sendData(password, jwt) {
     }
   );
 
+  /*
+  Tipos de errores:
+    ic: Incorrect Credentials - Credenciales incorrectas.
+    userdx: User doesn't exist - No existe un usuario con estas credenciales.
+    it: Invalid token - El token es inválido, comprobar caducidad.
+*/
+  console.log(response);
   response
     .json()
     .then((data) => {
-      alert("Password successfully reset.");
-      console.log(data);
-      //location.replace("../sign-in/index.html");
+      if (data.msg) throw data;
+      Swal.fire({
+        title: "Nice!",
+        icon: "success",
+        html: `<p class="modal-font">Password reset.</p>`,
+        confirmButtonText:
+          '<a class="modal-sign-up" href="../sign-in/index.html">Ok!</a> ',
+        confirmButtonColor: "var(--btn-color)",
+        customClass: {
+          title: "modal-font",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
     })
     .catch((error) => {
-      alert("Something went wrong, try again.");
+      switch (error.id) {
+        case "userdx":
+          Swal.fire({
+            title: "This user doesn't exist",
+            html: "<p class='modal-font'>Please verify your email address.</p>",
+            icon: "error",
+            customClass: {
+              title: "modal-font",
+            },
+            confirmButtonColor: "var(--incorrect-color)",
+          });
+          break;
+
+        case "it":
+          Swal.fire({
+            title: "The secret key expired. Please use another.",
+            icon: "error",
+            customClass: {
+              title: "modal-font",
+            },
+          });
+          break;
+
+        default:
+          Swal.fire({
+            title: "Something went wrong, try again.",
+            icon: "error",
+            customClass: {
+              title: "modal-font",
+            },
+          });
+          break;
+      }
       console.log(error);
     });
 }
@@ -59,7 +110,6 @@ function verifyPasswords(firstPassword, secondPassword) {
   if (firstPassword === secondPassword) {
     return true;
   } else {
-    alert("Passwords don't match.");
     return false;
   }
 }
@@ -70,10 +120,16 @@ button.addEventListener("click", () => {
     validatePassword(verifyPassword.value) &&
     verifyPasswords(newPassword.value, verifyPassword.value)
   ) {
-    // still working in sendData function
     sendData(newPassword.value, token);
-    console.log("Reset password");
   } else {
-    //some alert like sweetAlert2
+    Swal.fire({
+      title: "Hey!",
+      html: `<p class="modal-font">Passwords aren't the same. Please correct the fields.</p>`,
+      icon: "error",
+      customClass: {
+        title: "modal-font",
+      },
+      confirmButtonColor: "var(--incorrect-color)",
+    });
   }
 });
