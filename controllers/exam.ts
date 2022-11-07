@@ -65,7 +65,10 @@ const verifyExam = async (req: Request, res: Response) => {
   const result: boolean[] = [];
 
   const exam = await Exam.findById(id);
-  if (!exam) return res.status(400).json({ msg: "This exam doesn't exist" });
+  if (!exam)
+    return res
+      .status(400)
+      .json({ msg: "This exam doesn't exist", id: "examdx" });
 
   exam.questions.forEach((question, i) => {
     question.correctAnswer === answers[i]

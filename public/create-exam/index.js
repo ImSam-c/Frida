@@ -3,7 +3,7 @@ const saveButtons = document.querySelectorAll(".save-button");
 const questionsBox = document.querySelector(".questions-box");
 let questionNumber = 1;
 
-function createQuestion(n){
+function createQuestion(n) {
   const nqbContainer = createNqbContainer(n);
   const answersContainer = createAnswersContainer(n);
   const questionContainer = document.createElement("div");
@@ -14,27 +14,30 @@ function createQuestion(n){
   questionsBox.appendChild(questionContainer);
 }
 
-function getData(){
+function getData() {
   const questions = [];
   const comments = document.querySelector(".comments").value;
   const questionsContainer = document.querySelectorAll(".question-container");
-  questionsContainer.forEach(questionContainer => {
+  questionsContainer.forEach((questionContainer) => {
     const statement = questionContainer.querySelector("textarea").value;
     // Skip blank questions.
     if (!statement.trim()) return;
-  
+
     // Get answer options and correct answer from the input text and radio buttons.
-    const answersContainer = questionContainer.querySelector(".answers-container");
+    const answersContainer =
+      questionContainer.querySelector(".answers-container");
     const answers = answersContainer.querySelectorAll("input[type='text']");
-    const radioButtons = answersContainer.querySelectorAll("input[type='radio']");
+    const radioButtons = answersContainer.querySelectorAll(
+      "input[type='radio']"
+    );
 
     const options = Array.from(answers, (answer) => {
       return answer.value;
     });
 
     let correctAnswer = -1;
-    for(const radioBtn of radioButtons.entries()){
-      if(radioBtn[1].checked){
+    for (const radioBtn of radioButtons.entries()) {
+      if (radioBtn[1].checked) {
         correctAnswer = radioBtn[0];
         correctAnswer++;
         break;
@@ -44,13 +47,13 @@ function getData(){
     const questionData = {
       statement,
       options,
-      correctAnswer
+      correctAnswer,
     };
-    
+
     questions.push(questionData);
   });
 
-  return {questions, comments};
+  return { questions, comments };
 }
 
 async function sendData(questions, comments) {
@@ -59,23 +62,41 @@ async function sendData(questions, comments) {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("XSRF-TOKEN")}`,
     },
-    body: JSON.stringify({questions, comments}),
+    body: JSON.stringify({ questions, comments }),
   });
 
   response
     .json()
     .then(() => {
-      alert("Exam created successfully");
-      location.replace("../home/index.html");
+      Swal.fire({
+        title: "Nice!",
+        icon: "success",
+        html: `<p class="modal-font">Exam created!</p>`,
+        confirmButtonText:
+          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonColor: "var(--btn-color)",
+        customClass: {
+          title: "modal-font",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
     })
     .catch((error) => {
-      alert("Something went wrong, try again.");
+      Swal.fire({
+        title: "Something went wrong, try again.",
+        icon: "error",
+        customClass: {
+          title: "model-font",
+        },
+      });
       console.log(error);
     });
 }
 
-createButtons.forEach(createButton => {
+createButtons.forEach((createButton) => {
   createButton.addEventListener("click", () => {
     questionNumber++;
     createQuestion(questionNumber);
@@ -83,32 +104,45 @@ createButtons.forEach(createButton => {
   });
 });
 
-saveButtons.forEach(saveButton => {
+saveButtons.forEach((saveButton) => {
   saveButton.addEventListener("click", () => {
-     const {questions, comments} = getData();
-     if(questions.length > 0){
-      // sweetAlert2 or some other modal...
-      window.confirm("Create the exam?") ? sendData(questions, comments) : null;
-     }    
+    const { questions, comments } = getData();
+    if (questions.length > 0) {
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "question",
+        showCancelButton: true,
+        customClass: {
+          title: "modal-font",
+        },
+        cancelButtonColor: "var(--incorrect-color)",
+        confirmButtonColor: "var(--btn-color)",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        result.isConfirmed ? sendData(questions, comments) : null;
+      });
+    }
   });
 });
 
-function deleteContent(n){
+function deleteContent(n) {
   textArea = document.querySelector(`textarea[name="question${n}"]`);
   textArea.value = "";
   const questionContainer = document.getElementById(`qc${n}`);
-  const answersContainer = questionContainer.querySelector(".answers-container");
+  const answersContainer =
+    questionContainer.querySelector(".answers-container");
   const inputTexts = answersContainer.querySelectorAll("input[type='text']");
   const radioButtons = answersContainer.querySelectorAll("input[type='radio']");
-  inputTexts.forEach(inputText => {
+  inputTexts.forEach((inputText) => {
     inputText.value = "";
   });
-  radioButtons.forEach(radioButton => {
+  radioButtons.forEach((radioButton) => {
     radioButton.checked = false;
-  });  
+  });
 }
 
-function createNqbContainer(n){
+function createNqbContainer(n) {
   const questionNumber = document.createElement("p");
   questionNumber.classList.add("question-number");
   questionNumber.textContent = n + ".-";
@@ -133,10 +167,10 @@ function createNqbContainer(n){
   return nqbContainer;
 }
 
-function createAnswersContainer(n){
+function createAnswersContainer(n) {
   const answersContainer = document.createElement("div");
   answersContainer.classList.add("answers-container");
-  for(let i = 0; i < 4; i++){
+  for (let i = 0; i < 4; i++) {
     const radioButton = document.createElement("input");
     radioButton.setAttribute("type", "radio");
     radioButton.setAttribute("name", `answers${n}`);
