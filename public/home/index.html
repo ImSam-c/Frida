@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="backdrop"></div>
     <header class="container-padding">
       <nav class="navbar">
         <a href="#" class="brand">Frida</a>
@@ -21,7 +22,15 @@
           <li class="nav-item">
             <button type="button" class="nav-signin-button">Sign in</button>
           </li>
+          <li class="nav-item hide">
+            <button type="button" class="nav-signout-button">Sign out</button>
+          </li>
         </ul>
+        <button class="toggle-button">
+          <span class="toggle-button-bar"></span>
+          <span class="toggle-button-bar"></span>
+          <span class="toggle-button-bar"></span>
+        </button>
       </nav>
       <div class="container">
         <div class="big-header-container">
@@ -32,6 +41,22 @@
         </div>
       </div>
     </header>
+    <nav class="mobile-nav">
+      <ul class="mobile-nav-items">
+        <li class="mobile-nav-item">
+          <a class="nav-link" href="../contact-us/index.html">Contact</a>
+        </li>
+        <li class="mobile-nav-item">
+          <button type="button" class="nav-signup-button">Sign up</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button type="button" class="nav-signin-button">Sign in</button>
+        </li>
+        <li class="mobile-nav-item hide">
+          <button type="button" class="nav-signout-button">Sign out</button>
+        </li>
+      </ul>
+    </nav>
     <section class="container-padding">
       <div class="exam-sample">
         <div class="description-container">

@@ -11,6 +11,8 @@ function redirectHomeIfToken() {
 
 document.addEventListener("DOMContentLoaded", redirectHomeIfToken);
 
+email.focus();
+
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
     switch (e.target.name) {
