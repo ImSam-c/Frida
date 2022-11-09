@@ -30,7 +30,7 @@ const getStudents = async (_req: Request, res: Response) => {
 const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const user = await User.findById(id, { state: true });
+  const user = await User.findOne({_id: id, state: true });
   user ? res.json(user) : res.json({ msg: "This user doesn't exist" });
   res.end();
 };
