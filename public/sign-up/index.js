@@ -5,6 +5,8 @@ const email = document.querySelector("input[name='email']");
 const password = document.querySelector("input[name='password']");
 const inputs = document.querySelectorAll("input");
 
+firstName.focus();
+
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
     switch (e.target.name) {

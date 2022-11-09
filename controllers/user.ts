@@ -30,8 +30,10 @@ const getStudents = async (_req: Request, res: Response) => {
 const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const user = await User.findById(id, { state: true });
-  user ? res.json(user) : res.json({ msg: "This user doesn't exist" });
+  const user = await User.findOne({ _id: id, state: true });
+  user
+    ? res.json(user)
+    : res.json({ msg: "This user doesn't exist", id: "userdx" });
   res.end();
 };
 
@@ -67,7 +69,10 @@ const deleteUser = async (req: Request, res: Response) => {
   const { id } = (req as reqID).decoded;
 
   const user = await User.findById(idToDelete);
-  if (!user) return res.status(401).json({ msg: "This user doesn't exist" });
+  if (!user)
+    return res
+      .status(401)
+      .json({ msg: "This user doesn't exist", id: "userdx" });
 
   if (idToDelete !== String(id))
     return res.status(401).json({ msg: "You cannot delete this user" });
