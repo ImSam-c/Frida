@@ -1,6 +1,7 @@
 const signInButtons = document.querySelectorAll(".nav-signin-button");
 const signUpButtons = document.querySelectorAll(".nav-signup-button");
 const signOutButtons = document.querySelectorAll(".nav-signout-button");
+const toggleElements = document.querySelectorAll(".toggle-log");
 var toggleButton = document.querySelector(".toggle-button");
 var mobileNav = document.querySelector(".mobile-nav");
 var backdrop = document.querySelector(".backdrop");
@@ -17,7 +18,6 @@ signUpButtons.forEach(signUpButton =>{
         location.href = "../sign-up/index.html";
     });
 });
-
 
 signOutButtons.forEach(signOutButton =>{
     signOutButton.addEventListener("click", () => {
@@ -44,16 +44,8 @@ backdrop.addEventListener("click", function() {
 
 function isLoggedIn() {
     if (localStorage.getItem("XSRF-TOKEN")){
-        signInButtons.forEach(signInButton => {
-            signInButton.parentElement.classList.toggle("hide");
-        });
-        
-        signUpButtons.forEach(signUpButton =>{
-            signUpButton.parentElement.classList.toggle("hide");
-        });
-        
-        signOutButtons.forEach(signOutButton =>{
-            signOutButton.parentElement.classList.toggle("hide");
+        toggleElements.forEach(element => {
+            element.parentElement.classList.toggle("hide");
         });
     }
 }

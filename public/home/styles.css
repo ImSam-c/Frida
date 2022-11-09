@@ -196,7 +196,7 @@ footer{
 }
 
 /*mobile-nav*/
-@media (max-width: 700px){
+@media (max-width: 770px){
 
     .toggle-button {
         display: block;
