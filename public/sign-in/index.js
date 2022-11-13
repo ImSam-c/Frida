@@ -1,3 +1,5 @@
+import { checkJwtInCookies, getPayloadJwt } from "../helpers/jwtFunctions.js";
+
 const button = document.querySelector(".button");
 const email = document.querySelector("input[name='email']");
 const password = document.querySelector("input[name='password']");
@@ -5,8 +7,7 @@ const inputs = document.querySelectorAll("input");
 const ic_paragraph = document.getElementById("ic-paragraph");
 
 function redirectHomeIfToken() {
-  if (localStorage.getItem("XSRF-TOKEN"))
-    location.replace("../home/index.html");
+  //if (checkJwtInCookies()) location.replace("../home/index.html");
 }
 
 document.addEventListener("DOMContentLoaded", redirectHomeIfToken);
@@ -15,6 +16,7 @@ email.focus();
 
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
+    let color;
     switch (e.target.name) {
       case "email":
         color = validateEmail(e.target.value) ? "green" : "red";
@@ -55,7 +57,7 @@ function validatePassword(passwordInput) {
 */
 
 async function sendData(email, password) {
-  const response = await fetch("http://localhost:5000/api/auth/login", {
+  const response = await fetch("http://localhost:8080/api/auth/login", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -71,7 +73,8 @@ async function sendData(email, password) {
     .json()
     .then((data) => {
       if (data.msg) throw data;
-      localStorage.setItem("XSRF-TOKEN", data.jwt);
+      const jwt = getPayloadJwt(data.jwt);
+      document.cookie = `XSRF-TOKEN=${data.jwt};expires=${jwt.exp};samesite=strict;path=/`;
       location.replace("../home/index.html");
     })
     .catch((error) => {
@@ -102,7 +105,7 @@ async function sendData(email, password) {
           });
           break;
       }
-      console.log(error.msg);
+      console.log(error);
     });
 }
 

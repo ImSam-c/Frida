@@ -99,7 +99,7 @@ const recoverPassword = async (req: Request, res: Response) => {
       secure: false,
       auth: {
         user: "noreply.frida@gmail.com",
-        pass: "xckjuynqvwjmjjrs",
+        pass: process.env.SMTP_PASS,
       },
     });
 
@@ -107,9 +107,30 @@ const recoverPassword = async (req: Request, res: Response) => {
       from: "noreply.frida@gmail.com",
       to: email,
       subject: "Recovering password",
-      text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/../reset-password/index.html?temptKNrecvg=${tkn}
-      
-      Important: This link contains a secret key, expires in 10 minutes.`,
+      html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: 'Courier New', Courier, monospace">
+  <h1>Recovering password</h1>
+  <h2>Did you not request a password change? We recommend
+    you to change it.</h2>
+  <a style="text-decoration: none;
+    padding: .8rem;
+    background-color: #157070;
+    color: white;" href="http://localhost:8080/../reset-password/index.html?temptKNrecvg=${tkn}">Recover</a>
+
+  <h3>Click in this button to recover your password</h3>
+  <h3>Important: This button expires in 10 minutes.</h2>
+</body>
+
+</html>`,
     });
     return res.json({ msg: "sent" });
   } catch (error) {

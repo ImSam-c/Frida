@@ -2,10 +2,15 @@ import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
 import { secretOrPrivateKey } from "./variables";
 
-export const newJWT = (id: Types.ObjectId, exp: string = "12h") => {
+export const newJWT = (
+  id: Types.ObjectId,
+  name: string,
+  area?: string,
+  exp: string = "12h"
+) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { id },
+      { id, name, area },
       process.env.SECRETORPRIVATEKEY || secretOrPrivateKey,
       {
         expiresIn: exp,

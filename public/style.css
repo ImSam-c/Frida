@@ -90,7 +90,7 @@ input[type="password"] {
   color: white;
 }
 
-.hide{
+.hide {
   display: none !important;
 }
 
@@ -164,6 +164,6 @@ input[type="password"] {
   margin: 1rem 0;
 }
 
-.mobile-navbar{
+.mobile-navbar {
   display: none;
 }

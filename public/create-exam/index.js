@@ -57,7 +57,7 @@ function getData() {
 }
 
 async function sendData(questions, comments) {
-  const response = await fetch("http://localhost:5000/api/exams/createExam", {
+  const response = await fetch("http://localhost:8080/api/exams/createExam", {
     method: "POST",
     headers: {
       Accept: "application/json",

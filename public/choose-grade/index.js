@@ -27,7 +27,7 @@ teacherRadio.addEventListener("change", () => {
 });
 
 async function sendData(name, lastname, email, password, area) {
-  const response = await fetch("http://localhost:5000/api/auth/register", {
+  const response = await fetch("http://localhost:8080/api/auth/register", {
     method: "POST",
     headers: {
       Accept: "application/json",

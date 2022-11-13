@@ -2,13 +2,12 @@ const button = document.querySelector(".button");
 const newPassword = document.querySelector("input[name='new-password']");
 const verifyPassword = document.querySelector("input[name='verify-password']");
 const inputs = document.querySelectorAll("input");
-const [, jwtToken] = new URLSearchParams(location.search).toString().split("=");
+const [, jwtToken] = new URLSearchParams(location.search);
+if (!jwtToken) location.replace("../home");
 
-if (!jwtToken) location.replace("../home/index.html");
+jwtToken = jwtToken.toString().split("=").split(".")[1];
 
-const base64Url = jwtToken.split(".")[1];
-const base64 = base64Url.replace("-", "+").replace("_", "/");
-const token = JSON.parse(window.atob(base64));
+const token = JSON.parse(window.atob(jwtToken));
 
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
@@ -29,7 +28,7 @@ function validatePassword(passwordInput) {
 
 async function sendData(password) {
   const response = await fetch(
-    `http://localhost:5000/api/users/updateUser/${token.id}`,
+    `http://localhost:8080/api/users/updateUser/${token.id}`,
     {
       method: "PUT",
       headers: {
