@@ -72,7 +72,9 @@ const verifyExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const result = [];
     const exam = yield exam_1.default.findById(id);
     if (!exam)
-        return res.status(400).json({ msg: "This exam doesn't exist" });
+        return res
+            .status(400)
+            .json({ msg: "This exam doesn't exist", id: "examdx" });
     exam.questions.forEach((question, i) => {
         question.correctAnswer === answers[i]
             ? result.push(true)

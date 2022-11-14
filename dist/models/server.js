@@ -18,7 +18,7 @@ class Server {
             users: "/api/users",
         };
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || "7000";
+        this.port = process.env.PORT || "8090";
         this.middlewares();
         this.routes();
         this.connectDB();

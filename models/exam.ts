@@ -18,6 +18,11 @@ const examSchema = new Schema<examI>({
     required: true,
   },
 
+  nQuestions: {
+    type: Number,
+    required: true,
+  },
+
   comments: {
     type: String,
     default: "",

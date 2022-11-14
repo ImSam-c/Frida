@@ -11,10 +11,10 @@ import { validateJWT } from "../middlewares/validateJWT";
 const router = Router();
 
 //* Getting all exams
-router.get("/", getExams);
+router.get("/", validateJWT, getExams);
 
 //* Getting an exam by the id
-router.get("/:id", getExamById);
+router.get("/:id", validateJWT, getExamById);
 
 //* Creating an exam
 router.post("/createExam", validateJWT, createExam);

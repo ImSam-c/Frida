@@ -49,12 +49,14 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //Verifying email
     const user = yield user_1.default.findOne({ email, state: true });
     if (!user)
-        return res.status(400).json({ msg: "This user doesn't exist" });
+        return res
+            .status(400)
+            .json({ msg: "This user doesn't exist", id: "userdx" });
     //Verifying password
     const passwordMatch = bcryptjs_1.default.compareSync(password, user.password);
     if (!passwordMatch)
-        return res.status(401).json({ msg: "Incorrect credentials" });
-    const jwt = yield (0, generateJWT_1.newJWT)(user._id).catch((err) => {
+        return res.status(401).json({ msg: "Incorrect credentials", id: "ic" });
+    const jwt = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, user.area).catch((err) => {
         throw new Error(err);
     });
     return res.json({ user, jwt });

@@ -1,3 +1,5 @@
+import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
+
 const button = document.querySelector(".button");
 const firstName = document.querySelector("input[name='first-name']");
 const lastName = document.querySelector("input[name='last-name']");
@@ -5,10 +7,13 @@ const email = document.querySelector("input[name='email']");
 const password = document.querySelector("input[name='password']");
 const inputs = document.querySelectorAll("input");
 
+if (checkJwtInCookies()) location.replace("../home/");
+
 firstName.focus();
 
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
+    let color;
     switch (e.target.name) {
       case "first-name":
         color = validateName(e.target.value) ? "green" : "red";

@@ -4,13 +4,35 @@ import Exam from "../models/exam";
 import User from "../models/user";
 
 const getExams = async (req: Request, res: Response) => {
-  const exams = await Exam.find().populate("byTeacher", "fullname");
-  exams ? res.json({ exams }) : res.json({ msg: "There aren't exams" });
+  let { subject, nQuestions } = req.query;
+  let exams;
+
+  const [min, max] = String(nQuestions).split("-");
+
+  if (subject && nQuestions) {
+    exams = await Exam.find({
+      nQuestions: { $gte: Number(min), $lte: Number(max) },
+      area: subject,
+    }).populate("byTeacher", "fullname");
+  } else if (subject) {
+    exams = await Exam.find({ area: subject }).populate(
+      "byTeacher",
+      "fullname"
+    );
+  } else if (nQuestions) {
+    exams = await Exam.find({
+      nQuestions: { $gte: Number(min), $lte: Number(max) },
+    }).populate("byTeacher", "fullname");
+  } else {
+    exams = await Exam.find().populate("byTeacher", "fullname");
+  }
+
+  exams ? res.json(exams) : res.json({ msg: "There aren't exams" });
   res.end();
 };
 
 const createExam = async (req: Request, res: Response) => {
-  const { comments, questions } = req.body;
+  const { comments, questions, nQuestions } = req.body;
   const { id } = (req as reqID).decoded;
 
   const teacher = await User.findOne({
@@ -22,6 +44,7 @@ const createExam = async (req: Request, res: Response) => {
     const exam = await new Exam({
       area: teacher.area,
       questions,
+      nQuestions,
       comments,
       byTeacher: id,
     }).populate("byTeacher", "fullname");

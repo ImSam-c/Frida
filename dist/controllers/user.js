@@ -52,7 +52,7 @@ const getStudents = (_req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getStudents = getStudents;
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const user = yield user_1.default.findById(id, { state: true });
+    const user = yield user_1.default.findOne({ _id: id, state: true });
     user ? res.json(user) : res.json({ msg: "This user doesn't exist" });
     res.end();
 });
@@ -65,7 +65,9 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(401).json({ msg: "You cannot update this user" });
     const user = yield user_1.default.findById(idToUpdate);
     if (!user)
-        return res.status(401).json({ msg: "This user doesn't exist" });
+        return res
+            .status(401)
+            .json({ msg: "This user doesn't exist", id: "userdx" });
     if (rest.email)
         rest.email = rest.email.toLowerCase();
     if (rest.password) {
@@ -74,8 +76,8 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     yield user_1.default.findByIdAndUpdate(id, rest);
     user
-        ? res.json({ msg: "User updated" })
-        : res.json({ msg: "This user doesn't exist" });
+        ? res.json({})
+        : res.json({ msg: "This user doesn't exist", id: "userdx" });
     res.end();
 });
 exports.updateUser = updateUser;
@@ -84,7 +86,9 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { id } = req.decoded;
     const user = yield user_1.default.findById(idToDelete);
     if (!user)
-        return res.status(401).json({ msg: "This user doesn't exist" });
+        return res
+            .status(401)
+            .json({ msg: "This user doesn't exist", id: "userdx" });
     if (idToDelete !== String(id))
         return res.status(401).json({ msg: "You cannot delete this user" });
     yield user_1.default.findByIdAndUpdate(idToDelete, { state: false });
@@ -98,8 +102,8 @@ const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function
     if (!user)
         return res
             .status(400)
-            .json({ msg: "A user with this email doesn't exist" });
-    //* Creating new JWT and sending email
+            .json({ msg: "A user with this email doesn't exist", id: "userdx" });
+    //* Creating new JWT and sending mail
     try {
         const tkn = yield (0, generateJWT_1.newJWT)(user._id, "10m");
         let transporter = nodemailer_1.default.createTransport({
@@ -108,17 +112,39 @@ const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function
             secure: false,
             auth: {
                 user: "noreply.frida@gmail.com",
-                pass: "xckjuynqvwjmjjrs",
+                pass: process.env.SMTP_PASS,
             },
         });
         yield transporter.sendMail({
             from: "noreply.frida@gmail.com",
             to: email,
             subject: "Recovering password",
-            text: `Did you not request a password change? We recommend you to change it.\nTo recover your password join in this link: http://localhost:5000/../reset-password/index.html?temptKNrecvg=${tkn}`,
+            html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: 'Courier New', Courier, monospace">
+  <h1>Recovering password</h1>
+  <h2>Did you not request a password change? We recommend
+    you to change it.</h2>
+  <a style="text-decoration: none;
+    padding: .8rem;
+    background-color: #157070;
+    color: white;" href="http://localhost:8080/../reset-password/index.html?temptKNrecvg=${tkn}">Recover</a>
+
+  <h3>Click in this button to recover your password</h3>
+  <h3>Important: This button expires in 10 minutes.</h2>
+</body>
+
+</html>`,
         });
-        res.json({ msg: "Email sent" });
-        res.end();
+        return res.json({ msg: "sent" });
     }
     catch (error) {
         console.log(error);

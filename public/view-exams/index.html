@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frida - Exams</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <header>
+    <!-- In process -->
+  </header>
+
+  <section>
+    <section class="options">
+      <div class="options-sec1">
+        <h1>Filter by: </h1>
+        <select title="Select a subject" name="Subject" id="select-subject">
+          <option class="option" selected value="">Subject</option>
+          <option class="option" value="Geography">Geography</option>
+          <option class="option" value="History">History</option>
+          <option class="option" value="Mathematics">Mathematics</option>
+          <option class="option" value="Biology">Biology</option>
+          <option class="option" value="Chemistry">Chemistry</option>
+          <option class="option" value="English">English</option>
+          <option class="option" value="Social Studies">Social Studies</option>
+          <option class="option" value="Foreign Languages">Foreign Languages</option>
+          <option class="option" value="Computer Science">Computer Science</option>
+        </select>
+
+        <select title="Select a number of questions" name="nQuestions" id="select-nquestions">
+          <option class="option" selected value="">Number of Questions</option>
+          <option value="2-5">2-5 questions</option>
+          <option value="6-9">6-9 questions</option>
+          <option value="9-12">9-12 questions</option>
+          <option value="13-16">13-16 questions</option>
+        </select>
+      </div>
+
+      <div class="options-sec2">
+        <button type="submit" class="button filter">Filter</button>
+      </div>
+
+    </section>
+    <section id="exams">
+      <img src="../img/loader.svg" id="loader" alt="Loader">
+    </section>
+  </section>
+
+  <script src="./index.js" type="module"></script>
+</body>
+
+</html>

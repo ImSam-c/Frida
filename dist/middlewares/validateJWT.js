@@ -37,7 +37,8 @@ const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
         console.log(error);
         res.status(401).json({
-            msg: "Invalid token",
+            msg: "Invalid token, use a valid token",
+            id: "it",
         });
     }
 });

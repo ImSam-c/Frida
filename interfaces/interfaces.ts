@@ -20,6 +20,7 @@ interface examI {
   area: string;
   byTeacher: Types.ObjectId;
   questions: question[];
+  nQuestions: number;
   comments?: string;
 }
 

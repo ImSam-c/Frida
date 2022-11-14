@@ -1,0 +1,86 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  padding: 0.2rem;
+}
+
+.exam {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.3rem 0.9rem;
+  background-color: var(--btn-color);
+  color: white;
+  border-radius: 9px;
+  padding: 1rem;
+  transition: opacity 200ms ease;
+}
+
+.exam:hover {
+  opacity: 0.9;
+}
+
+.exam-madeby {
+  font-size: 0.9rem;
+  margin-top: 3.8rem;
+  font-weight: 200;
+}
+
+.exam-comments {
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+.options {
+  max-height: 74.375px;
+  border: 1px solid black;
+  font-size: 35px;
+  padding: 0.7rem 0.7rem;
+  border-radius: 9px;
+  margin: 1.3rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.options h1 {
+  font-weight: 400;
+}
+
+.exam h2 {
+  font-weight: 200;
+}
+
+.options-sec1 {
+  display: flex;
+  width: 50%;
+}
+
+.options-sec1 select {
+  margin-top: 10px;
+  padding: 3px;
+  font-size: 1rem;
+  margin-left: 1rem;
+  outline: none;
+  background-color: var(--btn-color);
+  color: white;
+  border-radius: 5px;
+  font-family: Montserrat, sans-serif;
+  border: none;
+  max-height: 35px;
+}
+
+.options-sec1 select * {
+  background-color: black;
+}
+
+.filter {
+  width: 12rem;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+#loader {
+  width: 5rem;
+  display: block;
+  margin: auto;
+  margin-top: 10rem;
+}

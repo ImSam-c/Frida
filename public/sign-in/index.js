@@ -7,7 +7,7 @@ const inputs = document.querySelectorAll("input");
 const ic_paragraph = document.getElementById("ic-paragraph");
 
 function redirectHomeIfToken() {
-  //if (checkJwtInCookies()) location.replace("../home/index.html");
+  if (checkJwtInCookies()) location.replace("../home/index.html");
 }
 
 document.addEventListener("DOMContentLoaded", redirectHomeIfToken);

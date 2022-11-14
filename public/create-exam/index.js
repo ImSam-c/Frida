@@ -1,7 +1,14 @@
+import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
+
 const createButtons = document.querySelectorAll(".create-button");
 const saveButtons = document.querySelectorAll(".save-button");
 const questionsBox = document.querySelector(".questions-box");
 let questionNumber = 1;
+
+let jwt;
+checkJwtInCookies()
+  ? (jwt = checkJwtInCookies())
+  : location.replace("../sign-in/");
 
 function createQuestion(n) {
   const nqbContainer = createNqbContainer(n);
@@ -62,9 +69,9 @@ async function sendData(questions, comments) {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("XSRF-TOKEN")}`,
+      authorization: `Bearer ${jwt}`,
     },
-    body: JSON.stringify({ questions, comments }),
+    body: JSON.stringify({ questions, nQuestions: questions.length, comments }),
   });
 
   response
