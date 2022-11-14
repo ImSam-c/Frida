@@ -3,8 +3,7 @@ body {
   height: 100vh;
   background-color: var(--body-color);
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+  flex-flow: column nowrap;
   align-items: center;
   overflow-x: hidden;
 }
