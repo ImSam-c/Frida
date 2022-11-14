@@ -1,4 +1,5 @@
 import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
+import { getPayloadJwt } from "../helpers/jwtFunctions.js";
 
 const signInButtons = document.querySelectorAll(".nav-signin-button");
 const signUpButtons = document.querySelectorAll(".nav-signup-button");
@@ -45,8 +46,12 @@ backdrop.addEventListener("click", function () {
 
 function isLoggedIn() {
   if (checkJwtInCookies()) {
+    const payload = getPayloadJwt(checkJwtInCookies());
     toggleElements.forEach((element) => {
       element.parentElement.classList.toggle("hide");
+      if (!payload.area && element.classList.contains("tch")) {
+        element.parentElement.classList.toggle("hide");
+      }
     });
   }
 }
