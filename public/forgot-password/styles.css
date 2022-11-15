@@ -2,10 +2,6 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: var(--body-color);
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
 }
 
 .container {
@@ -21,6 +17,11 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-style: normal;
+}
+
+.center-div{
+  display: flex;
+  justify-content: center;
 }
 
 label[for="email"]{

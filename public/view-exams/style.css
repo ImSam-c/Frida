@@ -135,4 +135,8 @@ body {
     height: 35px;
     text-align: center;
   }
+
+  body{
+    padding: 0px;
+  }
 }

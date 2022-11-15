@@ -10,40 +10,96 @@
 </head>
 
 <body>
+  <div class="backdrop"></div>
+  <header class="global-header">
+    <nav class="navbar">
+      <a href="../home/index.html" class="brand">Frida</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../contact-us/index.html">Contact</a>
+        </li>
+        <li class="nav-item hide">
+          <a class="nav-link toggle-log tch" href="../create-exam/index.html">Create Exam</a>
+        </li>
+        <li class="nav-item hide">
+          <a class="nav-link toggle-log" href="../view-exams/index.html">View Exam</a>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-signup-button toggle-log">Sign up</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-signin-button toggle-log">Sign in</button>
+        </li>
+        <li class="nav-item hide">
+          <button type="button" class="nav-signout-button toggle-log">Sign out</button>
+        </li>
+      </ul>
+      <button class="toggle-button">
+        <span class="toggle-button-bar"></span>
+        <span class="toggle-button-bar"></span>
+        <span class="toggle-button-bar"></span>
+      </button>
+    </nav>
+  </header>
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-items">
+      <li class="mobile-nav-item">
+        <a class="nav-link" href="../contact-us/index.html">Contact</a>
+      </li>
+      <li class="mobile-nav-item hide">
+        <a class="nav-link toggle-log tch" href="../create-exam/index.html">Create Exam</a>
+      </li>
+      <li class="mobile-nav-item hide">
+        <a class="nav-link toggle-log" href="../view-exams/index.html">View Exam</a>
+      </li>
+      <li class="mobile-nav-item">
+        <button type="button" class="nav-signup-button toggle-log">Sign up</button>
+      </li>
+      <li class="mobile-nav-item">
+        <button type="button" class="nav-signin-button toggle-log">Sign in</button>
+      </li>
+      <li class="mobile-nav-item hide">
+        <button type="button" class="nav-signout-button toggle-log">Sign out</button>
+      </li>
+    </ul>
+  </nav>
   <main>
     <img src="../logo.png" alt="logo" class="logo" draggable="false">
     <h3 class="title">Choose your grade</h3>
-    <div class="container">
-      <p>I am a:</p>
-      <div class="grades">
-        <div class="student-radio">
-          <input type="radio" id="student" name="category" />
-          <label for="student">Student</label>
+    <div class="center-div">
+      <div class="container">
+        <p>I am a:</p>
+        <div class="grades">
+          <div class="student-radio">
+            <input type="radio" id="student" name="category" />
+            <label for="student">Student</label>
+          </div>
+          <div class="teacher-radio">
+            <input type="radio" id="teacher" name="category" checked />
+            <label for="teacher">Teacher</label>
+          </div>
         </div>
-        <div class="teacher-radio">
-          <input type="radio" id="teacher" name="category" checked />
-          <label for="teacher">Teacher</label>
+        <div class="image"></div>
+        <div class="subject-container">
+          <p>Subject</p>
+          <select name="area" id="subject-select">
+            <option value="Geography" selected>Geography</option>
+            <option value="History">History</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="English">English</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Foreign Languages">Foreign Languages</option>
+            <option value="Computer Science">Computer Science</option>
+          </select>
         </div>
+        <button type="button" class="button">Register</button>
       </div>
-      <div class="image"></div>
-      <div class="subject-container">
-        <p>Subject</p>
-        <select name="area" id="subject-select">
-          <option value="Geography" selected>Geography</option>
-          <option value="History">History</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Biology">Biology</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="English">English</option>
-          <option value="Social Studies">Social Studies</option>
-          <option value="Foreign Languages">Foreign Languages</option>
-          <option value="Computer Science">Computer Science</option>
-        </select>
-      </div>
-      <button type="button" class="button">Register</button>
     </div>
   </main>
   <script src="index.js"></script>
+  <script src="../header.js" type="module"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
