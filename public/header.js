@@ -1,5 +1,5 @@
-import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
-import { getPayloadJwt } from "../helpers/jwtFunctions.js";
+import { checkJwtInCookies } from "./helpers/jwtFunctions.js";
+import { getPayloadJwt } from "./helpers/jwtFunctions.js";
 
 const signInButtons = document.querySelectorAll(".nav-signin-button");
 const signUpButtons = document.querySelectorAll(".nav-signup-button");

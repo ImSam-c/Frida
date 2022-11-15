@@ -164,3 +164,107 @@ input[type="password"] {
 .mobile-navbar {
   display: none;
 }
+
+/* HEADER */
+header{
+  background-color: var(--header-color);
+  width: 100%;
+}
+
+.container-padding{
+  padding: 3% 7% 0%;
+}
+
+.navbar{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+
+.navbar-nav{
+    list-style: none;
+}
+
+.nav-item{
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.nav-link{
+    color: white;
+    font-weight: 300;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.nav-link:hover{
+    opacity: 1;
+}
+
+.nav-signin-button,
+.nav-signout-button{
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--nav-signin-color);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 6px 25px;
+    border-radius: var(--btn-and-input-radius);
+    font-size: 1rem;
+}
+
+.nav-signin-button:hover,
+.nav-signout-button:hover{
+    cursor: pointer;
+    background-color: black;
+}
+
+.nav-signup-button{
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--body-color);
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 6px 25px;
+    border-radius: var(--btn-and-input-radius);
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.nav-signup-button:hover{
+    cursor: pointer;
+    background-color: white;
+    opacity: 1;
+}
+
+.global-header{
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 1200px){
+
+  .container-padding{
+      padding: 3% 15% 0%;
+  }
+}
+
+@media (max-width: 1024px){
+
+  .container-padding{
+      padding: 5% 10% 0%;
+  }
+}
+
+/*mobile-nav*/
+@media (max-width: 770px){
+
+  .toggle-button {
+      display: block;
+  }
+
+  .navbar-nav{
+      display: none;
+  }
+}
