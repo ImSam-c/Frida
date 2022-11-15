@@ -166,21 +166,11 @@ input[type="password"] {
 }
 
 /* HEADER */
-header{
-  background-color: var(--header-color);
-  width: 100%;
-}
-
-.container-padding{
-  padding: 3% 7% 0%;
-}
-
 .navbar{
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 4rem;
 }
 
 .navbar-nav{
@@ -239,22 +229,11 @@ header{
     opacity: 1;
 }
 
-.global-header{
-  margin-bottom: 3rem;
-}
-
-@media (min-width: 1200px){
-
-  .container-padding{
-      padding: 3% 15% 0%;
-  }
-}
-
-@media (max-width: 1024px){
-
-  .container-padding{
-      padding: 5% 10% 0%;
-  }
+.global-header {
+  background-color: var(--header-color);
+  margin-bottom: 4rem;
+  width: 100%;
+  padding: 1.2rem 4rem;
 }
 
 /*mobile-nav*/
@@ -266,5 +245,9 @@ header{
 
   .navbar-nav{
       display: none;
+  }
+
+  .global-header{
+    padding: 1.2rem;
   }
 }
