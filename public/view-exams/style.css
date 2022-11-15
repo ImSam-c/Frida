@@ -19,10 +19,16 @@ body {
   opacity: 0.9;
 }
 
+.exam-sec2 {
+  display: flex;
+  align-items: end;
+}
+
 .exam-madeby {
   font-size: 0.9rem;
-  margin-top: 3.8rem;
   font-weight: 200;
+  right: 35px;
+  position: absolute;
 }
 
 .exam-comments {
@@ -31,7 +37,7 @@ body {
 }
 
 .options {
-  max-height: 74.375px;
+  /* max-height: 74.375px; */
   border: 1px solid black;
   font-size: 35px;
   padding: 0.7rem 0.7rem;
@@ -51,7 +57,6 @@ body {
 
 .options-sec1 {
   display: flex;
-  width: 50%;
 }
 
 .options-sec1 select {
@@ -83,4 +88,51 @@ body {
   display: block;
   margin: auto;
   margin-top: 10rem;
+}
+
+
+@media (max-width: 900px){
+  .options {
+    height: auto;
+    border: 1px solid black;
+    font-size: 35px;
+    padding: 0.7rem 0.7rem;
+    border-radius: 9px;
+    margin: 1.3rem 0.9rem;
+    display: block;
+    text-align: center;
+  }
+
+  .options-sec1 {
+    display: block;
+  }
+
+  .options-sec1 select {
+    height: 35px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 485px){
+  .options {
+    height: auto;
+    border: 1px solid black;
+    font-size: 35px;
+    padding: 0.7rem 0.7rem;
+    border-radius: 9px;
+    margin: 1.3rem 0.9rem;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+  }
+
+  .options-sec1 {
+    display: block;
+  }
+
+  .options-sec1 select {
+    margin-left: 0;
+    height: 35px;
+    text-align: center;
+  }
 }
