@@ -1,6 +1,10 @@
   body{
     background-color: var(--exam-body-color);
-    margin: 0 10%;
+    /* margin: 0 10%; */
+  }
+
+  .global-header{
+    margin-bottom: 0;
   }
   
   main{

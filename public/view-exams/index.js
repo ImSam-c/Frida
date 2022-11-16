@@ -35,7 +35,7 @@ const getExams = () => {
           <p>Questions: ${exam.questions.length}</p>
         </div>
         <div class="exam-sec2">
-          <h3 class="exam-madeby">Made by: ${exam.byTeacher.fullname}</h3>
+          <h3 class="exam-madeby">Made by:<br>${exam.byTeacher.fullname}</h3>
         </div>`;
         fragment.append(newArticle);
       });
