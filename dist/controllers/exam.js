@@ -16,13 +16,32 @@ exports.verifyExam = exports.deleteExam = exports.getExamById = exports.createEx
 const exam_1 = __importDefault(require("../models/exam"));
 const user_1 = __importDefault(require("../models/user"));
 const getExams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const exams = yield exam_1.default.find().populate("byTeacher", "fullname");
-    exams ? res.json({ exams }) : res.json({ msg: "There aren't exams" });
+    let { subject, nQuestions } = req.query;
+    let exams;
+    const [min, max] = String(nQuestions).split("-");
+    if (subject && nQuestions) {
+        exams = yield exam_1.default.find({
+            nQuestions: { $gte: Number(min), $lte: Number(max) },
+            area: subject,
+        }).populate("byTeacher", "fullname");
+    }
+    else if (subject) {
+        exams = yield exam_1.default.find({ area: subject }).populate("byTeacher", "fullname");
+    }
+    else if (nQuestions) {
+        exams = yield exam_1.default.find({
+            nQuestions: { $gte: Number(min), $lte: Number(max) },
+        }).populate("byTeacher", "fullname");
+    }
+    else {
+        exams = yield exam_1.default.find().populate("byTeacher", "fullname");
+    }
+    exams ? res.json(exams) : res.json({ msg: "There aren't exams" });
     res.end();
 });
 exports.getExams = getExams;
 const createExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { comments, questions } = req.body;
+    const { comments, questions, nQuestions } = req.body;
     const { id } = req.decoded;
     const teacher = yield user_1.default.findOne({
         _id: id,
@@ -32,6 +51,7 @@ const createExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const exam = yield new exam_1.default({
             area: teacher.area,
             questions,
+            nQuestions,
             comments,
             byTeacher: id,
         }).populate("byTeacher", "fullname");
@@ -48,9 +68,9 @@ const createExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.createExam = createExam;
 const getExamById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const exams = yield exam_1.default.findById(id).populate("byTeacher", "fullname");
-    exams
-        ? res.json({ exams })
+    const exam = yield exam_1.default.findById(id).populate("byTeacher", "fullname");
+    exam
+        ? res.json({ exam })
         : res.status(400).json({ msg: "This exam doesn't exist" });
     res.end();
 });

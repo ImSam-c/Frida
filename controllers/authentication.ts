@@ -58,5 +58,4 @@ const login = async (req: Request, res: Response) => {
 
   return res.json({ user, jwt });
 };
-
 export { register, login };

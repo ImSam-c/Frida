@@ -61,9 +61,9 @@ const createExam = async (req: Request, res: Response) => {
 
 const getExamById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const exams = await Exam.findById(id).populate("byTeacher", "fullname");
-  exams
-    ? res.json({ exams })
+  const exam = await Exam.findById(id).populate("byTeacher", "fullname");
+  exam
+    ? res.json({ exam })
     : res.status(400).json({ msg: "This exam doesn't exist" });
   res.end();
 };
@@ -93,8 +93,8 @@ const verifyExam = async (req: Request, res: Response) => {
       .status(400)
       .json({ msg: "This exam doesn't exist", id: "examdx" });
 
-  exam.questions.forEach((question, i) => {
-    question.correctAnswer === answers[i]
+  exam.questions.forEach(({ options, correctAnswer }, i) => {
+    options[correctAnswer - 1] === answers[i]
       ? result.push(true)
       : result.push(false);
   });

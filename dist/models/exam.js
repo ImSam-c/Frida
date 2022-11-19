@@ -26,6 +26,10 @@ const examSchema = new mongoose_1.Schema({
         type: [],
         required: true,
     },
+    nQuestions: {
+        type: Number,
+        required: true,
+    },
     comments: {
         type: String,
         default: "",

@@ -1,91 +1,102 @@
-  body{
-    background-color: var(--exam-body-color);
-    /* margin: 0 10%; */
-  }
-
-  .global-header{
-    margin-bottom: 0;
-  }
-  
-  main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .exam-container{
-    background-color: var(--form-color);
-    width: 80%;
-    min-height: 100vh;
-    padding: 1rem;
-  }
-  
-  .exam-title{
-    margin-bottom: 2rem;
-    color: black;
-    font-family: "Fredericka the Great";
-    letter-spacing: 2px;
-    font-size: 2.5rem;
-  }
-  
-  .buttons-container{
-    display: flex;
-    justify-content: space-between;
-    margin: 1.5rem 0;
-  }
-  
-  textarea{
-    display: block;
-    width: 100%;
-    resize: vertical;
-    padding: 6px;
-  }
-
-  .comment{
-    margin-bottom: 1.5rem;
-  }
-  
-  .answers-container{
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 5px;
-    margin-left: 1.5rem;
-  }
-  
-  input[type="radio"]{
-    margin-right: 0.7rem;
-  }
-  
-  .question-container{
-    margin: 2rem 0;
-    width: 80%;
-  }
-
-  .questions-box{
-    margin-top: 3rem;
-  }
-
-  .nqb-container{
-    display: flex;
-    flex-flow: row nowrap;
-    margin-bottom: 1rem;
-    position: relative;
-  }
-
-  .question-number{
-    margin-right: 0.5rem;
-  }
-
-  .delete-button {
-    align-self: center;
-    height: 1.5rem;
-    background-color: var(--danger-color);
-    position: absolute;
-    right: -80px;
+body {
+  background-color: var(--exam-body-color);
+  font-family: "Montserrat", sans-serif;
+  /* margin: 0 10%; */
 }
 
-@media(max-width: 630px){
-  body{
+.global-header {
+  margin-bottom: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exam-container {
+  margin-top: 2rem;
+  background-color: var(--form-color);
+  width: 80%;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.exam-title {
+  margin-bottom: 2rem;
+  color: black;
+  font-family: "Fredericka the Great";
+  letter-spacing: 2px;
+  font-size: 2.5rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+}
+
+.create-button,
+.save-button,
+.delete-button {
+  font-size: 1rem;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  resize: none;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.comment {
+  margin-bottom: 1.5rem;
+}
+
+.answers-container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5px;
+  margin-left: 1.5rem;
+}
+
+input[type="radio"] {
+  margin-right: 0.7rem;
+}
+
+.question-container {
+  margin: 2rem 0;
+  width: 80%;
+}
+
+.questions-box {
+  margin-top: 3rem;
+}
+
+.nqb-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.question-number {
+  margin-right: 0.5rem;
+}
+
+.delete-button {
+  align-self: center;
+  height: 2.5rem;
+  width: 7rem;
+  background-color: var(--danger-color);
+  position: absolute;
+  right: -150px;
+}
+
+@media (max-width: 630px) {
+  body {
     margin: 0;
   }
 
@@ -95,14 +106,13 @@
   }
 }
 
-@media(max-width: 435px){
-  .exam-container{
+@media (max-width: 435px) {
+  .exam-container {
     width: 100%;
     padding: 1rem 2rem;
   }
 
-  .exam-title{
+  .exam-title {
     font-size: 180%;
   }
 }
-

@@ -27,11 +27,12 @@ const getExams = () => {
     .then((exams) => {
       exams.forEach((exam) => {
         let newArticle = d.createElement("article");
+        newArticle.dataset.v_id = exam._id;
         newArticle.classList.add("exam");
         newArticle.innerHTML = `
         <div class="exam-sec1">
           <h2>${exam.area} Exam</h2>
-          <p class="exam-comments">Comments: ${exam.comments}</p>
+          <div class="comments-container"><p class="exam-comments">Comments: ${exam.comments}</p></div>
           <p>Questions: ${exam.questions.length}</p>
         </div>
         <div class="exam-sec2">
@@ -46,13 +47,71 @@ const getExams = () => {
     .catch((err) => console.log(err));
 };
 
+const getExam = async (id) => {
+  Swal.fire({
+    title: "Searching exam...",
+    didOpen: async () => {
+      Swal.showLoading();
+      const res = await fetch(`http://localhost:8080/api/exams/${id}`, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      const { exam } = await res.json();
+      let questionsText = "<br><br>";
+
+      exam.questions.forEach((question, i) => {
+        questionsText += `${i + 1}. ${question.statement}<br><br>`;
+      });
+
+      Swal.fire({
+        title: '<h2 style="text-align: left;">Exam details: </h2>',
+        width: "900px",
+        showCancelButton: true,
+        cancelButtonText: "Close",
+        confirmButtonText: "Reply",
+        customClass: {
+          confirmButton: "confirmButton",
+          cancelButton: "cancelButton",
+        },
+        html: `
+          <h4 class="exam-info">Subject: ${exam.area}</h4><br>
+          <h4 class="exam-info">Created by: ${exam.byTeacher.fullname}</h4><br>
+          <h4 class="exam-info">Comments: ${exam.comments}</h4><br>
+          <h4 class="exam-info">Number of questions: ${exam.nQuestions}</h4><br>
+          <div style="text-align: left;">Questions: ${questionsText}</div>`,
+      }).then((response) => {
+        if (response.isConfirmed)
+          location.replace(`../reply-exam/index.html?idExam=${id}`);
+      });
+    },
+  });
+};
+
 document.addEventListener("DOMContentLoaded", getExams);
-document.addEventListener("click", (e) => {
-  if (e.target.matches(".exam")) {
-    //TODO: Redirect to full page exam
+document.addEventListener("click", async (e) => {
+  if (e.target.matches(".exam, .exam *")) {
+    let id;
+    if (e.target.matches(".exam *"))
+      id = e.target.closest(".exam").dataset.v_id;
+    else id = e.target.dataset.v_id;
+
+    getExam(id);
   }
 
-  if (e.target.matches(".button")) {
+  if (e.target.matches(".filter")) {
+    let selectedSubject = d.getElementById("select-subject").value,
+      selectedNQuestions = d.getElementById("select-nquestions").value;
+
+    if (
+      !selectedNQuestions &&
+      !selectedSubject &&
+      !examsContainer.children.length > 2
+    )
+      return;
+
     examsContainer.innerHTML =
       '<img src="../img/loader.svg" id="loader" alt="Loader">';
     getExams();

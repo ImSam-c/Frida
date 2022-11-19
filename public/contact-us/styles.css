@@ -1,7 +1,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--body-color);
+  background-color: #f2f4f3;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -25,19 +25,33 @@ body {
 
 label[for="name"],
 label[for="email"],
-label[for="message"]{
+label[for="message"] {
   margin-bottom: 10px;
 }
 
 input[name="name"],
 input[name="email"],
-textarea[name="message"]{
+textarea[name="message"] {
   margin-bottom: 25px;
 }
 
-textarea[name="message"]{
+textarea[name="message"] {
   border: 1px solid var(--border-color);
   border-radius: var(--btn-and-input-radius);
   padding: 6px;
   resize: vertical;
+}
+
+.global-header {
+  background-color: #22333b !important;
+}
+
+.global-header .nav-signout-button {
+  background-color: #a9927d !important;
+  color: #f2f4f3 !important;
+}
+
+.button {
+  background-color: #22333b !important;
+  color: #f2f4f3 !important;
 }

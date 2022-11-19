@@ -1,18 +1,39 @@
 body {
   font-family: "Montserrat", sans-serif;
-  padding: 0.2rem;
+  background-color: #f2f4f3;
+}
+
+.confirmButton {
+  color: var(--header-color) !important;
+  background-color: var(--nav-signin-color) !important;
+}
+
+.cancelButton {
+  color: var(--body-color) !important;
+  background-color: var(--header-color) !important;
+}
+
+.confirmButton,
+.cancelButton {
+  font-size: 1rem;
 }
 
 .exam {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  margin: 1.3rem 0.9rem;
-  background-color: var(--btn-color);
-  color: white;
+  margin: 1.3rem 1.8rem;
+  background-color: var(--header-color);
+  color: var(--body-color);
   border-radius: 9px;
   padding: 1rem;
   transition: opacity 200ms ease;
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.exam-info {
+  text-align: left;
+  font-weight: 400;
 }
 
 .exam:hover {
@@ -27,13 +48,21 @@ body {
 .exam-madeby {
   font-size: 0.9rem;
   font-weight: 200;
-  right: 35px;
+  right: 50px;
   position: absolute;
 }
 
 .exam-comments {
   font-weight: 400;
   margin-top: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 950px;
+}
+
+.comments-container {
+  text-overflow: ellipsis;
 }
 
 .options {
@@ -42,7 +71,7 @@ body {
   font-size: 35px;
   padding: 0.7rem 0.7rem;
   border-radius: 9px;
-  margin: 1.3rem 0.9rem;
+  margin: 1.3rem 1.8rem;
   display: flex;
   justify-content: space-between;
 }
@@ -65,16 +94,18 @@ body {
   font-size: 1rem;
   margin-left: 1rem;
   outline: none;
-  background-color: var(--btn-color);
-  color: white;
+  background-color: var(--nav-signin-color);
+  color: var(--header-color);
   border-radius: 5px;
   font-family: Montserrat, sans-serif;
   border: none;
   max-height: 35px;
+  text-align: center;
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.25);
 }
 
 .options-sec1 select * {
-  background-color: black;
+  background-color: var(--body-color);
 }
 
 .filter {
@@ -90,8 +121,42 @@ body {
   margin-top: 10rem;
 }
 
+.global-header {
+  background-color: var(--body-color);
+  margin-bottom: 0.3rem !important;
+}
 
-@media (max-width: 900px){
+.button {
+  background-color: var(--body-color);
+  color: var(--btn-color);
+  position: relative;
+  bottom: 0.17rem;
+}
+
+select {
+  background-color: var(--subject-body);
+  color: #f2f4f3;
+  position: relative;
+  top: 0.1rem;
+}
+
+.options {
+  padding: 1rem !important;
+}
+
+@media (max-width: 1140px) {
+  .exam-comments {
+    width: 800px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .exam-comments {
+    width: 700px;
+  }
+}
+
+@media (max-width: 930px) {
   .options {
     height: auto;
     border: 1px solid black;
@@ -111,9 +176,19 @@ body {
     height: 35px;
     text-align: center;
   }
+
+  .exam-comments {
+    width: 500px;
+  }
 }
 
-@media (max-width: 485px){
+@media (max-width: 730px) {
+  .exam-comments {
+    width: 400px;
+  }
+}
+
+@media (max-width: 594px) {
   .options {
     height: auto;
     border: 1px solid black;
@@ -134,9 +209,15 @@ body {
     margin-left: 0;
     height: 35px;
     text-align: center;
+    width: 181px;
+    font-size: 0.89rem;
   }
 
-  body{
+  body {
     padding: 0px;
+  }
+
+  .exam-comments {
+    width: 260px;
   }
 }

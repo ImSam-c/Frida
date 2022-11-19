@@ -1,0 +1,51 @@
+body {
+  background-color: var(--body-color);
+}
+
+.exam-info {
+  text-align: left;
+  font-weight: 400;
+}
+
+.valid-answer {
+  color: rgb(46, 184, 46);
+}
+
+.incorrect-answer {
+  color: var(--incorrect-color);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+.exam-container {
+  padding: 1rem;
+}
+
+.question {
+  margin-top: 1rem;
+}
+
+input[type="radio"] {
+  margin-top: 0.6rem;
+  margin-right: 0.3rem;
+}
+
+input[type="radio"]:checked {
+  accent-color: var(--header-color);
+  outline: none;
+}
+
+.sendButton {
+  padding: 0.7rem;
+  border: none;
+  cursor: pointer;
+  background-color: var(--header-color);
+  color: var(--body-color);
+  font-size: 1rem;
+  width: 6rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.6rem;
+}

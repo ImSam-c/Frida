@@ -3,7 +3,6 @@ import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
 const createButtons = document.querySelectorAll(".create-button");
 const saveButtons = document.querySelectorAll(".save-button");
 const questionsBox = document.querySelector(".questions-box");
-let questionNumber = 1;
 
 let jwt;
 checkJwtInCookies()
@@ -105,8 +104,7 @@ async function sendData(questions, comments) {
 
 createButtons.forEach((createButton) => {
   createButton.addEventListener("click", () => {
-    questionNumber++;
-    createQuestion(questionNumber);
+    createQuestion(questionsBox.children.length + 1);
     window.scrollTo(0, document.body.scrollHeight);
   });
 });
@@ -133,21 +131,21 @@ saveButtons.forEach((saveButton) => {
   });
 });
 
-function deleteContent(n) {
-  textArea = document.querySelector(`textarea[name="question${n}"]`);
-  textArea.value = "";
-  const questionContainer = document.getElementById(`qc${n}`);
-  const answersContainer =
-    questionContainer.querySelector(".answers-container");
-  const inputTexts = answersContainer.querySelectorAll("input[type='text']");
-  const radioButtons = answersContainer.querySelectorAll("input[type='radio']");
-  inputTexts.forEach((inputText) => {
-    inputText.value = "";
-  });
-  radioButtons.forEach((radioButton) => {
-    radioButton.checked = false;
-  });
-}
+// function deleteContent(n) {
+//   textArea = document.querySelector(`textarea[name="question${n}"]`);
+//   textArea.value = "";
+//   const questionContainer = document.getElementById(`qc${n}`);
+//   const answersContainer =
+//     questionContainer.querySelector(".answers-container");
+//   const inputTexts = answersContainer.querySelectorAll("input[type='text']");
+//   const radioButtons = answersContainer.querySelectorAll("input[type='radio']");
+//   inputTexts.forEach((inputText) => {
+//     inputText.value = "";
+//   });
+//   radioButtons.forEach((radioButton) => {
+//     radioButton.checked = false;
+//   });
+// }
 
 function createNqbContainer(n) {
   const questionNumber = document.createElement("p");
@@ -162,7 +160,6 @@ function createNqbContainer(n) {
   deleteButton.classList.add("delete-button");
   deleteButton.classList.add("button");
   deleteButton.setAttribute("type", "button");
-  deleteButton.setAttribute("onclick", `deleteContent(${n})`);
   deleteButton.textContent = "Delete";
 
   const nqbContainer = document.createElement("div");
@@ -193,3 +190,11 @@ function createAnswersContainer(n) {
   }
   return answersContainer;
 }
+
+document.addEventListener("click", (e) => {
+  if (
+    e.target.matches(".delete-button") &&
+    e.target.closest(".question-container").id !== "qc1"
+  )
+    e.target.closest(".question-container").remove();
+});
