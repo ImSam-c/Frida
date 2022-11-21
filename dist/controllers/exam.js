@@ -95,8 +95,8 @@ const verifyExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res
             .status(400)
             .json({ msg: "This exam doesn't exist", id: "examdx" });
-    exam.questions.forEach((question, i) => {
-        question.correctAnswer === answers[i]
+    exam.questions.forEach(({ options, correctAnswer }, i) => {
+        options[correctAnswer - 1] === answers[i]
             ? result.push(true)
             : result.push(false);
     });

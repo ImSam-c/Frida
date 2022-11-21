@@ -24,20 +24,23 @@ export class Server {
   }
 
   middlewares() {
-    //Static content
-    this.app.use(express.static("public"));
-
     //CORS
     this.app.use(cors());
 
     //Parse body
     this.app.use(express.json());
+
+    //Static content
+    this.app.use(express.static("./public"));
   }
 
   routes() {
     this.app.use(this.apiPaths.auth, authRouter);
     this.app.use(this.apiPaths.exams, examRouter);
     this.app.use(this.apiPaths.users, userRouter);
+    // this.app.use("/", (req, res) => {
+    //   res.sendFile("../sign-in/index.html");
+    // });
   }
 
   connectDB() {

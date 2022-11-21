@@ -92,7 +92,7 @@ const recoverPassword = async (req: Request, res: Response) => {
 
   //* Creating new JWT and sending mail
   try {
-    const tkn = await newJWT(user._id, "10m");
+    const tkn = await newJWT(user._id, user.fullname, undefined, "10m");
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 25,

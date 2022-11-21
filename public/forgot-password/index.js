@@ -39,8 +39,7 @@ async function sendData(email) {
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Recovery email link sent. Check your inbox and spam.</p>`,
-        confirmButtonText:
-          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
         customClass: {
           title: "modal-font",

@@ -49,8 +49,7 @@ async function sendData(name, lastname, email, password, area) {
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Successfully registered.</p>`,
-        confirmButtonText:
-          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
         customClass: {
           title: "modal-font",

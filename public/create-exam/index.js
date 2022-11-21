@@ -80,8 +80,7 @@ async function sendData(questions, comments) {
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Exam created!</p>`,
-        confirmButtonText:
-          '<a class="modal-sign-up" href="../home/index.html">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
         customClass: {
           title: "modal-font",

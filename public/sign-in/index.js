@@ -7,7 +7,7 @@ const inputs = document.querySelectorAll("input");
 const ic_paragraph = document.getElementById("ic-paragraph");
 
 function redirectHomeIfToken() {
-  if (checkJwtInCookies()) location.replace("../home/index.html");
+  if (checkJwtInCookies()) location.replace("../");
 }
 
 document.addEventListener("DOMContentLoaded", redirectHomeIfToken);
@@ -75,7 +75,7 @@ async function sendData(email, password) {
       if (data.msg) throw data;
       const jwt = getPayloadJwt(data.jwt);
       document.cookie = `XSRF-TOKEN=${data.jwt};expires=${jwt.exp};samesite=strict;path=/`;
-      location.replace("../home/index.html");
+      location.replace("../");
     })
     .catch((error) => {
       switch (error.id) {

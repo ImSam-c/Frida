@@ -1,5 +1,5 @@
-import { checkJwtInCookies } from "../helpers/jwtFunctions.js";
-import { getPayloadJwt } from "../helpers/jwtFunctions.js";
+import { checkJwtInCookies } from "./helpers/jwtFunctions.js";
+import { getPayloadJwt } from "./helpers/jwtFunctions.js";
 
 const signInButtons = document.querySelectorAll(".nav-signin-button");
 const signUpButtons = document.querySelectorAll(".nav-signup-button");
@@ -24,7 +24,7 @@ signUpButtons.forEach((signUpButton) => {
 signOutButtons.forEach((signOutButton) => {
   signOutButton.addEventListener("click", () => {
     document.cookie = `XSRF-TOKEN=nt;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
-    location.replace("../home/index.html");
+    location.replace("../");
   });
 });
 

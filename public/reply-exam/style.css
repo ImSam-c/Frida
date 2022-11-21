@@ -48,4 +48,9 @@ input[type="radio"]:checked {
   display: block;
   margin: 0 auto;
   margin-top: 1.6rem;
+  transition: background 300ms ease-in-out;
+}
+
+.sendButton:hover {
+  background-color: var(--nav-signin-color);
 }

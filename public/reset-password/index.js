@@ -2,12 +2,11 @@ const button = document.querySelector(".button");
 const newPassword = document.querySelector("input[name='new-password']");
 const verifyPassword = document.querySelector("input[name='verify-password']");
 const inputs = document.querySelectorAll("input");
-const [, jwtToken] = new URLSearchParams(location.search);
-if (!jwtToken) location.replace("../home");
+let jwtToken = new URLSearchParams(location.search).get("temptKNrecvg");
 
-jwtToken = jwtToken.toString().split("=").split(".")[1];
+if (!jwtToken) location.replace("../sign-in");
 
-const token = JSON.parse(window.atob(jwtToken));
+const token = JSON.parse(window.atob(jwtToken.split(".")[1]));
 
 inputs.forEach((input) => {
   input.addEventListener("change", (e) => {
@@ -48,7 +47,6 @@ async function sendData(password) {
     userdx: User doesn't exist - No existe un usuario con estas credenciales.
     it: Invalid token - El token es inválido, comprobar caducidad.
 */
-  console.log(response);
   response
     .json()
     .then((data) => {

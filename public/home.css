@@ -50,6 +50,10 @@ header {
   margin-top: 6%;
 }
 
+.big-header {
+  font-weight: 600;
+}
+
 .chalkboard-container {
   width: 50%;
   text-align: right;
