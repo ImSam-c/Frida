@@ -217,3 +217,15 @@ document.addEventListener("click", (e) => {
   )
     e.target.closest(".question-container").remove();
 });
+
+window.matchMedia("(max-width: 950px)").addEventListener("change", x => {
+  if (x.matches) {
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.textContent = "X";
+    });
+  } else {
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.textContent = "delete";
+    });
+  }
+});
