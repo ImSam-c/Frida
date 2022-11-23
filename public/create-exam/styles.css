@@ -95,6 +95,13 @@ input[type="radio"] {
   right: -150px;
 }
 
+@media (max-width: 950px) {
+  .delete-button {
+    width: 3rem;
+    right: -68px;
+  }
+}
+
 @media (max-width: 630px) {
   body {
     margin: 0;
@@ -107,11 +114,6 @@ input[type="radio"] {
 }
 
 @media (max-width: 435px) {
-  .exam-container {
-    width: 100%;
-    padding: 1rem 2rem;
-  }
-
   .exam-title {
     font-size: 180%;
   }

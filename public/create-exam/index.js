@@ -62,6 +62,16 @@ function getData() {
   return { questions, comments };
 }
 
+function areAllAnswersSelected(questions){
+  let result = true;
+  questions.forEach(({correctAnswer}) => {
+    if(correctAnswer === -1){
+      result = false;
+    }
+  });
+  return result;
+}
+
 async function sendData(questions, comments) {
   const response = await fetch("http://localhost:8080/api/exams/createExam", {
     method: "POST",
@@ -111,7 +121,7 @@ createButtons.forEach((createButton) => {
 saveButtons.forEach((saveButton) => {
   saveButton.addEventListener("click", () => {
     const { questions, comments } = getData();
-    if (questions.length > 0) {
+    if (areAllAnswersSelected(questions) && questions.length > 0) {
       Swal.fire({
         title: "Are you sure?",
         icon: "question",
@@ -126,7 +136,17 @@ saveButtons.forEach((saveButton) => {
       }).then((result) => {
         result.isConfirmed ? sendData(questions, comments) : null;
       });
-    }
+    } else{
+        Swal.fire({
+          title: "Hey!",
+          html: '<p class="modal-font">Select a correct answer for each question.</p>',
+          icon: "error",
+          customClass: {
+            title: "modal-font",
+          },
+          confirmButtonColor: "var(--incorrect-color)",
+        });
+      }
   });
 });
 
@@ -196,4 +216,16 @@ document.addEventListener("click", (e) => {
     e.target.closest(".question-container").id !== "qc1"
   )
     e.target.closest(".question-container").remove();
+});
+
+window.matchMedia("(max-width: 950px)").addEventListener("change", x => {
+  if (x.matches) {
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.textContent = "X";
+    });
+  } else {
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.textContent = "delete";
+    });
+  }
 });
