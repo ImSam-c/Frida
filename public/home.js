@@ -11,13 +11,13 @@ var backdrop = document.querySelector(".backdrop");
 
 signInButtons.forEach((signInButton) => {
   signInButton.addEventListener("click", () => {
-    location.href = "../sign-in/index.html";
+    location.href = "./sign-in/index.html";
   });
 });
 
 signUpButtons.forEach((signUpButton) => {
   signUpButton.addEventListener("click", () => {
-    location.href = "../sign-up/index.html";
+    location.href = "./sign-up/index.html";
   });
 });
 

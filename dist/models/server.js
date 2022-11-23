@@ -24,17 +24,20 @@ class Server {
         this.connectDB();
     }
     middlewares() {
-        //Static content
-        this.app.use(express_1.default.static("public"));
         //CORS
         this.app.use((0, cors_1.default)());
         //Parse body
         this.app.use(express_1.default.json());
+        //Static content
+        this.app.use(express_1.default.static("./public"));
     }
     routes() {
         this.app.use(this.apiPaths.auth, authentication_1.default);
         this.app.use(this.apiPaths.exams, exam_1.default);
         this.app.use(this.apiPaths.users, user_1.default);
+        // this.app.use("/", (req, res) => {
+        //   res.sendFile("../sign-in/index.html");
+        // });
     }
     connectDB() {
         (0, connection_1.dbConnection)();

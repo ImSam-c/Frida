@@ -42,16 +42,18 @@ header {
 }
 
 .big-header-container {
-  width: 50%;
+  width: 62%;
   text-align: left;
 }
 
 .big-header-container .big-header {
-  margin-top: 6%;
+  margin-top: 3%;
 }
 
 .big-header {
   font-weight: 600;
+  font-size: 3.55rem;
+  display: block;
 }
 
 .chalkboard-container {
@@ -120,6 +122,94 @@ footer {
   font-size: 0.8rem;
   flex-grow: 1;
 }
+
+.pencil {
+  width: 4rem;
+  display: inline-block;
+  position: relative;
+  left: 21.5rem;
+  bottom: 6rem;
+}
+
+.profile-photo {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 3rem;
+}
+
+/* TextAnimation */
+
+.big-header-container div {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.big-header-container div:first-of-type {
+  animation: showup 7s infinite;
+}
+
+.big-header-container div:last-of-type {
+  width: 0px;
+  animation: reveal 7s infinite;
+}
+
+.big-header-container div:last-of-type span {
+  margin-left: -255px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+/* Responsive */
 
 @media (min-width: 1200px) {
   .container-padding {

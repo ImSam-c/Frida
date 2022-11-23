@@ -105,7 +105,7 @@ const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function
             .json({ msg: "A user with this email doesn't exist", id: "userdx" });
     //* Creating new JWT and sending mail
     try {
-        const tkn = yield (0, generateJWT_1.newJWT)(user._id, "10m");
+        const tkn = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, undefined, "10m");
         let transporter = nodemailer_1.default.createTransport({
             host: "smtp.gmail.com",
             port: 25,

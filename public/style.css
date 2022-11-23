@@ -23,6 +23,10 @@
   --subject-body: #d8bd8a;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .logo {
   margin: 0 auto;
   display: block;
@@ -264,7 +268,7 @@ input[type="password"] {
   }
 
   .contact {
-    color: #22333b !important;
+    color: var(--header-color) !important;
     font-weight: 600 !important;
   }
 
