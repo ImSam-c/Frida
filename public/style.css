@@ -276,4 +276,8 @@ input[type="password"] {
     font-weight: 400;
     color: var(--header-color);
   }
+
+  .container{
+    width: 20rem !important;
+  }
 }

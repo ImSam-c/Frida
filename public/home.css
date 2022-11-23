@@ -36,7 +36,7 @@ header {
   opacity: 1;
 }
 
-.container {
+.h-container {
   display: flex;
   flex-flow: row nowrap;
 }
