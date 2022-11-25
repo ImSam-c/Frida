@@ -179,8 +179,11 @@ function createNqbContainer(n) {
   deleteButton.classList.add("delete-button");
   deleteButton.classList.add("button");
   deleteButton.setAttribute("type", "button");
-  deleteButton.textContent = "Delete";
-
+  if(window.matchMedia("(max-width: 950px)").matches){
+    deleteButton.textContent = "X";
+  }else{
+    deleteButton.textContent = "Delete";
+  }
   const nqbContainer = document.createElement("div");
   nqbContainer.classList.add("nqb-container");
   nqbContainer.appendChild(questionNumber);
@@ -217,6 +220,13 @@ document.addEventListener("click", (e) => {
   )
     e.target.closest(".question-container").remove();
 });
+
+
+if(window.matchMedia("(max-width: 950px)").matches){
+  document.querySelectorAll(".delete-button").forEach(button => {
+    button.textContent = "X";
+  });
+}
 
 window.matchMedia("(max-width: 950px)").addEventListener("change", x => {
   if (x.matches) {
