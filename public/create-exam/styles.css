@@ -100,6 +100,14 @@ input[type="radio"] {
     width: 3rem;
     right: -68px;
   }
+
+  .delete-button span{
+    display: none;
+  }
+
+  .delete-button::after{
+    content: "X";
+  }
 }
 
 @media (max-width: 630px) {

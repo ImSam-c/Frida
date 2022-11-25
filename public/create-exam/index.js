@@ -179,11 +179,11 @@ function createNqbContainer(n) {
   deleteButton.classList.add("delete-button");
   deleteButton.classList.add("button");
   deleteButton.setAttribute("type", "button");
-  if(window.matchMedia("(max-width: 950px)").matches){
-    deleteButton.textContent = "X";
-  }else{
-    deleteButton.textContent = "Delete";
-  }
+
+  const deleteSpan = document.createElement("span");
+  deleteSpan.textContent = "Delete";
+  deleteButton.appendChild(deleteSpan);
+
   const nqbContainer = document.createElement("div");
   nqbContainer.classList.add("nqb-container");
   nqbContainer.appendChild(questionNumber);
@@ -219,23 +219,4 @@ document.addEventListener("click", (e) => {
     e.target.closest(".question-container").id !== "qc1"
   )
     e.target.closest(".question-container").remove();
-});
-
-
-if(window.matchMedia("(max-width: 950px)").matches){
-  document.querySelectorAll(".delete-button").forEach(button => {
-    button.textContent = "X";
-  });
-}
-
-window.matchMedia("(max-width: 950px)").addEventListener("change", x => {
-  if (x.matches) {
-    document.querySelectorAll(".delete-button").forEach(button => {
-      button.textContent = "X";
-    });
-  } else {
-    document.querySelectorAll(".delete-button").forEach(button => {
-      button.textContent = "delete";
-    });
-  }
 });
