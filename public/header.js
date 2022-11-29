@@ -1,47 +1,35 @@
 import { checkJwtInCookies } from "./helpers/jwtFunctions.js";
 import { getPayloadJwt } from "./helpers/jwtFunctions.js";
 
-const signInButtons = document.querySelectorAll(".nav-signin-button");
-const signUpButtons = document.querySelectorAll(".nav-signup-button");
-const signOutButtons = document.querySelectorAll(".nav-signout-button");
 const toggleElements = document.querySelectorAll(".toggle-log");
-var toggleButton = document.querySelector(".toggle-button");
 var mobileNav = document.querySelector(".mobile-nav");
 var backdrop = document.querySelector(".backdrop");
 
-signInButtons.forEach((signInButton) => {
-  signInButton.addEventListener("click", () => {
+document.addEventListener("click", event => {
+  if(event.target.matches(".nav-signin-button")){
     location.href = "../sign-in/index.html";
-  });
-});
-
-signUpButtons.forEach((signUpButton) => {
-  signUpButton.addEventListener("click", () => {
+  }
+  if(event.target.matches(".nav-signup-button")){
     location.href = "../sign-up/index.html";
-  });
-});
-
-signOutButtons.forEach((signOutButton) => {
-  signOutButton.addEventListener("click", () => {
+  }
+  if(event.target.matches(".nav-signout-button")){
     document.cookie = `XSRF-TOKEN=nt;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
     location.replace("../");
-  });
-});
-
-toggleButton.addEventListener("click", function () {
-  mobileNav.classList.add("open");
-  backdrop.style.display = "block";
-  setTimeout(function () {
-    backdrop.classList.add("open");
-  }, 10);
-});
-
-backdrop.addEventListener("click", function () {
-  mobileNav.classList.remove("open");
-  backdrop.classList.remove("open");
-  setTimeout(function () {
-    backdrop.style.display = "none";
-  }, 200);
+  }
+  if(event.target.matches(".toggle-button")){
+    mobileNav.classList.add("open");
+    backdrop.style.display = "block";
+    setTimeout(function () {
+      backdrop.classList.add("open");
+    }, 10);
+  }
+  if(event.target.matches(".backdrop")){
+    mobileNav.classList.remove("open");
+    backdrop.classList.remove("open");
+    setTimeout(function () {
+      backdrop.style.display = "none";
+    }, 200);
+  }
 });
 
 function isLoggedIn() {
