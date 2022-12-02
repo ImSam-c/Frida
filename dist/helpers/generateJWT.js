@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.newJWT = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const variables_1 = require("./variables");
-const newJWT = (id, name, area, exp = "12h") => {
+const newJWT = (id, name, email, area, exp = "12h") => {
     return new Promise((resolve, reject) => {
-        jsonwebtoken_1.default.sign({ id, name, area }, process.env.SECRETORPRIVATEKEY || variables_1.secretOrPrivateKey, {
+        jsonwebtoken_1.default.sign({ id, name, email, area }, process.env.SECRETORPRIVATEKEY || variables_1.secretOrPrivateKey, {
             expiresIn: exp,
         }, (err, token) => {
             err ? reject(`The JWT could not be generated: ${err}`) : resolve(token);

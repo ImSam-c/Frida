@@ -52,7 +52,12 @@ const login = async (req: Request, res: Response) => {
   if (!passwordMatch)
     return res.status(401).json({ msg: "Incorrect credentials", id: "ic" });
 
-  const jwt = await newJWT(user._id, user.fullname, user.area).catch((err) => {
+  const jwt = await newJWT(
+    user._id,
+    user.fullname,
+    user.email,
+    user.area
+  ).catch((err) => {
     throw new Error(err);
   });
 

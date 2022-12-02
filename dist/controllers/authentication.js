@@ -56,7 +56,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const passwordMatch = bcryptjs_1.default.compareSync(password, user.password);
     if (!passwordMatch)
         return res.status(401).json({ msg: "Incorrect credentials", id: "ic" });
-    const jwt = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, user.area).catch((err) => {
+    const jwt = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, user.email, user.area).catch((err) => {
         throw new Error(err);
     });
     return res.json({ user, jwt });

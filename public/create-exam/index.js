@@ -62,10 +62,10 @@ function getData() {
   return { questions, comments };
 }
 
-function areAllAnswersSelected(questions){
+function areAllAnswersSelected(questions) {
   let result = true;
-  questions.forEach(({correctAnswer}) => {
-    if(correctAnswer === -1){
+  questions.forEach(({ correctAnswer }) => {
+    if (correctAnswer === -1) {
       result = false;
     }
   });
@@ -136,17 +136,17 @@ saveButtons.forEach((saveButton) => {
       }).then((result) => {
         result.isConfirmed ? sendData(questions, comments) : null;
       });
-    } else{
-        Swal.fire({
-          title: "Hey!",
-          html: '<p class="modal-font">Select a correct answer for each question.</p>',
-          icon: "error",
-          customClass: {
-            title: "modal-font",
-          },
-          confirmButtonColor: "var(--incorrect-color)",
-        });
-      }
+    } else {
+      Swal.fire({
+        title: "Hey!",
+        html: '<p class="modal-font">Select a correct answer for each question.</p>',
+        icon: "error",
+        customClass: {
+          title: "modal-font",
+        },
+        confirmButtonColor: "var(--incorrect-color)",
+      });
+    }
   });
 });
 
@@ -218,13 +218,13 @@ document.addEventListener("click", (e) => {
     e.target.closest(".question-container").remove();
 });
 
-window.matchMedia("(max-width: 950px)").addEventListener("change", x => {
+window.matchMedia("(max-width: 950px)").addEventListener("change", (x) => {
   if (x.matches) {
-    document.querySelectorAll(".delete-button").forEach(button => {
+    document.querySelectorAll(".delete-button").forEach((button) => {
       button.textContent = "X";
     });
   } else {
-    document.querySelectorAll(".delete-button").forEach(button => {
+    document.querySelectorAll(".delete-button").forEach((button) => {
       button.textContent = "delete";
     });
   }

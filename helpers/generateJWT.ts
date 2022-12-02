@@ -5,12 +5,13 @@ import { secretOrPrivateKey } from "./variables";
 export const newJWT = (
   id: Types.ObjectId,
   name: string,
+  email: string,
   area?: string,
   exp: string = "12h"
 ) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { id, name, area },
+      { id, name, email, area },
       process.env.SECRETORPRIVATEKEY || secretOrPrivateKey,
       {
         expiresIn: exp,

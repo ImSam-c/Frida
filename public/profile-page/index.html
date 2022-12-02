@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>Sign In</title>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="styles.css">
   <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+
 </head>
 
 <body>
@@ -64,26 +65,33 @@
       </li>
     </ul>
   </nav>
+  <h1>Configure your profile</h1>
+  <hr>
   <main>
-    <img src="../logo.png" alt="logo" class="logo" draggable="false">
-    <h3 class="title">Sign in to Frida</h3>
-    <div class="center-div">
-      <div class="container">
-        <label for="email">Email address</label>
-        <input type="email" name="email" required>
-        <div class="forgot-password-container">
-          <label for="password">Password</label>
-          <a href="../forgot-password/index.html" tabindex="-1">Forgot password?</a>
-        </div>
-        <input type="password" name="password" required>
-        <p style="display: none" id="ic-paragraph">Incorrect credentials.</p>
-        <button type="button" class="button">Sign in</button>
-      </div>
-    </div>
-    <div class="container register-now-container">
-      <p class="not-registered-text">Don't have an account yet?<a href="../sign-up/index.html">Register now</a></p>
-    </div>
+    <section class="options-container">
+      <img class="img-profile" src="../img/no-image-profile.png" alt="img">
+      <h3>Sam Tito</h3>
+      <button class="first-option-account">Public profile</button>
+      <button class="option-account">Details of your account</button>
+      <button class="option-account">Add a photography</button>
+      <button class="option-account delete-account-btn">Delete
+        your account</button>
+    </section>
+
+    <section class="opened-option-container">
+      <h2>Details of your account</h2>
+      <p>Edit your private information</p>
+      <article class="inputs">
+        <label for="inputName"><input type="text" id="inputName" class="input-profile"></label>
+
+        <label for="inputArea"><input type="text" id="inputArea" class="input-profile" disabled></label>
+      </article>
+      <button class="button save-button" type="button" disabled>Save</button>
+    </section>
+
   </main>
+
+
   <script src="index.js" type="module"></script>
   <script src="../header.js" type="module"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
