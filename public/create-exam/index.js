@@ -179,7 +179,10 @@ function createNqbContainer(n) {
   deleteButton.classList.add("delete-button");
   deleteButton.classList.add("button");
   deleteButton.setAttribute("type", "button");
-  deleteButton.textContent = "Delete";
+
+  const deleteSpan = document.createElement("span");
+  deleteSpan.textContent = "Delete";
+  deleteButton.appendChild(deleteSpan);
 
   const nqbContainer = document.createElement("div");
   nqbContainer.classList.add("nqb-container");
