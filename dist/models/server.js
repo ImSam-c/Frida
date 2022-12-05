@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const cors_1 = __importDefault(require("cors"));
 const authentication_1 = __importDefault(require("../routes/authentication"));
 const exam_1 = __importDefault(require("../routes/exam"));
@@ -16,6 +17,7 @@ class Server {
             auth: "/api/auth",
             exams: "/api/exams",
             users: "/api/users",
+            uploads: "/api/upload",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "8090";
@@ -30,14 +32,16 @@ class Server {
         this.app.use(express_1.default.json());
         //Static content
         this.app.use(express_1.default.static("./public"));
+        //FileUpload
+        this.app.use((0, express_fileupload_1.default)({
+            useTempFiles: true,
+            tempFileDir: "/tmp/",
+        }));
     }
     routes() {
         this.app.use(this.apiPaths.auth, authentication_1.default);
         this.app.use(this.apiPaths.exams, exam_1.default);
         this.app.use(this.apiPaths.users, user_1.default);
-        // this.app.use("/", (req, res) => {
-        //   res.sendFile("../sign-in/index.html");
-        // });
     }
     connectDB() {
         (0, connection_1.dbConnection)();

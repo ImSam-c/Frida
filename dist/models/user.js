@@ -18,6 +18,7 @@ const userSchema = new mongoose_1.Schema({
     email: { type: String, required: true },
     area: { type: String },
     state: { type: Boolean, default: true },
+    img: { type: String },
 });
 userSchema.methods.toJSON = function () {
     const _a = this.toObject(), { password, state, __v } = _a, rest = __rest(_a, ["password", "state", "__v"]);

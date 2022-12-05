@@ -16,8 +16,12 @@ exports.existsUserById = exports.emailExists = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const emailExists = (email = "") => __awaiter(void 0, void 0, void 0, function* () {
     const emailE = yield user_1.default.findOne({ email: email.toLowerCase() });
+    const objectError = {
+        msg: `The email ${email} is already registered`,
+        id: "uEmail",
+    };
     if (emailE)
-        throw new Error(`The email ${email} is already registered`);
+        throw new Error(JSON.stringify(objectError));
 });
 exports.emailExists = emailExists;
 const existsUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {

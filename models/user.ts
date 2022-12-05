@@ -7,6 +7,7 @@ const userSchema = new Schema<userI>({
   email: { type: String, required: true },
   area: { type: String },
   state: { type: Boolean, default: true },
+  img: { type: String },
 });
 
 userSchema.methods.toJSON = function () {

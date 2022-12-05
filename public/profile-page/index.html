@@ -71,18 +71,18 @@
     <section class="options-container">
       <img class="img-profile" src="../img/no-image-profile.png" alt="img">
       <h3>Sam Tito</h3>
-      <button class="first-option-account">Public profile</button>
-      <button class="option-account">Details of your account</button>
-      <button class="option-account">Add a photography</button>
-      <button class="option-account delete-account-btn">Delete
+      <button class="first-option-account" id="publicProfileOption">Public profile</button>
+      <button class="option-account" id="detailsAccountOption">Details of your account</button>
+      <button class="option-account" id="addPhotographyOption">Add a photography</button>
+      <button class="option-account delete-account-btn" id="deleteAccountOption">Delete
         your account</button>
     </section>
 
     <section class="opened-option-container">
-      <h2>Details of your account</h2>
-      <p>Edit your private information</p>
+      <h2>Public Profile</h2>
+      <p>Edit your public information</p>
       <article class="inputs">
-        <label for="inputName"><input type="text" id="inputName" class="input-profile"></label>
+        <label for="inputName"><input type="text" name="name" id="inputName" class="input-profile"></label>
 
         <label for="inputArea"><input type="text" id="inputArea" class="input-profile" disabled></label>
       </article>

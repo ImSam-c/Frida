@@ -19,6 +19,7 @@ const register = (req: Request, res: Response): void => {
       password,
       email,
       area,
+      img: "",
     });
     res.status(201).json({ user });
     user.save();

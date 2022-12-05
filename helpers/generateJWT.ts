@@ -7,11 +7,12 @@ export const newJWT = (
   name: string,
   email: string,
   area?: string,
+  img?: string,
   exp: string = "12h"
 ) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { id, name, email, area },
+      { id, name, email, area, img },
       process.env.SECRETORPRIVATEKEY || secretOrPrivateKey,
       {
         expiresIn: exp,

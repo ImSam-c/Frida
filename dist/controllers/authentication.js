@@ -28,6 +28,7 @@ const register = (req, res) => {
             password,
             email,
             area,
+            img: "",
         });
         res.status(201).json({ user });
         user.save();

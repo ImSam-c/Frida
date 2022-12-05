@@ -54,6 +54,7 @@ function validatePassword(passwordInput) {
   Tipos de errores:
     ic: Incorrect Credentials - Credenciales incorrectas.
     userdx: User doesn't exist - No existe un usuario con estas credenciales.
+    uEmail: The email is already registered
 */
 
 async function sendData(email, password) {

@@ -58,12 +58,12 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getUserById = getUserById;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let _a = req.body, { state } = _a, rest = __rest(_a, ["state"]);
+    let rest = __rest(req.body, []);
     const { id: idToUpdate } = req.params;
     const { id } = req.decoded;
     if (idToUpdate !== String(id))
         return res.status(401).json({ msg: "You cannot update this user" });
-    const user = yield user_1.default.findById(idToUpdate);
+    let user = yield user_1.default.findById(idToUpdate);
     if (!user)
         return res
             .status(401)
@@ -74,11 +74,13 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const salt = bcryptjs_1.default.genSaltSync();
         rest.password = bcryptjs_1.default.hashSync(rest.password, salt);
     }
-    yield user_1.default.findByIdAndUpdate(id, rest);
-    user
-        ? res.json({})
-        : res.json({ msg: "This user doesn't exist", id: "userdx" });
-    res.end();
+    user = yield user_1.default.findByIdAndUpdate(id, rest, {
+        returnDocument: "after",
+    });
+    const jwt = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, user.email, user.area).catch((err) => {
+        throw new Error(err);
+    });
+    res.json({ jwt });
 });
 exports.updateUser = updateUser;
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

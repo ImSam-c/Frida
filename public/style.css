@@ -56,6 +56,11 @@ body {
   font-weight: bold;
 }
 
+.big-header-container {
+  max-width: 342px;
+  max-height: 144px;
+}
+
 .button {
   height: 35px;
   border-radius: var(--btn-and-input-radius);
@@ -69,7 +74,7 @@ body {
   transition: opacity 200ms ease;
 }
 
-.button:hover {
+.button:hover:not(:disabled) {
   cursor: pointer;
   opacity: 0.8;
 }
@@ -277,7 +282,12 @@ input[type="password"] {
     color: var(--header-color);
   }
 
-  .container{
+  .container {
     width: 20rem !important;
+  }
+
+  .big-header-container {
+    /* max-width: 217px; */
+    max-height: 97px;
   }
 }

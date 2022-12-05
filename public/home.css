@@ -46,10 +46,6 @@ header {
   text-align: left;
 }
 
-.big-header-container .big-header {
-  margin-top: 3%;
-}
-
 .big-header {
   font-weight: 600;
   font-size: 3.55rem;
@@ -125,9 +121,9 @@ footer {
 
 .pencil {
   width: 4rem;
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
-  left: 21.5rem;
+  left: 20rem;
   bottom: 6rem;
 }
 
@@ -239,6 +235,10 @@ footer {
   .mobile-image {
     width: 45%;
   }
+
+  .pencil {
+    left: 20rem;
+  }
 }
 
 /*mobile-nav*/
@@ -252,10 +252,20 @@ footer {
   }
 }
 
+@media (max-width: 761px) {
+  .pencil {
+    left: 10rem;
+  }
+}
+
 @media (max-width: 620px) {
   .mobile-image {
     width: 85%;
     margin-top: 2rem;
+  }
+
+  .pencil {
+    left: 20rem;
   }
 
   .exam-sample {

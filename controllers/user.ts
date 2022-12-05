@@ -36,14 +36,15 @@ const getUserById = async (req: Request, res: Response) => {
 };
 
 const updateUser = async (req: Request, res: Response) => {
-  let { state, ...rest } = req.body;
+  let { ...rest } = req.body;
   const { id: idToUpdate } = req.params;
   const { id } = (req as reqID).decoded;
 
   if (idToUpdate !== String(id))
     return res.status(401).json({ msg: "You cannot update this user" });
 
-  const user = await User.findById(idToUpdate);
+  let user = await User.findById(idToUpdate);
+
   if (!user)
     return res
       .status(401)
@@ -55,11 +56,20 @@ const updateUser = async (req: Request, res: Response) => {
     rest.password = bcryptjs.hashSync(rest.password, salt);
   }
 
-  await User.findByIdAndUpdate(id, rest);
-  user
-    ? res.json({})
-    : res.json({ msg: "This user doesn't exist", id: "userdx" });
-  res.end();
+  user = await User.findByIdAndUpdate(id, rest, {
+    returnDocument: "after",
+  });
+
+  const jwt = await newJWT(
+    user!._id,
+    user!.fullname,
+    user!.email,
+    user!.area
+  ).catch((err) => {
+    throw new Error(err);
+  });
+
+  res.json({ jwt });
 };
 
 const deleteUser = async (req: Request, res: Response) => {

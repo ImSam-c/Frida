@@ -44,7 +44,8 @@ async function sendData(name, lastname, email, password, area) {
 
   response
     .json()
-    .then(() => {
+    .then((res) => {
+      console.log(res);
       Swal.fire({
         title: "Nice!",
         icon: "success",
