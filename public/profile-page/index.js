@@ -276,6 +276,15 @@ const updateUserProfile = async (origin) => {
   }
 };
 
+function validateEmail(emailInput) {
+  const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailInput.match(mailRegex)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 d.addEventListener("change", (e) => {
   if (e.target.matches("#inputPhoto")) {
     const imgElement = d.querySelector(".profile-opened-image");
@@ -342,6 +351,10 @@ d.addEventListener("input", (e) => {
 
   const saveButton = d.querySelector(".save-button");
 
+  if(e.target.name === "email"){
+    let color = validateEmail(e.target.value) ? "green" : "red";
+    e.target.style.border = "2px solid " + color;
+  }
   if (e.target.type !== "file") actualInputValue = e.target.value.trim();
   else actualInputValue = e.target.src;
 
