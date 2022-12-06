@@ -374,7 +374,8 @@ d.addEventListener("input", (e) => {
     if (
       e.target.name === "email" &&
       actualInputValue === lastUserInfoSaved[editedInputName] &&
-      e.target.parentElement.nextElementSibling.children[0].value.length !== 0
+      e.target.parentElement.nextElementSibling.children[0].value.length !== 0 &&
+      validateEmail(e.target.value)
     ) {
       saveButton.disabled = false;
     }
