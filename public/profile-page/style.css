@@ -156,3 +156,129 @@ label {
   margin-left: 4rem;
   font-size: 1.05rem !important;
 }
+
+@media (max-width: 770px){
+  h1 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  main {
+    /* display: flex;
+    width: 100%; */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .options-container {
+    border-right: none;
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img-profile {
+    /* border-radius: 20%;
+    width: 10rem;
+    margin-top: 2rem; */
+    position: relative; /*attention*/
+    left: auto; /*attention*/
+    /* min-height: 181.219px;
+    min-width: 160px;
+    object-fit: cover; */
+  }
+
+  h3 {
+    /* font-weight: 600;
+    margin-bottom: 0.5rem; */
+    margin-left: 0;
+    /* margin-top: 1rem; */
+  }
+
+  .first-option-account {
+    margin-left: 0rem;
+    /* margin-top: 1.3rem;
+    border: none;
+    background-color: unset;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 300ms ease; */
+  }
+
+  .option-account {
+    margin-left: 0;
+    display: block;
+    /* margin-top: 1.3rem;
+    border: none;
+    background-color: unset;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 250ms ease;
+    margin: 1.3rem auto 0; */
+  }
+
+  .opened-option-container{
+    text-align: center;
+  }
+
+  h2 {
+    margin-left: 0;
+    /* margin-top: 3rem;
+    font-size: 2rem; */
+  }
+
+  p {
+    margin-left: 0;
+  }
+
+  label {
+    margin-left: 0;
+    /* display: block;
+    margin-bottom: 1rem; */
+  }
+
+  label:nth-child(1) {
+    margin-top: 2rem;
+}
+
+  .save-button {
+    /* font-size: 1.05rem !important; */
+    /* margin-left: 0; */
+    /* width: 6.5rem; */
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+
+  .imgLabelProfile {
+    max-height: 181.219px;
+    max-width: none;
+  }
+
+  .input-profile{
+    text-align: center;
+  }
+
+  .profile-opened-image{
+    right: 0;
+  }
+
+  .small-photo{
+    left: 0;
+    top: -1.7rem;
+  }
+
+  .becareful {
+    margin-left: 0;
+    padding: 1rem 0;
+  }
+
+  .button-remove {
+    display: unset;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
