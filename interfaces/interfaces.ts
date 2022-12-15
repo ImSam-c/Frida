@@ -1,7 +1,6 @@
 import { Request } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { Types } from "mongoose";
-import { UploadedFile } from "express-fileupload";
 
 interface userI {
   fullname: string;

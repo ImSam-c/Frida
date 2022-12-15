@@ -31,7 +31,7 @@ const detailsAccountHTML = `<h2>Details of your account</h2>
 const addAPhotographyHTML = `<h2>Change your photography</h2>
       <p>Edit your public photo</p>
       <article class="inputs">
-        <form method="post" action="http://localhost:8080/api/upload/" enctype="multipart/form-data">
+        <form method="post" action="https://frida.rettouseisama.com/api/upload/" enctype="multipart/form-data">
           <label class="imgLabelProfile" for="inputPhoto">
             <img class="profile-opened-image" src="../img/no-image-profile.png" alt="profile-img">
             <input type="file" accept="image/jpeg, image/png" name="file" id="inputPhoto">
@@ -73,18 +73,15 @@ const initialPublicProfileValues = async () => {
   const inputArea = d.getElementById("inputArea"),
     inputName = d.getElementById("inputName");
 
-  const userImg = JSON.parse(
-    sessionStorage.getItem("publicAndPrivateUserInformation")
-  )?.src;
-
   inputName.value = user.name;
   inputArea.value = user.area || "No subject.";
 
-  if (userImg) d.querySelector(".img-profile").src = userImg;
+  d.querySelector(".img-profile").src = user.img;
 
   const userInfo = {
     email: user.email,
     name: user.name,
+    src: user.img,
   };
 
   sessionStorage.setItem(
@@ -141,14 +138,17 @@ const updateUserProfile = async (origin) => {
     case "public":
       const fullname = d.getElementById("inputName").value.trim();
 
-      await fetch(`http://localhost:8080/api/users/updateUser/${user.id}`, {
-        method: "PUT",
-        headers: {
-          authorization: "Bearer " + jwt,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fullname }),
-      })
+      await fetch(
+        `https://frida.rettouseisama.com/api/users/updateUser/${user.id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: "Bearer " + jwt,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ fullname }),
+        }
+      )
         .then((res) => res.json())
         .then((res) => {
           if (res.errors) {
@@ -195,14 +195,17 @@ const updateUserProfile = async (origin) => {
       } else if (password.value) dataUser = { password: password.value };
       else dataUser = { email };
 
-      await fetch(`http://localhost:8080/api/users/updateUser/${user.id}`, {
-        method: "PUT",
-        headers: {
-          authorization: "Bearer " + jwt,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataUser),
-      })
+      await fetch(
+        `https://frida.rettouseisama.com/api/users/updateUser/${user.id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: "Bearer " + jwt,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataUser),
+        }
+      )
         .then((res) => res.json())
         .then((res) => {
           if (res.errors) {
@@ -242,7 +245,7 @@ const updateUserProfile = async (origin) => {
           cancelButton: "cancelButton",
         },
         preConfirm: async () => {
-          await fetch(`http://localhost:8080/api/users/${user.id}`, {
+          await fetch(`https://frida.rettouseisama.com/api/users/${user.id}`, {
             method: "DELETE",
             headers: {
               authorization: "Bearer " + jwt,
@@ -351,10 +354,6 @@ d.addEventListener("input", (e) => {
 
   const saveButton = d.querySelector(".save-button");
 
-  if(e.target.name === "email"){
-    let color = validateEmail(e.target.value) ? "green" : "red";
-    e.target.style.border = "2px solid " + color;
-  }
   if (e.target.type !== "file") actualInputValue = e.target.value.trim();
   else actualInputValue = e.target.src;
 
@@ -371,11 +370,18 @@ d.addEventListener("input", (e) => {
       ? (saveButton.disabled = false)
       : (saveButton.disabled = true);
 
+    if (e.target.name === "email") {
+      let color = validateEmail(e.target.value) ? "green" : "red";
+      e.target.style.border = "2px solid " + color;
+      validateEmail(e.target.value)
+        ? (saveButton.disabled = false)
+        : (saveButton.disabled = true);
+    }
+
     if (
       e.target.name === "email" &&
       actualInputValue === lastUserInfoSaved[editedInputName] &&
-      e.target.parentElement.nextElementSibling.children[0].value.length !== 0 &&
-      validateEmail(e.target.value)
+      e.target.parentElement.nextElementSibling.children[0].value.length !== 0
     ) {
       saveButton.disabled = false;
     }
@@ -397,7 +403,7 @@ d.addEventListener("submit", async (e) => {
       const formData = new FormData(e.target);
       formData.entries().next().value[0] = "file";
 
-      const res = await fetch("http://localhost:8080/api/upload", {
+      const res = await fetch("https://frida.rettouseisama.com/api/upload", {
         method: "POST",
         body: formData,
         headers: {
@@ -428,7 +434,4 @@ d.addEventListener("submit", async (e) => {
       });
     },
   });
-
-  // setValuesSessionStorage()
-  // location.reload()
 });

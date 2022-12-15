@@ -126,6 +126,16 @@ body {
   margin-bottom: 0.3rem !important;
 }
 
+.no-exams {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.hide {
+  display: none;
+}
+
 .button {
   background-color: var(--body-color);
   color: var(--btn-color);

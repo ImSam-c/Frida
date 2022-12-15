@@ -15,7 +15,7 @@ const getExams = () => {
     loader = d.getElementById("loader");
 
   fetch(
-    `http://localhost:8080/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
+    `https://frida.rettouseisama.com/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
     {
       method: "GET",
       headers: {
@@ -25,11 +25,16 @@ const getExams = () => {
   )
     .then((res) => res.json())
     .then((exams) => {
-      exams.forEach((exam) => {
-        let newArticle = d.createElement("article");
-        newArticle.dataset.v_id = exam._id;
-        newArticle.classList.add("exam");
-        newArticle.innerHTML = `
+      if (exams.length === 0) {
+        const noExamsTitle = d.querySelector(".no-exams");
+        loader.style.display = "none";
+        noExamsTitle.classList.remove("hide");
+      } else {
+        exams.forEach((exam) => {
+          let newArticle = d.createElement("article");
+          newArticle.dataset.v_id = exam._id;
+          newArticle.classList.add("exam");
+          newArticle.innerHTML = `
         <div class="exam-sec1">
           <h2>${exam.area} Exam</h2>
           <div class="comments-container"><p class="exam-comments">Comments: ${exam.comments}</p></div>
@@ -38,11 +43,12 @@ const getExams = () => {
         <div class="exam-sec2">
           <h3 class="exam-madeby">Made by:<br>${exam.byTeacher.fullname}</h3>
         </div>`;
-        fragment.append(newArticle);
-      });
-      loader.style.display = "none";
-      examsContainer.append(fragment);
-      button.removeAttribute("disabled");
+          fragment.append(newArticle);
+        });
+        loader.style.display = "none";
+        examsContainer.append(fragment);
+        button.removeAttribute("disabled");
+      }
     })
     .catch((err) => console.log(err));
 };
@@ -52,12 +58,15 @@ const getExam = async (id) => {
     title: "Searching exam...",
     didOpen: async () => {
       Swal.showLoading();
-      const res = await fetch(`http://localhost:8080/api/exams/${id}`, {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${jwtToken}`,
-        },
-      });
+      const res = await fetch(
+        `https://frida.rettouseisama.com/api/exams/${id}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
 
       const { exam } = await res.json();
       let questionsText = "<br><br>";

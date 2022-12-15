@@ -18,7 +18,7 @@ function validateEmail(emailInput) {
 async function sendData(email) {
   // fetch url may change.
   const response = await fetch(
-    "http://localhost:8080/api/users/recoverPassword",
+    "https://frida.rettouseisama.com/api/users/recoverPassword",
     {
       method: "PUT",
       headers: {

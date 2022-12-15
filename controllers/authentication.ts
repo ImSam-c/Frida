@@ -57,7 +57,8 @@ const login = async (req: Request, res: Response) => {
     user._id,
     user.fullname,
     user.email,
-    user.area
+    user.area,
+    user.img
   ).catch((err) => {
     throw new Error(err);
   });

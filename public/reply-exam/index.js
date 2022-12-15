@@ -13,7 +13,7 @@ let exam;
 
 const appearQuestions = async () => {
   exam = await (
-    await fetch(`http://localhost:8080/api/exams/${idExam}`, {
+    await fetch(`https://frida.rettouseisama.com/api/exams/${idExam}`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + jwtInCookies,
@@ -71,7 +71,7 @@ const sendAnswersAndShowResult = async () => {
   }
 
   const req = await fetch(
-    "http://localhost:8080/api/exams/verifyExam/" + idExam,
+    "https://frida.rettouseisama.com/api/exams/verifyExam/" + idExam,
     {
       method: "POST",
       headers: {

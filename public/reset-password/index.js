@@ -27,7 +27,7 @@ function validatePassword(passwordInput) {
 
 async function sendData(password) {
   const response = await fetch(
-    `http://localhost:8080/api/users/updateUser/${token.id}`,
+    `https://frida.rettouseisama.com/api/users/updateUser/${token.id}`,
     {
       method: "PUT",
       headers: {

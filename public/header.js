@@ -5,25 +5,27 @@ const toggleElements = document.querySelectorAll(".toggle-log");
 var mobileNav = document.querySelector(".mobile-nav");
 var backdrop = document.querySelector(".backdrop");
 
-document.addEventListener("click", event => {
-  if(event.target.matches(".nav-signin-button")){
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".nav-signin-button")) {
     location.href = "../sign-in/index.html";
   }
-  if(event.target.matches(".nav-signup-button")){
+  if (event.target.matches(".nav-signup-button")) {
     location.href = "../sign-up/index.html";
   }
-  if(event.target.matches(".nav-signout-button")){
+  if (event.target.matches(".nav-signout-button")) {
     document.cookie = `XSRF-TOKEN=nt;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
+    sessionStorage.removeItem("publicAndPrivateUserInformation");
+    sessionStorage.removeItem("actualSelectedPage");
     location.replace("../");
   }
-  if(event.target.matches(".toggle-button")){
+  if (event.target.matches(".toggle-button")) {
     mobileNav.classList.add("open");
     backdrop.style.display = "block";
     setTimeout(function () {
       backdrop.classList.add("open");
     }, 10);
   }
-  if(event.target.matches(".backdrop")){
+  if (event.target.matches(".backdrop")) {
     mobileNav.classList.remove("open");
     backdrop.classList.remove("open");
     setTimeout(function () {
