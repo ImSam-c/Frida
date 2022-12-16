@@ -1,3 +1,3 @@
 # Repositorio oficial de Frida
 
-Proyecto en construcción.
+Proyecto en producción.
