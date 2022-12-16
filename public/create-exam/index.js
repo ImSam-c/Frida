@@ -74,7 +74,7 @@ function areAllAnswersSelected(questions) {
 
 async function sendData(questions, comments) {
   const response = await fetch(
-    "https://frida.up.railway.app//api/exams/createExam",
+    "https://frida.up.railway.app/api/exams/createExam",
     {
       method: "POST",
       headers: {

@@ -28,7 +28,7 @@ teacherRadio.addEventListener("change", () => {
 
 async function sendData(name, lastname, email, password, area) {
   const response = await fetch(
-    "https://frida.up.railway.app//api/auth/register",
+    "https://frida.up.railway.app/api/auth/register",
     {
       method: "POST",
       headers: {
