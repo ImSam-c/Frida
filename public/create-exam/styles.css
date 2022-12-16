@@ -20,14 +20,16 @@ main {
   width: 80%;
   min-height: 100vh;
   padding: 1rem;
+  border-radius: 18px;
 }
 
 .exam-title {
   margin-bottom: 2rem;
   color: black;
-  font-family: "Fredericka the Great";
+  font-family: "Montserrat";
   letter-spacing: 2px;
   font-size: 2.5rem;
+  font-weight: 400;
 }
 
 .buttons-container {
@@ -49,6 +51,7 @@ textarea {
   resize: none;
   font-size: 1rem;
   font-family: "Montserrat", sans-serif;
+  border-radius: 8px;
 }
 
 .comment {
@@ -101,11 +104,11 @@ input[type="radio"] {
     right: -68px;
   }
 
-  .delete-button span{
+  .delete-button span {
     display: none;
   }
 
-  .delete-button::after{
+  .delete-button::after {
     content: "X";
   }
 }

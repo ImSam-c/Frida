@@ -1,3 +1,84 @@
+.examProfile {
+  cursor: pointer;
+  background-color: var(--header-color);
+  color: var(--body-color);
+  border-radius: 9px;
+  padding-bottom: 0.4rem;
+  width: 800px;
+  transition: opacity 200ms ease;
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.25);
+  left: 4rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.no-exams-user {
+  margin-top: 5rem;
+}
+
+.examProfile:hover {
+  opacity: 0.9;
+}
+
+.fa-trash {
+  cursor: pointer;
+  transition: all 200ms ease;
+  position: relative;
+  margin-left: 0.6rem;
+}
+
+.fa-trash:hover {
+  color: var(--incorrect-color);
+}
+
+.examProfile h2 {
+  font-size: 1.6rem;
+  padding-top: 0.3rem;
+  margin-left: 42px;
+  font-weight: 200;
+  text-align: left;
+  width: inherit;
+}
+
+.examProfile p {
+  margin-left: 40px;
+}
+
+.exam-info {
+  text-align: left;
+  font-weight: 400;
+}
+
+.exam:hover {
+  opacity: 0.9;
+}
+
+.exam-sec2 {
+  display: flex;
+  align-items: end;
+}
+
+.exam-madeby {
+  font-size: 0.9rem;
+  font-weight: 200;
+  right: 81px;
+  position: absolute;
+}
+
+.exam-comments {
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-left: 42px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 500px;
+}
+
+.comments-container {
+  text-overflow: ellipsis;
+}
+
 h1 {
   margin-left: 3.5rem;
   font-size: 2rem;
@@ -49,7 +130,7 @@ main {
 .options-container {
   border-right: 1px solid rgb(137, 137, 137);
   width: 300px;
-  height: 452px;
+  min-width: 222px;
 }
 
 .option-account {
@@ -58,8 +139,8 @@ main {
   align-items: center;
   margin-top: 1.3rem;
   border: none;
-  background-color: unset;
   font-size: 1rem;
+  background-color: unset;
   cursor: pointer;
   transition: opacity 250ms ease;
 }
@@ -157,7 +238,59 @@ label {
   font-size: 1.05rem !important;
 }
 
-@media (max-width: 770px){
+@media (max-width: 1044px) {
+  .examProfile {
+    right: 10rem;
+    width: 600px;
+  }
+
+  .exam-comments {
+    width: 360px;
+  }
+}
+
+@media (max-width: 980px) {
+  .examProfile {
+    right: 10rem;
+    width: 550px;
+  }
+
+  .exam-madeby {
+    left: 400px;
+    width: 100px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 930px) {
+  .examProfile {
+    width: 380px;
+  }
+
+  .exam-comments {
+    width: 320px;
+  }
+
+  .exam-madeby {
+    display: block;
+    position: unset;
+    height: 20px;
+    width: 320px;
+    margin: 0;
+    margin-left: 1rem;
+    font-weight: 500;
+  }
+
+  .exam-madeby br {
+    display: none;
+  }
+
+  .exam-madeby span {
+    margin-right: 0.2rem;
+  }
+}
+
+@media (max-width: 770px) {
   h1 {
     margin-left: 0;
     text-align: center;
@@ -212,16 +345,15 @@ label {
   .option-account {
     margin-left: 0;
     display: block;
-    /* margin-top: 1.3rem;
+    margin-top: 1.3rem;
     border: none;
     background-color: unset;
-    font-size: 1rem;
     cursor: pointer;
     transition: opacity 250ms ease;
-    margin: 1.3rem auto 0; */
+    margin: 1.3rem auto 0;
   }
 
-  .opened-option-container{
+  .opened-option-container {
     text-align: center;
   }
 
@@ -243,7 +375,7 @@ label {
 
   label:nth-child(1) {
     margin-top: 2rem;
-}
+  }
 
   .save-button {
     /* font-size: 1.05rem !important; */
@@ -258,15 +390,15 @@ label {
     max-width: none;
   }
 
-  .input-profile{
+  .input-profile {
     text-align: center;
   }
 
-  .profile-opened-image{
+  .profile-opened-image {
     right: 0;
   }
 
-  .small-photo{
+  .small-photo {
     left: 0;
     top: -1.7rem;
   }
@@ -280,5 +412,47 @@ label {
     display: unset;
     margin-left: 0;
     margin-bottom: 1rem;
+  }
+
+  .examProfile {
+    width: 570px;
+    position: relative;
+    left: 10px !important;
+  }
+
+  .examProfile p:not(.exam-comments) {
+    margin-left: 28px;
+    width: 120px;
+  }
+
+  .exam-madeby {
+    margin-left: 1rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 730px) {
+  .exam-comments {
+    width: 400px;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 601px) {
+  .examProfile h2 {
+    width: 80%;
+    text-align: left;
+  }
+
+  .examProfile {
+    width: 460px;
+    position: unset;
+  }
+}
+
+@media (max-width: 594px) {
+  .exam-comments {
+    width: 300px;
+    margin-left: 40px !important;
   }
 }

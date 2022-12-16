@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyExam = exports.deleteExam = exports.getExamById = exports.createExam = exports.getExams = void 0;
+exports.verifyExam = exports.deleteExam = exports.getExamById = exports.createExam = exports.getExamsById = exports.getExams = void 0;
 const exam_1 = __importDefault(require("../models/exam"));
 const user_1 = __importDefault(require("../models/user"));
 const getExams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,6 +40,15 @@ const getExams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.end();
 });
 exports.getExams = getExams;
+const getExamsById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const exams = yield exam_1.default.find({ byTeacher: id }).populate("byTeacher", "fullname");
+    exams
+        ? res.json({ exams })
+        : res.status(400).json({ msg: "This user doesn't have exams" });
+    res.end();
+});
+exports.getExamsById = getExamsById;
 const createExam = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { comments, questions, nQuestions } = req.body;
     const { id } = req.decoded;

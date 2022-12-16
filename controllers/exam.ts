@@ -31,6 +31,18 @@ const getExams = async (req: Request, res: Response) => {
   res.end();
 };
 
+const getExamsById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const exams = await Exam.find({ byTeacher: id }).populate(
+    "byTeacher",
+    "fullname"
+  );
+  exams
+    ? res.json({ exams })
+    : res.status(400).json({ msg: "This user doesn't have exams" });
+  res.end();
+};
+
 const createExam = async (req: Request, res: Response) => {
   const { comments, questions, nQuestions } = req.body;
   const { id } = (req as reqID).decoded;
@@ -103,4 +115,11 @@ const verifyExam = async (req: Request, res: Response) => {
   res.end();
 };
 
-export { getExams, createExam, getExamById, deleteExam, verifyExam };
+export {
+  getExams,
+  getExamsById,
+  createExam,
+  getExamById,
+  deleteExam,
+  verifyExam,
+};

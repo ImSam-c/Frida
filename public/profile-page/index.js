@@ -1,7 +1,8 @@
 import { checkJwtInCookies, getPayloadJwt } from "../helpers/jwtFunctions.js";
 
 const d = document,
-  openedOptionContainer = d.querySelector(".opened-option-container");
+  openedOptionContainer = d.querySelector(".opened-option-container"),
+  fragment = d.createDocumentFragment();
 
 let jwt = checkJwtInCookies();
 
@@ -31,7 +32,7 @@ const detailsAccountHTML = `<h2>Details of your account</h2>
 const addAPhotographyHTML = `<h2>Change your photography</h2>
       <p>Edit your public photo</p>
       <article class="inputs">
-        <form method="post" action="https://frida.up.railway.app/api/upload/" enctype="multipart/form-data">
+        <form method="post" action="https://frida.up.railway.app//api/upload/" enctype="multipart/form-data">
           <label class="imgLabelProfile" for="inputPhoto">
             <img class="profile-opened-image" src="../img/no-image-profile.png" alt="profile-img">
             <input type="file" accept="image/jpeg, image/png" name="file" id="inputPhoto">
@@ -69,14 +70,54 @@ const setValuesSessionStorage = (img) => {
   );
 };
 
-const initialPublicProfileValues = async () => {
+const loadExams = async () => {
+  if (user.area && sessionStorage.getItem("actualSelectedPage") === "public") {
+    const res = await fetch(
+      `https://frida.up.railway.app//api/exams/byTeacher/${user.id}`,
+      {
+        headers: { authorization: "Bearer " + jwt },
+      }
+    );
+    const { exams } = await res.json();
+
+    if (exams.length > 0) {
+      exams.forEach((exam) => {
+        let newArticle = d.createElement("article");
+        newArticle.dataset.v_id = exam._id;
+        newArticle.classList.add("examProfile");
+        newArticle.innerHTML = `
+        <div class="exam-sec1">
+          <h2>Computer Science Exam</h2>
+          <div class="comments-container">
+            <p class="exam-comments">Comments: ${exam.comments}</p>
+          </div>
+          <p>Questions: ${exam.questions.length}</p>
+        </div>
+        <div class="exam-sec2">
+          <i id="btn-delete-exam" class="fa-solid fa-trash"></i>
+          <h3 class="exam-madeby"><span>Made by:</span><br>${exam.byTeacher.fullname}</h3>
+        </div>`;
+        fragment.append(newArticle);
+      });
+      openedOptionContainer.append(fragment);
+    } else {
+      const noExams = d.createElement("p");
+      noExams.textContent = "You haven't exams";
+      noExams.classList.add("no-exams-user");
+      openedOptionContainer.append(noExams);
+    }
+  }
+};
+
+const initialPublicProfileValues = () => {
   const inputArea = d.getElementById("inputArea"),
     inputName = d.getElementById("inputName");
 
   inputName.value = user.name;
   inputArea.value = user.area || "No subject.";
+  d.getElementById("userName").textContent = user.name;
 
-  d.querySelector(".img-profile").src = user.img;
+  if (user.img) d.querySelector(".img-profile").src = user.img;
 
   const userInfo = {
     email: user.email,
@@ -90,9 +131,8 @@ const initialPublicProfileValues = async () => {
   );
 
   sessionStorage.setItem("actualSelectedPage", "public");
+  loadExams();
 };
-
-initialPublicProfileValues();
 
 const handleErrors = (id) => {
   switch (id) {
@@ -139,7 +179,7 @@ const updateUserProfile = async (origin) => {
       const fullname = d.getElementById("inputName").value.trim();
 
       await fetch(
-        `https://frida.up.railway.app/api/users/updateUser/${user.id}`,
+        `https://frida.up.railway.app//api/users/updateUser/${user.id}`,
         {
           method: "PUT",
           headers: {
@@ -196,7 +236,7 @@ const updateUserProfile = async (origin) => {
       else dataUser = { email };
 
       await fetch(
-        `https://frida.up.railway.app/api/users/updateUser/${user.id}`,
+        `https://frida.up.railway.app//api/users/updateUser/${user.id}`,
         {
           method: "PUT",
           headers: {
@@ -245,7 +285,7 @@ const updateUserProfile = async (origin) => {
           cancelButton: "cancelButton",
         },
         preConfirm: async () => {
-          await fetch(`https://frida.up.railway.app/api/users/${user.id}`, {
+          await fetch(`https://frida.up.railway.app//api/users/${user.id}`, {
             method: "DELETE",
             headers: {
               authorization: "Bearer " + jwt,
@@ -305,7 +345,7 @@ d.addEventListener("change", (e) => {
   }
 });
 
-d.addEventListener("click", (e) => {
+d.addEventListener("click", async (e) => {
   if (e.target.matches("#publicProfileOption")) {
     openedOptionContainer.innerHTML = publicProfileHTML;
     sessionStorage.setItem("actualSelectedPage", "public");
@@ -345,6 +385,83 @@ d.addEventListener("click", (e) => {
   if (e.target.matches(".save-button, .button-remove")) {
     const origin = sessionStorage.getItem("actualSelectedPage");
     updateUserProfile(origin);
+  }
+
+  if (e.target.matches("#btn-delete-exam")) {
+    const id = e.target.parentElement.parentElement.dataset.v_id;
+    if (!id) {
+      return;
+    }
+
+    Swal.fire({
+      title: "Are you sure?",
+      showCancelButton: true,
+      customClass: {
+        confirmButton: "confirmButton",
+      },
+      preConfirm: async () => {
+        Swal.showLoading();
+        await fetch(
+          "https://frida.up.railway.app//api/exams/deleteExam/" + id,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: "Bearer " + jwt,
+            },
+          }
+        );
+        Swal.close();
+        location.reload();
+      },
+    });
+  }
+
+  if (
+    e.target.matches(".examProfile, .examProfile *") &&
+    !e.target.matches("#btn-delete-exam")
+  ) {
+    const id = e.target.closest(".examProfile").dataset.v_id;
+
+    Swal.fire({
+      title: "Searching exam...",
+      didOpen: async () => {
+        Swal.showLoading();
+        const res = await fetch(
+          `https://frida.up.railway.app//api/exams/${id}`,
+          {
+            method: "GET",
+            headers: {
+              authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+
+        const { exam } = await res.json();
+        let questionsText = "<br><br>";
+
+        exam.questions.forEach((question, i) => {
+          questionsText += `${i + 1}. ${question.statement}<br><br>`;
+        });
+
+        Swal.fire({
+          title: "<h2>Exam details: </h2>",
+          width: "900px",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonText: "Close",
+          customClass: {
+            cancelButton: "cancelButton",
+            title: "title",
+          },
+          html: `
+          <h4 class="exam-info">Subject: ${exam.area}</h4><br>
+          <h4 class="exam-info">Created by: ${exam.byTeacher.fullname}</h4><br>
+          <h4 class="exam-info">Comments: ${exam.comments}</h4><br>
+          <h4 class="exam-info">Number of questions: ${exam.nQuestions}</h4><br>
+          <div style="text-align: left;">Questions: ${questionsText}</div>`,
+        });
+      },
+    });
   }
 });
 
@@ -403,7 +520,7 @@ d.addEventListener("submit", async (e) => {
       const formData = new FormData(e.target);
       formData.entries().next().value[0] = "file";
 
-      const res = await fetch("https://frida.up.railway.app/api/upload", {
+      const res = await fetch("https://frida.up.railway.app//api/upload", {
         method: "POST",
         body: formData,
         headers: {
@@ -435,3 +552,5 @@ d.addEventListener("submit", async (e) => {
     },
   });
 });
+
+d.addEventListener("DOMContentLoaded", initialPublicProfileValues);

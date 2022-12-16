@@ -28,7 +28,7 @@ teacherRadio.addEventListener("change", () => {
 
 async function sendData(name, lastname, email, password, area) {
   const response = await fetch(
-    "https://frida.up.railway.app/api/auth/register",
+    "https://frida.up.railway.app//api/auth/register",
     {
       method: "POST",
       headers: {
@@ -48,16 +48,16 @@ async function sendData(name, lastname, email, password, area) {
   response
     .json()
     .then((res) => {
-      console.log(res);
       Swal.fire({
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Successfully registered.</p>`,
-        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
         customClass: {
           title: "modal-font",
         },
+        preConfirm: () => location.replace("../"),
         allowOutsideClick: false,
         allowEscapeKey: false,
       });

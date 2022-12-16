@@ -4,6 +4,7 @@ import {
   deleteExam,
   getExamById,
   getExams,
+  getExamsById,
   verifyExam,
 } from "../controllers/exam";
 import { validateJWT } from "../middlewares/validateJWT";
@@ -15,6 +16,9 @@ router.get("/", validateJWT, getExams);
 
 //* Getting an exam by the id
 router.get("/:id", validateJWT, getExamById);
+
+//* Getting exams by teacher id
+router.get("/byTeacher/:id", validateJWT, getExamsById);
 
 //* Creating an exam
 router.post("/createExam", validateJWT, createExam);

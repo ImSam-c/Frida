@@ -3,11 +3,6 @@ body {
   background-color: #f2f4f3;
 }
 
-.confirmButton {
-  color: var(--header-color) !important;
-  background-color: var(--nav-signin-color) !important;
-}
-
 .cancelButton {
   color: var(--body-color) !important;
   background-color: var(--header-color) !important;

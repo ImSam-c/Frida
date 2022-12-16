@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Montserrat:wght@300;400;700;800;900&family=Ubuntu:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800;900&family=Ubuntu:wght@700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -79,6 +79,11 @@ body {
   opacity: 0.8;
 }
 
+.confirmButton {
+  color: var(--header-color) !important;
+  background-color: var(--nav-signin-color) !important;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -117,6 +122,12 @@ input[type="password"] {
   padding-top: 0;
   padding-bottom: 0;
   vertical-align: middle;
+}
+
+.title h2 {
+  text-align: left;
+  position: relative;
+  right: 4rem;
 }
 
 .toggle-button:focus {
@@ -262,6 +273,10 @@ input[type="password"] {
 @media (max-width: 770px) {
   .toggle-button {
     display: block;
+  }
+
+  .title h2 {
+    right: 0.2rem;
   }
 
   .navbar-nav {

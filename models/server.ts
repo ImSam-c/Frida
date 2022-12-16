@@ -30,11 +30,7 @@ export class Server {
 
   middlewares() {
     //CORS
-    this.app.use(
-      cors({
-        origin: "https://frida.up.railway.app",
-      })
-    );
+    this.app.use(cors());
 
     //Parse body
     this.app.use(express.json());

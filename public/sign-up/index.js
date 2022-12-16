@@ -83,12 +83,12 @@ button.addEventListener("click", () => {
     Swal.fire({
       title: "Perfect!",
       html: `<p class="modal-font">Now, let's see if you are a student or not.</p>`,
-      confirmButtonText:
-        '<a class="modal-sign-up" href="../choose-grade/index.html">Next →</a> ',
+      confirmButtonText: '<a class="modal-sign-up">Next →</a> ',
       confirmButtonColor: "var(--btn-color)",
       customClass: {
         title: "modal-font",
       },
+      preConfirm: () => location.replace("../choose-grade/index.html"),
       allowOutsideClick: false,
       allowEscapeKey: false,
     });

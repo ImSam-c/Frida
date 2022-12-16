@@ -197,7 +197,7 @@ const recoverPassword = (req, res) =>
   <a style="text-decoration: none;
     padding: .8rem;
     background-color: #157070;
-    color: white;" href="https://frida.up.railway.app/../reset-password/index.html?temptKNrecvg=${tkn}">Recover</a>
+    color: white;" href="https://frida.up.railway.app//../reset-password/index.html?temptKNrecvg=${tkn}">Recover</a>
 
   <h3>Click in this button to recover your password</h3>
   <h3>Important: This button expires in 10 minutes.</h2>

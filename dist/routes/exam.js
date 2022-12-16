@@ -8,6 +8,8 @@ const router = (0, express_1.Router)();
 router.get("/", validateJWT_1.validateJWT, exam_1.getExams);
 //* Getting an exam by the id
 router.get("/:id", validateJWT_1.validateJWT, exam_1.getExamById);
+//* Getting exams by teacher id
+router.get("/byTeacher/:id", validateJWT_1.validateJWT, exam_1.getExamsById);
 //* Creating an exam
 router.post("/createExam", validateJWT_1.validateJWT, exam_1.createExam);
 //* Deleting an exam by id

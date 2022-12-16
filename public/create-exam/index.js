@@ -74,7 +74,7 @@ function areAllAnswersSelected(questions) {
 
 async function sendData(questions, comments) {
   const response = await fetch(
-    "https://frida.up.railway.app/api/exams/createExam",
+    "https://frida.up.railway.app//api/exams/createExam",
     {
       method: "POST",
       headers: {
@@ -97,11 +97,12 @@ async function sendData(questions, comments) {
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Exam created!</p>`,
-        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
         customClass: {
           title: "modal-font",
         },
+        preConfirm: () => location.replace("../"),
         allowOutsideClick: false,
         allowEscapeKey: false,
       });
@@ -226,16 +227,4 @@ document.addEventListener("click", (e) => {
     e.target.closest(".question-container").id !== "qc1"
   )
     e.target.closest(".question-container").remove();
-});
-
-window.matchMedia("(max-width: 950px)").addEventListener("change", (x) => {
-  if (x.matches) {
-    document.querySelectorAll(".delete-button").forEach((button) => {
-      button.textContent = "X";
-    });
-  } else {
-    document.querySelectorAll(".delete-button").forEach((button) => {
-      button.textContent = "delete";
-    });
-  }
 });
