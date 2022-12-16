@@ -120,7 +120,7 @@ input[type="radio"] {
 
   .exam-container {
     width: 100%;
-    padding: 1rem 2rem;
+    margin: 0.2rem 0.4rem 0 0.4rem;
   }
 }
 

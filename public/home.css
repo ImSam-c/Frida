@@ -106,7 +106,7 @@ header {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  margin: 4rem;
+  margin: auto;
 }
 
 footer {
@@ -138,6 +138,7 @@ footer {
 .big-header-container div {
   overflow: hidden;
   white-space: nowrap;
+  max-width: 300px;
 }
 
 .big-header-container div:first-of-type {
@@ -265,7 +266,7 @@ footer {
   }
 
   .pencil {
-    left: 20rem;
+    display: none;
   }
 
   .exam-sample {

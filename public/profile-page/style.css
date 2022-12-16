@@ -442,10 +442,11 @@ label {
   .examProfile h2 {
     width: 80%;
     text-align: left;
+    font-size: 1.4rem;
   }
 
   .examProfile {
-    width: 460px;
+    width: 355px;
     position: unset;
   }
 }
