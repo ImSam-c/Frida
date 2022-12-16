@@ -27,7 +27,7 @@ function validatePassword(passwordInput) {
 
 async function sendData(password) {
   const response = await fetch(
-    `frida.up.railway.app/api/users/updateUser/${token.id}`,
+    `https://frida.up.railway.app/api/users/updateUser/${token.id}`,
     {
       method: "PUT",
       headers: {

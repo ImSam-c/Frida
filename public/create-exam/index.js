@@ -73,19 +73,22 @@ function areAllAnswersSelected(questions) {
 }
 
 async function sendData(questions, comments) {
-  const response = await fetch("frida.up.railway.app/api/exams/createExam", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      authorization: `Bearer ${jwt}`,
-    },
-    body: JSON.stringify({
-      questions,
-      nQuestions: questions.length,
-      comments,
-    }),
-  });
+  const response = await fetch(
+    "https://frida.up.railway.app/api/exams/createExam",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({
+        questions,
+        nQuestions: questions.length,
+        comments,
+      }),
+    }
+  );
 
   response
     .json()

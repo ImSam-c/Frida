@@ -58,7 +58,7 @@ function validatePassword(passwordInput) {
 */
 
 async function sendData(email, password) {
-  const response = await fetch("frida.up.railway.app/api/auth/login", {
+  const response = await fetch("https://frida.up.railway.app/api/auth/login", {
     method: "POST",
     headers: {
       Accept: "application/json",

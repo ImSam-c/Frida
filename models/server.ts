@@ -32,7 +32,7 @@ export class Server {
     //CORS
     this.app.use(
       cors({
-        origin: "frida.up.railway.app",
+        origin: "https://frida.up.railway.app",
       })
     );
 
