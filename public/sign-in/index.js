@@ -58,20 +58,17 @@ function validatePassword(passwordInput) {
 */
 
 async function sendData(email, password) {
-  const response = await fetch(
-    "https://frida.rettouseisama.com/api/auth/login",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    }
-  );
+  const response = await fetch("https://frida-tm.vercel.app/api/auth/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
 
   response
     .json()

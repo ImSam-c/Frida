@@ -74,7 +74,7 @@ function areAllAnswersSelected(questions) {
 
 async function sendData(questions, comments) {
   const response = await fetch(
-    "https://frida.rettouseisama.com/api/exams/createExam",
+    "https://frida-tm.vercel.app/api/exams/createExam",
     {
       method: "POST",
       headers: {

@@ -31,7 +31,7 @@ const detailsAccountHTML = `<h2>Details of your account</h2>
 const addAPhotographyHTML = `<h2>Change your photography</h2>
       <p>Edit your public photo</p>
       <article class="inputs">
-        <form method="post" action="https://frida.rettouseisama.com/api/upload/" enctype="multipart/form-data">
+        <form method="post" action="https://frida-tm.vercel.app/api/upload/" enctype="multipart/form-data">
           <label class="imgLabelProfile" for="inputPhoto">
             <img class="profile-opened-image" src="../img/no-image-profile.png" alt="profile-img">
             <input type="file" accept="image/jpeg, image/png" name="file" id="inputPhoto">
@@ -139,7 +139,7 @@ const updateUserProfile = async (origin) => {
       const fullname = d.getElementById("inputName").value.trim();
 
       await fetch(
-        `https://frida.rettouseisama.com/api/users/updateUser/${user.id}`,
+        `https://frida-tm.vercel.app/api/users/updateUser/${user.id}`,
         {
           method: "PUT",
           headers: {
@@ -196,7 +196,7 @@ const updateUserProfile = async (origin) => {
       else dataUser = { email };
 
       await fetch(
-        `https://frida.rettouseisama.com/api/users/updateUser/${user.id}`,
+        `https://frida-tm.vercel.app/api/users/updateUser/${user.id}`,
         {
           method: "PUT",
           headers: {
@@ -245,7 +245,7 @@ const updateUserProfile = async (origin) => {
           cancelButton: "cancelButton",
         },
         preConfirm: async () => {
-          await fetch(`https://frida.rettouseisama.com/api/users/${user.id}`, {
+          await fetch(`https://frida-tm.vercel.app/api/users/${user.id}`, {
             method: "DELETE",
             headers: {
               authorization: "Bearer " + jwt,
@@ -403,7 +403,7 @@ d.addEventListener("submit", async (e) => {
       const formData = new FormData(e.target);
       formData.entries().next().value[0] = "file";
 
-      const res = await fetch("https://frida.rettouseisama.com/api/upload", {
+      const res = await fetch("https://frida-tm.vercel.app/api/upload", {
         method: "POST",
         body: formData,
         headers: {

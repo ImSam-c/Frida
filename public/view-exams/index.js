@@ -15,7 +15,7 @@ const getExams = () => {
     loader = d.getElementById("loader");
 
   fetch(
-    `https://frida.rettouseisama.com/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
+    `https://frida-tm.vercel.app/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
     {
       method: "GET",
       headers: {
@@ -58,15 +58,12 @@ const getExam = async (id) => {
     title: "Searching exam...",
     didOpen: async () => {
       Swal.showLoading();
-      const res = await fetch(
-        `https://frida.rettouseisama.com/api/exams/${id}`,
-        {
-          method: "GET",
-          headers: {
-            authorization: `Bearer ${jwtToken}`,
-          },
-        }
-      );
+      const res = await fetch(`https://frida-tm.vercel.app/api/exams/${id}`, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${jwtToken}`,
+        },
+      });
 
       const { exam } = await res.json();
       let questionsText = "<br><br>";

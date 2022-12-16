@@ -15,7 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.existsUserById = exports.emailExists = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const emailExists = (email = "") => __awaiter(void 0, void 0, void 0, function* () {
-    const emailE = yield user_1.default.findOne({ email: email.toLowerCase() });
+    const emailE = yield user_1.default.findOne({
+        email: email.toLowerCase(),
+        state: true,
+    });
     const objectError = {
         msg: `The email ${email} is already registered`,
         id: "uEmail",

@@ -28,7 +28,7 @@ teacherRadio.addEventListener("change", () => {
 
 async function sendData(name, lastname, email, password, area) {
   const response = await fetch(
-    "https://frida.rettouseisama.com/api/auth/register",
+    "https://frida-tm.vercel.app/api/auth/register",
     {
       method: "POST",
       headers: {

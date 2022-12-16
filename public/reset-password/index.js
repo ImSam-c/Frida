@@ -27,7 +27,7 @@ function validatePassword(passwordInput) {
 
 async function sendData(password) {
   const response = await fetch(
-    `https://frida.rettouseisama.com/api/users/updateUser/${token.id}`,
+    `https://frida-tm.vercel.app/api/users/updateUser/${token.id}`,
     {
       method: "PUT",
       headers: {

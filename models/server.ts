@@ -30,7 +30,9 @@ export class Server {
 
   middlewares() {
     //CORS
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: "https://frida-tm.vercel.app"
+    }));
 
     //Parse body
     this.app.use(express.json());
