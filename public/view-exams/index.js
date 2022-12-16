@@ -15,7 +15,7 @@ const getExams = () => {
     loader = d.getElementById("loader");
 
   fetch(
-    `https://frida-tm.vercel.app/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
+    `frida.up.railway.app/api/exams?subject=${selectedSubject}&nQuestions=${selectedNQuestions}`,
     {
       method: "GET",
       headers: {
@@ -58,7 +58,7 @@ const getExam = async (id) => {
     title: "Searching exam...",
     didOpen: async () => {
       Swal.showLoading();
-      const res = await fetch(`https://frida-tm.vercel.app/api/exams/${id}`, {
+      const res = await fetch(`frida.up.railway.app/api/exams/${id}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${jwtToken}`,

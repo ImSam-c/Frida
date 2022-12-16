@@ -27,23 +27,20 @@ teacherRadio.addEventListener("change", () => {
 });
 
 async function sendData(name, lastname, email, password, area) {
-  const response = await fetch(
-    "https://frida-tm.vercel.app/api/auth/register",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        lastname,
-        email,
-        password,
-        area,
-      }),
-    }
-  );
+  const response = await fetch("frida.up.railway.app/api/auth/register", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      lastname,
+      email,
+      password,
+      area,
+    }),
+  });
 
   response
     .json()

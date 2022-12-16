@@ -13,7 +13,7 @@ let exam;
 
 const appearQuestions = async () => {
   exam = await (
-    await fetch(`https://frida-tm.vercel.app/api/exams/${idExam}`, {
+    await fetch(`frida.up.railway.app/api/exams/${idExam}`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + jwtInCookies,
@@ -71,7 +71,7 @@ const sendAnswersAndShowResult = async () => {
   }
 
   const req = await fetch(
-    "https://frida-tm.vercel.app/api/exams/verifyExam/" + idExam,
+    "frida.up.railway.app/api/exams/verifyExam/" + idExam,
     {
       method: "POST",
       headers: {

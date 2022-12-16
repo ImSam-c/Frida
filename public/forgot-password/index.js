@@ -18,7 +18,7 @@ function validateEmail(emailInput) {
 async function sendData(email) {
   // fetch url may change.
   const response = await fetch(
-    "https://frida-tm.vercel.app/api/users/recoverPassword",
+    "frida.up.railway.app/api/users/recoverPassword",
     {
       method: "PUT",
       headers: {
