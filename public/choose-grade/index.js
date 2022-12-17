@@ -24,6 +24,7 @@ studentRadio.addEventListener("change", () => {
 teacherRadio.addEventListener("change", () => {
   image.style.backgroundImage = `url(${TEACHER_IMAGE})`;
   subjectContainer.style.display = "block";
+  comboBox.value = "Geography";
 });
 
 async function sendData(name, lastname, email, password, area) {
