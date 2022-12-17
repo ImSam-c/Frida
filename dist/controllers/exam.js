@@ -36,9 +36,7 @@ const getExams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else {
         exams = yield exam_1.default.find().populate("byTeacher", "fullname");
     }
-    console.log(yield exam_1.default.find());
     exams ? res.json(exams) : res.json({ msg: "There aren't exams" });
-    res.end();
 });
 exports.getExams = getExams;
 const getExamsById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

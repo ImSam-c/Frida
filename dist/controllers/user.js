@@ -28,6 +28,7 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 const user_1 = __importDefault(require("../models/user"));
 const generateJWT_1 = require("../helpers/generateJWT");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const exam_1 = __importDefault(require("../models/exam"));
 const getUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield user_1.default.find({ state: true });
     users ? res.json({ users }) : res.json({ msg: "There aren't users" });
@@ -86,16 +87,22 @@ exports.updateUser = updateUser;
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id: idToDelete } = req.params;
     const { id } = req.decoded;
-    const user = yield user_1.default.findById(idToDelete);
+    const user = yield user_1.default.findOne({ _id: idToDelete, state: true });
     if (!user)
         return res
-            .status(401)
+            .status(400)
             .json({ msg: "This user doesn't exist", id: "userdx" });
     if (idToDelete !== String(id))
         return res.status(401).json({ msg: "You cannot delete this user" });
-    yield user_1.default.findByIdAndUpdate(idToDelete, { state: false });
+    if (user.area) {
+        Promise.all([
+            user_1.default.findByIdAndUpdate(idToDelete, { state: false }),
+            exam_1.default.deleteMany({ byTeacher: idToDelete }),
+        ]);
+    }
+    else
+        yield user_1.default.findByIdAndUpdate(idToDelete, { state: false });
     res.json({ msg: "user deleted" });
-    res.end();
 });
 exports.deleteUser = deleteUser;
 const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

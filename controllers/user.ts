@@ -77,10 +77,10 @@ const deleteUser = async (req: Request, res: Response) => {
   const { id: idToDelete } = req.params;
   const { id } = (req as reqID).decoded;
 
-  const user = await User.findById(idToDelete);
+  const user = await User.findOne({ _id: idToDelete, state: true });
   if (!user)
     return res
-      .status(401)
+      .status(400)
       .json({ msg: "This user doesn't exist", id: "userdx" });
 
   if (idToDelete !== String(id))
