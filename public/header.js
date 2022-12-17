@@ -18,7 +18,7 @@ document.addEventListener("click", (event) => {
     sessionStorage.removeItem("actualSelectedPage");
     location.replace("../");
   }
-  if (event.target.matches(".toggle-button")) {
+  if (event.target.matches(".toggle-button, .toggle-button *")) {
     mobileNav.classList.add("open");
     backdrop.style.display = "block";
     setTimeout(function () {
