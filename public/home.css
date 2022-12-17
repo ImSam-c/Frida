@@ -138,7 +138,7 @@ footer {
 .big-header-container div {
   overflow: hidden;
   white-space: nowrap;
-  max-width: 300px;
+  max-width: 355px;
 }
 
 .big-header-container div:first-of-type {

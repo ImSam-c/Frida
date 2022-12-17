@@ -80,3 +80,7 @@ button.addEventListener("click", () => {
   const tmpReg = JSON.parse(sessionStorage.getItem("tmpReg"));
   sendData(...tmpReg, area);
 });
+
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") button.click();
+});

@@ -176,6 +176,7 @@ label {
   position: relative;
   left: 3rem;
   min-height: 181.219px;
+  max-height: 181.219px;
   min-width: 160px;
   object-fit: cover;
 }
@@ -205,6 +206,7 @@ label {
   transition: opacity 250ms ease;
   cursor: pointer;
   min-height: 181.219px;
+  max-height: 181.219px;
   min-width: 160px;
   object-fit: cover;
 }

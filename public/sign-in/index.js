@@ -125,3 +125,7 @@ button.addEventListener("click", () => {
     });
   }
 });
+
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") button.click();
+});
