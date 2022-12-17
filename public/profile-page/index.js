@@ -87,7 +87,7 @@ const loadExams = async () => {
         newArticle.classList.add("examProfile");
         newArticle.innerHTML = `
         <div class="exam-sec1">
-          <h2>Computer Science Exam</h2>
+          <h2>${exam.area} Exam</h2>
           <div class="comments-container">
             <p class="exam-comments">Comments: ${exam.comments}</p>
           </div>
