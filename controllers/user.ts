@@ -4,6 +4,7 @@ import { reqID } from "../interfaces/interfaces";
 import User from "../models/user";
 import { newJWT } from "../helpers/generateJWT";
 import bcryptjs from "bcryptjs";
+import Exam from "../models/exam";
 
 const getUsers = async (_req: Request, res: Response) => {
   const users = await User.find({ state: true });
@@ -85,10 +86,14 @@ const deleteUser = async (req: Request, res: Response) => {
   if (idToDelete !== String(id))
     return res.status(401).json({ msg: "You cannot delete this user" });
 
-  await User.findByIdAndUpdate(idToDelete, { state: false });
+  if (user.area) {
+    Promise.all([
+      User.findByIdAndUpdate(idToDelete, { state: false }),
+      Exam.deleteMany({ byTeacher: idToDelete }),
+    ]);
+  } else await User.findByIdAndUpdate(idToDelete, { state: false });
 
   res.json({ msg: "user deleted" });
-  res.end();
 };
 
 const recoverPassword = async (req: Request, res: Response) => {

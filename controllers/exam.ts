@@ -28,7 +28,6 @@ const getExams = async (req: Request, res: Response) => {
   }
 
   exams ? res.json(exams) : res.json({ msg: "There aren't exams" });
-  res.end();
 };
 
 const getExamsById = async (req: Request, res: Response) => {

@@ -287,9 +287,7 @@ const updateUserProfile = async (origin) => {
         preConfirm: async () => {
           await fetch(`https://frida.up.railway.app/api/users/${user.id}`, {
             method: "DELETE",
-            headers: {
-              authorization: "Bearer " + jwt,
-            },
+            headers: { authorization: "Bearer " + jwt },
           });
 
           Swal.fire({

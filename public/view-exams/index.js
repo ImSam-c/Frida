@@ -25,6 +25,7 @@ const getExams = () => {
   )
     .then((res) => res.json())
     .then((exams) => {
+      console.log(exams);
       if (exams.length === 0) {
         const noExamsTitle = d.querySelector(".no-exams");
         loader.style.display = "none";
