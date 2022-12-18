@@ -106,7 +106,6 @@ async function sendData(email, password) {
           });
           break;
       }
-      console.log(error);
     });
 }
 

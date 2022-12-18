@@ -6,6 +6,7 @@ import authRouter from "../routes/authentication";
 import examRouter from "../routes/exam";
 import userRouter from "../routes/user";
 import uploadsRouter from "../routes/uploads";
+import notFoundRouter from "../routes/404";
 
 import { dbConnection } from "../db/connection";
 
@@ -17,6 +18,7 @@ export class Server {
     exams: "/api/exams",
     users: "/api/users",
     uploads: "/api/upload",
+    notFound: "*",
   };
 
   constructor() {
@@ -30,7 +32,11 @@ export class Server {
 
   middlewares() {
     //CORS
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: "https://frida.up.railway.app",
+      })
+    );
 
     //Parse body
     this.app.use(express.json());
@@ -56,6 +62,7 @@ export class Server {
     this.app.use(this.apiPaths.exams, examRouter);
     this.app.use(this.apiPaths.users, userRouter);
     this.app.use(this.apiPaths.uploads, uploadsRouter);
+    this.app.use(this.apiPaths.notFound, notFoundRouter);
   }
 
   connectDB() {

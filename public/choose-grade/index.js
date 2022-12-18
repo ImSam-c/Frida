@@ -72,7 +72,6 @@ async function sendData(name, lastname, email, password, area) {
           title: "model-font",
         },
       });
-      console.log(error);
     });
 }
 

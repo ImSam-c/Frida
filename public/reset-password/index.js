@@ -99,7 +99,6 @@ async function sendData(password) {
           });
           break;
       }
-      console.log(error);
     });
 }
 

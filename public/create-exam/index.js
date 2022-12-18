@@ -115,7 +115,6 @@ async function sendData(questions, comments) {
           title: "model-font",
         },
       });
-      console.log(error);
     });
 }
 

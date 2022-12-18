@@ -109,9 +109,7 @@ const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function
     const { email } = req.body;
     const user = yield user_1.default.findOne({ email, state: true });
     if (!user)
-        return res
-            .status(400)
-            .json({ msg: "A user with this email doesn't exist", id: "userdx" });
+        return res.end();
     //* Creating new JWT and sending mail
     try {
         const tkn = yield (0, generateJWT_1.newJWT)(user._id, user.fullname, email, undefined, "10m");

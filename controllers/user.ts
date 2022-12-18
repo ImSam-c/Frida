@@ -100,10 +100,7 @@ const recoverPassword = async (req: Request, res: Response) => {
   const { email } = req.body;
 
   const user = await User.findOne({ email, state: true });
-  if (!user)
-    return res
-      .status(400)
-      .json({ msg: "A user with this email doesn't exist", id: "userdx" });
+  if (!user) return res.end();
 
   //* Creating new JWT and sending mail
   try {

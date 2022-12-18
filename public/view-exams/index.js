@@ -50,7 +50,7 @@ const getExams = () => {
         button.removeAttribute("disabled");
       }
     })
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 const getExam = async (id) => {

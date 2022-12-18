@@ -11,6 +11,7 @@ const authentication_1 = __importDefault(require("../routes/authentication"));
 const exam_1 = __importDefault(require("../routes/exam"));
 const user_1 = __importDefault(require("../routes/user"));
 const uploads_1 = __importDefault(require("../routes/uploads"));
+const _404_1 = __importDefault(require("../routes/404"));
 const connection_1 = require("../db/connection");
 class Server {
     constructor() {
@@ -19,6 +20,7 @@ class Server {
             exams: "/api/exams",
             users: "/api/users",
             uploads: "/api/upload",
+            notFound: "*",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "8090";
@@ -28,7 +30,9 @@ class Server {
     }
     middlewares() {
         //CORS
-        this.app.use((0, cors_1.default)());
+        this.app.use((0, cors_1.default)({
+            origin: "https://frida.up.railway.app",
+        }));
         //Parse body
         this.app.use(express_1.default.json());
         //Static content
@@ -48,6 +52,7 @@ class Server {
         this.app.use(this.apiPaths.exams, exam_1.default);
         this.app.use(this.apiPaths.users, user_1.default);
         this.app.use(this.apiPaths.uploads, uploads_1.default);
+        this.app.use(this.apiPaths.notFound, _404_1.default);
     }
     connectDB() {
         (0, connection_1.dbConnection)();

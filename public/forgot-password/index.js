@@ -22,7 +22,6 @@ async function sendData(email) {
     {
       method: "PUT",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -33,14 +32,16 @@ async function sendData(email) {
 
   response
     .json()
-    .then(() => {
+    .then((e) => {
+      console.log(e);
       Swal.close();
       Swal.fire({
         title: "Nice!",
         icon: "success",
         html: `<p class="modal-font">Recovery email link sent. Check your inbox and spam.</p>`,
-        confirmButtonText: '<a class="modal-sign-up" href="../">Ok!</a> ',
+        confirmButtonText: '<a class="modal-sign-up">Ok!</a> ',
         confirmButtonColor: "var(--btn-color)",
+        preConfirm: () => location.replace("../"),
         customClass: {
           title: "modal-font",
         },
@@ -56,7 +57,6 @@ async function sendData(email) {
           title: "model-font",
         },
       });
-      console.log(error);
     });
 }
 
