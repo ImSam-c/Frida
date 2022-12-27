@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
-import { secretOrPrivateKey } from "./variables";
 
 export const newJWT = (
   id: Types.ObjectId,
@@ -13,7 +12,7 @@ export const newJWT = (
   return new Promise((resolve, reject) => {
     jwt.sign(
       { id, name, email, area, img },
-      process.env.SECRETORPRIVATEKEY || secretOrPrivateKey,
+      process.env.SECRETORPRIVATEKEY || "",
       {
         expiresIn: exp,
       },

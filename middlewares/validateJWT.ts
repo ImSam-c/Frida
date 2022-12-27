@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 import User from "../models/user";
-import { secretOrPrivateKey } from "../helpers/variables";
 import { CustomRequest } from "../interfaces/interfaces";
 
 export const validateJWT = async (
@@ -18,10 +17,7 @@ export const validateJWT = async (
       .json({ msg: "You must provide an authentication token" });
 
   try {
-    const decoded = jwt.verify(
-      tokenAuth,
-      process.env.secretOrPrivateKey || secretOrPrivateKey
-    );
+    const decoded = jwt.verify(tokenAuth, process.env.secretOrPrivateKey || "");
 
     (req as CustomRequest).decoded = decoded;
     const { id } = decoded as CustomRequest;

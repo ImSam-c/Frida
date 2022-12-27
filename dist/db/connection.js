@@ -14,10 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const variables_1 = require("../helpers/variables");
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(process.env.MONGODB_CNN || variables_1.mongodbcnn);
+        yield mongoose_1.default.connect(process.env.MONGODB_CNN || "");
         console.log("DB Connected");
     }
     catch (error) {

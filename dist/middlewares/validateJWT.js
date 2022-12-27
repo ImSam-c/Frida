@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateJWT = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
-const variables_1 = require("../helpers/variables");
 const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const tokenAuth = (_a = req.header("authorization")) === null || _a === void 0 ? void 0 : _a.replace("Bearer ", "");
@@ -24,7 +23,7 @@ const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             .status(401)
             .json({ msg: "You must provide an authentication token" });
     try {
-        const decoded = jsonwebtoken_1.default.verify(tokenAuth, process.env.secretOrPrivateKey || variables_1.secretOrPrivateKey);
+        const decoded = jsonwebtoken_1.default.verify(tokenAuth, process.env.secretOrPrivateKey || "");
         req.decoded = decoded;
         const { id } = decoded;
         //Getting user from payload of the JWT
