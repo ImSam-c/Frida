@@ -23,7 +23,7 @@ const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             .status(401)
             .json({ msg: "You must provide an authentication token" });
     try {
-        const decoded = jsonwebtoken_1.default.verify(tokenAuth, process.env.secretOrPrivateKey || "");
+        const decoded = jsonwebtoken_1.default.verify(tokenAuth, process.env.SECRETORPRIVATEKEY || "");
         req.decoded = decoded;
         const { id } = decoded;
         //Getting user from payload of the JWT

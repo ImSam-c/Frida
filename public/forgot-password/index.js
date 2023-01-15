@@ -33,7 +33,6 @@ async function sendData(email) {
   response
     .json()
     .then((e) => {
-      console.log(e);
       Swal.close();
       Swal.fire({
         title: "Nice!",
