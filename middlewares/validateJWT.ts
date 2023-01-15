@@ -17,6 +17,7 @@ export const validateJWT = async (
       .json({ msg: "You must provide an authentication token" });
 
   try {
+    console.log(process.env.secretorprivatekey);
     const decoded = jwt.verify(tokenAuth, process.env.secretOrPrivateKey || "");
 
     (req as CustomRequest).decoded = decoded;
